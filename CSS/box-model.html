@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box model</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; 
+        }
+        .div-1{
+            border: 2px solid black;
+           min-height: 20vh;
+           max-height: 60vh;
+           min-width: 80vw;
+            /* padding-left: 100px; */
+            margin: 100px;
+            font-size: 36px;
+            overflow: visible;
+
+        }
+
+        .div-2{
+            /* border: 2px double black; */
+            background-color: red;
+            height: 20rem;
+            padding: 2rem;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+        <div class="div-1">
+            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam deleniti facilis autem ipsa. Nesciunt sunt eligendi quidem, magni nostrum tempora id pariatur qui a neque perspiciatis illo maxime asperiores voluptas. Debitis fugiat, nulla temporibus esse voluptatibus praesentium minima sit ipsum voluptatem vel consequuntur adipisci distinctio eum? Quia, quisquam. Fuga, nisi!</span>
+        </div>
+        <div class="div-2">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit error ea corporis sed non est blanditiis qui porro ratione dolores!
+        </div>
+
+        <form style="border: 2px solid black; height: 300px; width: 400px; border-radius: 15px; background-color: purple;">
+            <label for="">Username</label><br><br>
+            <input style="background-color: red;" type="text" name="" id="">
+            <label for="">Username</label><br><br>
+            <input type="text" name="" id="">
+            <label for="">Username</label><br><br>
+            <input type="text" name="" id="">
+        </form>
+</body>
+</html>
