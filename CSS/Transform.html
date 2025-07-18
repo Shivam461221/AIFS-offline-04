@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            height: 200px;
+            width: 200px;
+            background-color: skyblue;
+            margin: 10px;
+            transition: 0.5s linear;
+        }
+
+        .box-1{
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box-1:hover{
+            transform: translateY(500px);
+        }
+
+        .box-2:hover{
+            transform: rotate(360deg);
+        }
+
+        .box-3:hover{
+            /* transform: scale(0.5); */
+            transform: scaleX(0.5);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box box-1">Translate</div>
+    <div class="box box-2"></div>
+    <div class="box box-3"></div>
+</body>
+</html>

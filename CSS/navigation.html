@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation</title>
+    <style>
+        * {
+            font-size: 24px;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        .nav {
+            background-color: skyblue;
+            height: 60px;
+            padding: 15px;
+        }
+
+        .nav ul li {
+            display: inline;
+            margin-right: 20px;
+            padding: 10px;
+            border-radius: 15px;
+            transition: 5s ease;
+        }
+
+        .nav ul li:hover {
+            background-color: rgb(48, 43, 43);
+            color: white;
+            box-shadow: 5px 5px 5px 0px black;
+        }
+
+        .main img {
+            height: 400px;
+            width: 380px;
+        }
+
+        .main img:hover {
+            box-shadow: 5px 5px 5px black;
+        }
+
+        .parent {
+            min-height: 200px;
+            border: 2px solid purple;
+            padding: 20px;
+        }
+
+        .child-1 {
+            height: 80px;
+            border: 2px solid purple;
+        }
+
+        .parent p {
+            font-size: 10px;
+        }
+
+        .child-1>p {
+            background-color: red;
+        }
+
+        .child-2 {
+            margin-top: 10px;
+            height: 80px;
+            border: 2px solid blue;
+        }
+
+        .child-1+div {
+            background-color: yellow;
+        }
+
+        .child-1~div {
+            margin-top: 10px;
+            height: 80px;
+            border: 2px solid blue;
+            background-color: red;
+        }
+
+        div[class="main"]{
+            background-color: green;
+        }
+
+        input[type="text"]{
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav ">
+        <ul>
+            <li>Home</li>
+            <li>Cart</li>
+            <li>Profile</li>
+            <li>About</li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <img src="../HTML/images/pngtree-a-man-talking-on-phone-with-smile-his-face-png-image_12651903-removebg-preview.png"
+            alt="">
+    </div>
+
+    <div class="parent">
+        <div class="child-1">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, sapiente?</p>
+        </div>
+        <div class="child-2">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, sapiente?</p>
+        </div>
+        <div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, sapiente?</p>
+        </div>
+        <div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, sapiente?</p>
+        </div>
+    </div>
+</body>
+
+</html>
