@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body{
+            height: 200vh;
+        }
+        .container {
+            border: 2px solid black;
+            height: 200px;
+            position: relative; 
+            top: 100px;
+            left: 100px;
+            background-color: rgb(114, 23, 23);
+            z-index: 1;
+        }
+
+        .box-2 {
+            position: relative;
+            border: 2px solid black;
+            height: 200px;
+            background-color: blueviolet;
+        }
+
+        .box-2:hover{
+             z-index: 1;
+        }
+
+        .circle {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            top: 50px;
+        }
+
+        .circle-2 {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            background-color: red;
+            position: sticky;
+            top: 100px;
+        }
+
+        .scroll{
+            height: 50px;
+            width: 50px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="circle"></div>
+    </div>
+     <div class="circle-2">
+
+        </div>
+    <div class="box-2">
+       
+    </div>
+
+    <div class="scroll">
+
+    </div>
+</body>
+
+</html>

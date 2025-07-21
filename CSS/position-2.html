@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            background-color: #f6e1d9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            height: 150vh;
+        }
+
+        .header {
+            
+            display: flex;
+            height: 55px;
+        }
+
+
+        .right {
+            width: 90vw;
+            position: relative;
+        }
+
+        .top {
+            border-bottom: 1px solid black;
+
+        }
+
+        .bottom {
+            padding: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            margin-left: 10vw;
+        }
+
+        .top ul li {
+            display: inline;
+            margin-right: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            transition: 0.8s linear;
+        }
+
+        .top ul li:hover {
+            background-color: white;
+
+        }
+
+        .bottom ul li {
+            display: inline;
+            margin-right: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            transition: 0.8s linear;
+            font-size: 20px;
+
+        }
+
+        .bottom button {
+            padding: 15px;
+            padding-left: 20px;
+            padding-right: 20px;
+            background-color: #f7774c;
+            border-radius: 30px;
+            color: white;
+            font-size: 18px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="left"><img src="image.png" width="150" alt=""></div>
+        <div class="right">
+            <div class="top">
+                <ul>
+                    <li>Office</li>
+                    <li>Careers</li>
+                    <li>Be a mentor</li>
+                    <li>Blogs</li>
+                    <li></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="bottom">
+        <ul>
+            <li>Home</li>
+            <li>Training</li>
+            <li>CDEC</li>
+            <li>Corporate Training</li>
+            <li>Internship</li>
+            <li>About Us</li>
+            <li><button>Free Consultation</button></li>
+        </ul>
+    </div>
+</body>
+
+</html>
