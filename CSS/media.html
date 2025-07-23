@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            background-color: rgb(122, 114, 114);
+            display: flex;
+        }
+
+        .container div{
+            padding: 15px;
+            margin-right: 20px;
+            font-size: 24px;
+        }
+
+        .menu{
+            display: none;
+        }
+
+        @media  screen and (max-width:600px) {
+            .container{
+               justify-content: space-between;
+            }
+
+            .option{
+                display: none;
+            }
+
+            .menu{
+                display: block;
+            }
+        }
+
+        @media (min-width:600px) and (max-width:786px){
+            .container div{
+                padding-left: 15px;
+                padding-right: 15px;
+                margin-right: 5px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo" style="padding: 0;"><img src="image.png" alt="logo" height="70" width="70"/></div>
+        <div class="option">Home</div>
+        <div class="option">About</div>
+        <div class="option">Career</div>
+        <div class="option">Training</div>
+        <div class="option">Courses</div>
+        <div class="option">Contact</div>
+        <div class="menu" style="font-size: 40px; "><i class='bxr  bx-menu'></i></div>
+    </div>
+</body>
+</html>

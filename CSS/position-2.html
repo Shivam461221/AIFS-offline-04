@@ -16,7 +16,7 @@
         }
 
         .header {
-            
+
             display: flex;
             height: 55px;
         }
@@ -53,7 +53,7 @@
 
         }
 
-        .bottom ul li {
+        .bottom .bottom-list li {
             display: inline;
             margin-right: 20px;
             padding: 10px;
@@ -72,6 +72,29 @@
             color: white;
             font-size: 18px;
             border: none;
+        }
+
+        .hover-list{
+            display: inline-block;
+            position: relative;
+            left: 100px;
+            top: -30px;
+        }
+
+        .hover-list li{
+            display: block;
+            background-color: white;
+            padding: 15px;
+            display: none;
+            cursor: pointer;
+        }
+
+        .hover-list li:hover{
+            color: #f7774c;
+        }
+
+        .bottom:hover .hover-list li{
+            display: block;
         }
     </style>
 </head>
@@ -93,14 +116,21 @@
         </div>
     </div>
     <div class="bottom">
-        <ul>
+        <ul class="bottom-list">
             <li>Home</li>
-            <li>Training</li>
+            <li class="training">Training</li>
             <li>CDEC</li>
             <li>Corporate Training</li>
             <li>Internship</li>
             <li>About Us</li>
             <li><button>Free Consultation</button></li>
+        </ul>
+        <ul class="hover-list">
+            <li>DevOps</li>
+            <li>Kubernetes</li>
+            <li>Docker</li>
+            <li>Linux</li>
+            <li>Jenkins</li>
         </ul>
     </div>
 </body>

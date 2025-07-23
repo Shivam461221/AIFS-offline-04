@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .circle {
+            height: 70px;
+            width: 70px;
+            border-radius: 50%;
+            background-color: red;
+            animation: bounce 2s linear infinite;
+            /* animation: name duration timing-function delay iteration-count ; */
+            transition: all 2s ease;
+        }
+
+        @keyframes bounce {
+            /* from{
+            transform: translateY(500px);
+           }
+           to{
+            transform: translateY(100px);
+           } */
+
+            0% {
+                transform: translateY(500px);
+            }
+
+            50% {
+                transform: translateY(100px) scale(1.5);
+
+            }
+
+            100% {
+                transform: translateY(500px);
+            }
+        }
+
+        .rocket {
+            font-size: 50px;
+            width: 300px;
+            transition: all 1s ease;
+            overflow: hidden;
+            border: 2px solid black;
+        }
+
+        .rocket:hover i {
+            animation: fly 1s linear infinite;
+        }
+
+        @keyframes fly {
+            from {
+                transform: translateX(0px);
+            }
+
+            to {
+                transform: translateX(500px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="circle"></div> -->
+    <div class="rocket"><i class='bxr  bx-rocket'></i> </div>
+</body>
+
+</html>
