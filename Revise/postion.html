@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position CSS</title>
+    <style>
+
+        body{
+            height: 150vw;
+        }
+        .box-1{
+            height: 100px;
+            background-color: blue;
+            /* position: relative; */
+            left: 100px;
+        }
+
+        .box-2{
+            height: 150px;
+            background-color: skyblue;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 150px;
+        }
+
+        .circle{
+            height: 50px;
+            width: 50px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            top: 50px;
+            left: 100px;
+        }
+
+        .parent{
+            height: 200px;
+            border: 2px solid black;
+            position: relative;
+            top: 100px;
+        }
+
+        .child{
+            height: 50px;
+            width: 50px;
+            border: 2px solid purple;
+            position: absolute;
+            top: 50px;
+            left: 100px;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="box-1">
+        <div class="circle">
+
+        </div>
+    </div>
+
+    <div class="box-2">
+    </div>
+
+    <div class="grand">
+        <div class="parent">
+        <div class="child"></div>
+    </div>
+    </div>
+</body>
+</html>

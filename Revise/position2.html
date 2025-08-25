@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Sicky</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            height: 200vh;
+        }
+        .header{
+            height: 70px;
+            background-color: plum;
+            padding: 10px;
+        }
+        .nav{
+            height: 50px;
+            background-color: darkcyan;
+            position: sticky;
+            top: 0px;
+            padding: 10px;
+        }
+
+        .nav ul li{
+            display: inline;
+            font-size: 26px;
+            color: white;
+            margin-right: 20px;
+            cursor: pointer;
+            padding: 10px;
+            transition: all 0.8s linear;
+            border-radius: 15px;
+        }
+
+        .nav ul li:hover{
+            background-color: rgb(18, 70, 70);
+        }
+
+        .box{
+            height: 300px;
+            width: 100px;
+
+        }
+
+        .box-1{
+            background-color: red;
+            position: relative;
+            z-index: 3;
+        }
+
+        .box-2{
+            background-color: brown;
+            position: relative;
+            bottom: 200px;
+            left: 80px;
+            z-index: 2;
+        }
+
+        .box-3{
+            background-color: purple;
+            position: relative;
+            bottom: 400px;
+            left: 140px;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>CloudBlitz</h1>
+    </div>
+    <div class="nav">
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Courses</li>
+            <li>Career</li>
+            <li>Contact</li>
+        </ul>
+    </div>
+
+
+    <div class="box box-1"></div>
+    <div class="box box-2"></div>
+    <div class="box box-3"></div>
+</body>
+</html>

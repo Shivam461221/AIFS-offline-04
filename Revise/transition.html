@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            height: 100px;
+            width: 100px;
+            border: 2px solid black;
+        }
+
+        .box-1{
+            transition: all 1s linear;
+        }
+
+        .box-1:hover{
+            background-color: red;
+            width: 300px;
+        }
+        .box-2{
+            transition: all 1s ease;
+        }
+
+        .box-2:hover{
+            background-color: red;
+            width: 300px;
+        }
+
+        .box-3{
+            transition: all 1s ease-in;
+        }
+
+        .box-3:hover{
+            background-color: red;
+            width: 300px;
+        }
+
+        .box-4{
+            transition: all 1s ease-in-out;
+        }
+
+        .box-4:hover{
+            background-color: red;
+            width: 300px;
+        }
+
+        .box-5{
+            transition: all 1s ease-out;
+        }
+
+        .box-5:hover{
+            background-color: red;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box box-1">Linear</div>
+    <div class="box box-2">Ease</div>
+    <div class="box box-3">Ease-in</div>
+    <div class="box box-4">Ease-in-out</div>
+    <div class="box box-5">Ease-out</div>
+</body>
+</html>

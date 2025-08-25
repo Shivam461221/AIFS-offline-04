@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transform</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .box{
+            height: 100px;
+            width: 100px;
+            border: 2px solid black;
+            transition: transform 0.6s linear;
+            transition-delay: 2s;
+        }
+
+        .box:hover{
+            transform: rotate(110deg);
+            background-color: red;
+        }
+
+        .box-2{
+            height: 100px;
+            border: 2px dotted black;
+            margin-right: 50px;
+            padding-left: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+
+    </div>
+
+    <div class="box-2">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem nobis eveniet molestiae veniam quibusdam animi molestias unde sequi quos voluptate?</p>
+    </div>
+</body>
+</html>
