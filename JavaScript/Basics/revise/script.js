@@ -80,6 +80,7 @@ console.log(typeof phone);
 //comparision opertor
 //logical operator
 //exponentiation operator
+//Assignment operator 
 
 
 
