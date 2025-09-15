@@ -1,0 +1,40 @@
+<script>
+    let arr = [12, 21, 12, 43, 56, 87, 89];
+
+    console.log('for loop');
+
+    for (let i = 0; i < arr.length; i++) {
+        console.log(arr[i]);
+
+    }
+
+    let j = 0;
+    console.log('while loop');
+
+    while (j < arr.length) {
+        console.log(arr[j]);
+        j++;
+    }
+
+    console.log('for in');
+    
+    for(let index in arr){
+        console.log(arr[index]);
+        
+    }
+
+    console.log('for of');
+
+    for(let element of arr){
+        console.log(element);
+        
+    }
+
+    console.log('For each');
+    
+    arr.forEach(element=>console.log(element));
+    
+    
+
+
+</script>
