@@ -1,0 +1,21 @@
+<script>
+
+    //Callback functions
+
+    function sayHi(name, callback){
+        console.log('Hello', name);
+        callback(name);
+    }
+
+    function sayBye(name){
+        console.log('Bye', name);
+        
+    }
+
+    function getName(){
+        console.log('Second');
+        
+    }
+
+    sayHi('shivam', getName)
+</script>

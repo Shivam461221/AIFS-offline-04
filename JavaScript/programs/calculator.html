@@ -1,0 +1,46 @@
+<script>
+
+
+    let x = 1 * prompt('Enter first number');
+
+    let y = 1 * prompt('Enter Second Number');
+
+    let operation = prompt('Enter operation which you want to perform');
+
+
+    let sum = (a, b) => a + b;
+
+    
+    
+
+    let substract = (a, b) => a - b;
+
+    let multiply = (a, b) => a * b;
+
+    let divide = (a, b) => a / b;
+
+
+    function calculator() {
+        switch (operation) {
+            case 'add': console.log(sum(x, y));
+
+                break;
+
+            case 'substract': console.log(substract(x, y));
+
+                break;
+
+            case 'multiply': console.log(multiply(x, y));
+
+                break;
+
+            case 'divide': console.log(divide(x, y));
+
+                break;
+
+            default: console.log('Invalid operation')
+        }
+    }
+
+    calculator();
+</script>
