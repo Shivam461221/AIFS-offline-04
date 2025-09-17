@@ -1,0 +1,19 @@
+<script>
+
+    //Reduce 
+
+
+    let arr = [1,2,3,4,5,6];
+
+
+    let sum = arr.reduce((initial, num)=>num*initial, 1);
+
+    console.log(sum);
+
+    let max = arr.reduce((acc, num)=> (num<acc)?num:acc, arr[0]);
+
+    console.log(max);
+    
+    
+
+</script>
