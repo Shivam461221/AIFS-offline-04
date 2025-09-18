@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .dark {
+            background-color: black;
+            color: white;
+        }
+    </style>
 </head>
 <body>
         <div id="container">
@@ -15,8 +21,9 @@
 
         function changeText(){
             let container = document.getElementById('container');
-            container.style.backgroundColor = 'red';
+           // container.style.backgroundColor = 'red';
             container.innerText = 'New Text';
+            container.classList.toggle('dark');
         }
     </script>
 </body>
