@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bottom img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <img id="main" src="Images/download.png" alt="">
+    </div>
+    <div class="bottom">
+        <img onmouseover="swapImage(this)" src="Images/images (1).png" alt="">
+        <img onmouseover="swapImage(this)" src="Images/images (2).png" alt="">
+        <img onmouseover="swapImage(this)" src="Images/images.jpeg" alt="">
+        <img onmouseover="swapImage(this)" src="Images/images.png" alt="">
+    </div>
+
+    <script>
+
+        function swapImage(obj) {
+            let main = document.getElementById('main');
+
+            let temp = main.src;
+
+            main.src = obj.src;
+
+            obj.src = temp;
+
+        }
+
+    </script>
+</body>
+
+</html>

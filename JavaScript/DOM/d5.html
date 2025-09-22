@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Click</button>
+
+    <div id="box">Container</div>
+
+    <script>
+
+        let btn = document.getElementById('btn');
+
+        let box = document.getElementById('box');
+
+        // btn.onclick = function(){
+        //     alert('Clicked');
+        // }
+
+        btn.addEventListener('click', function(){
+            alert('Clicked');
+        });
+
+        box.addEventListener('mouseout', function(){
+            alert('Hover');
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .dark{
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container" class="container">
+        <h1>Container</h1>
+        <button onclick="changeTheme()" id="btn">Dark</button>
+    </div>
+    
+
+    <script>
+
+        function changeTheme(){
+            let container = document.getElementById('container');
+            let btn = document.getElementById('btn')
+            container.classList.toggle('dark');
+            if(btn.innerText=='Dark'){
+                btn.innerText = 'Light';
+            }
+
+            else{
+                btn.innerText = 'Dark';
+            }
+
+
+        }
+
+
+
+    </script>
+</body>
+</html>

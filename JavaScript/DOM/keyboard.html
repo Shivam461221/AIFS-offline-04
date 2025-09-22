@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .box{
+            height: 300px;
+            border: 2px solid black;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #key{
+            border: 1px solid grey;
+            min-width: 40px;
+            height: 40px;
+            padding: 5px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span onkeydown="" id="key"></span>
+    </div>
+
+    <script>
+
+        document.body.addEventListener('keydown', function(event){
+           let span = document.getElementById('key');
+
+          if(event.key===' '){
+             span.innerText = 'space';
+          }
+          else{
+            span.innerText = event.key;
+          }
+        });
+
+        document.body.addEventListener('keyup', function(){
+            let span = document.getElementById('key');
+
+            span.innerText = '';
+        });
+
+    </script>
+</body>
+</html>
