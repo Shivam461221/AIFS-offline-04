@@ -13,49 +13,123 @@
     <div class="container my-5">
 
         <form>
-            <label class="form-label">Username</label>
-            <input onblur="validateUsername()" id="username" class="form-control" type="text">
-            <small id="usernameError"> </small>
+            <div class="form-group my-2">
+                <label class="form-label">Username</label>
+                <input onblur="validateUsername()" id="username" class="form-control" type="text">
+                <small id="usernameError"> </small>
+            </div>
 
-            <label  class="form-label">Password</label>
-            <input id="password" onblur="validatePassword()" type="password" class="form-control">
-             <small id="passwordError"> </small>
+            <div class="form-group my-2">
+                <label class="form-label">Password</label>
+                <input id="password" onblur="validatePassword()" type="password" class="form-control">
+                <small id="passwordError"> </small>
+            </div>
+            <div class="form-group my-2">
+                <label for="" class="form-label">Mobile</label>
+                <input onblur="validateMobile()" type="text" id="mobile" class="form-control">
+                <small id="mobileError"></small>
+            </div>
+
+            <div class="form-group my-2">
+                <label for="" class="form-label">Email</label>
+                <input onblur="validateEmail()" type="text" id="email" class="form-control">
+                <small id="emailError"></small>
+            </div>
+            <button onclick="return validateForm()" class="btn btn-primary">Submit</button>
         </form>
     </div>
     <script>
-
-
         function validateUsername() {
             let username = document.getElementById('username').value;
             let userError = document.getElementById('usernameError');
+            let value = false;
 
-            if(username===''){
+            if (username === '') {
                 userError.textContent = 'Please Enter Username';
                 userError.style.color = 'red';
+                value = false;
             }
-            else{
+            else {
                 userError.textContent = '';
+                value = true;
             }
+
+            return value;
         }
 
-        function validatePassword(){
+        function validatePassword() {
             let password = document.getElementById('password').value;
             let passError = document.getElementById('passwordError');
             const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            let value = false;
 
-            if(password===''){
+            if (password === '') {
                 passError.textContent = 'Please Enter Password';
                 passError.style.color = 'red';
-            }else 
-            if(!regex.test(password)){
-                passError.textContent = 'Password length should be between 8 to 12 characters';
-                passError.style.color = 'red';
-            }
-            else{
-                passError.textContent = '';
-            }
+                // value = false;
+            } else  if (!regex.test(password)) {
+                    passError.textContent = 'Password length should be between 8 to 12 characters';
+                    passError.style.color = 'red';
+                }
+                else {
+                    passError.textContent = '';
+                    value = true;
+                }
+
+            return value;
         }
 
+        function validateMobile() {
+            let mobile = document.getElementById('mobile').value;
+            let mobileError = document.getElementById('mobileError');
+            let value = false;
+
+            if (isNaN(mobile)) {
+                mobileError.textContent = 'Only digits allowed';
+                mobileError.style.color = 'red';
+            }
+            else if (mobile.length !== 10) {
+                mobileError.textContent = 'Invalid Mobile Number';
+                mobileError.style.color = 'red';
+            }
+            else {
+                mobileError.textContent = '';
+                value = true;
+            }
+
+            return value;
+        }
+
+        function validateEmail() {
+            let email = document.getElementById('email').value;
+            let emailError = document.getElementById('emailError');
+            let value = false;
+
+            if (!email.includes('@')) {
+                emailError.textContent = 'Invalid email';
+                emailError.style.color = 'red';
+            }
+            else {
+                emailError.textContent = '';
+                value = true;
+            }
+
+            return value;
+        }
+
+        function validateForm() {
+            let mobile = validateMobile();
+            let username = validateUsername();
+            let password = validatePassword();
+            let email = validateEmail();
+
+            if(mobile && username && password && email){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
 
     </script>
 </body>
