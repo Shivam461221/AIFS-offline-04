@@ -1,0 +1,21 @@
+<script>
+
+    async function getProducts(){
+        try{
+            let data = await fetch('https://dummyjson.com/products');
+            let product = await data.json();  //converting json into JS object
+            console.log(data);
+
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
+    
+
+    getProducts();
+
+
+
+</script>

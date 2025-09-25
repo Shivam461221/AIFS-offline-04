@@ -1,0 +1,44 @@
+<script>
+    //Promise - Resolve, Reject, Pending
+
+    // const p1 = new Promise((resolve, reject) => {
+    //     let num = Math.random();
+    //     console.log(num);
+    //     if (num > 0.3) {
+    //         resolve("Resolved");
+    //     }
+    //     else {
+    //         reject('Rejected');
+    //     }
+    // });
+
+    // p1
+    //     .then(result => console.log("Resolve", result))
+    //     .catch(error => console.log("Reject", error));
+
+
+    // fetch('https://dummyjson.com/products')
+    //     .then(res => res.json())
+    //     .then(console.log)
+    //     .catch(error=>console.log(error))
+    //     .finally(console.log('Executes everytime'));
+
+        function orderFood(){
+            return new Promise((resolve, reject)=>{
+                console.log('Order placed');
+
+                let num = Math.random()>0.3;
+                if(num){
+                    resolve('Order successful')
+                }
+                else{
+                    reject('Order failed');
+                }
+            })
+        }
+
+        orderFood()
+        .then(result=>console.log(result))
+        .catch(error=>console.log(error));
+
+</script>
