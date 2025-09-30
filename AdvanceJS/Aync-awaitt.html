@@ -4,6 +4,8 @@
         try{
             let data = await fetch('https://dummyjson.com/products');
             let product = await data.json();  //converting json into JS object
+
+            showProducts(product);
             console.log(data);
 
         }
@@ -12,9 +14,20 @@
         }
     }
 
+    function showProducts(product){
+        let ui = ``;
+
+        product.forEach(element =>  {
+            
+        });
+    }
+    //axios
+
     
 
     getProducts();
+
+    let data = product[0].id
 
 
 
