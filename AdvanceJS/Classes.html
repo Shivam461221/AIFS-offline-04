@@ -1,0 +1,28 @@
+<script>
+
+    class Bird{
+        // let species;
+        // let color;
+
+        constructor(species, color){
+            this.species = species;
+            this.color = color;
+        }
+
+        display(){
+            console.log(`Birds name ${this.species} & its color is ${this.color}`);
+        }
+    }
+
+    //inheritance
+    class Parrot extends Bird{
+        
+
+    }
+
+    const parrot = new Bird("Parrot", "green");
+
+    const spparow = new Bird("", "");
+
+    parrot.display();
+</script>

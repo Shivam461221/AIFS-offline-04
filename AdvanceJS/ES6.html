@@ -1,0 +1,63 @@
+<script>
+
+    //ES6 features
+
+    //1. let & const
+
+    //2. Template literals - ``
+
+    let x = 10;
+
+    let str = `x ${x}`;
+
+    //3. Arrow function 
+
+    let add = (x,y)=>{
+       return x+y;
+    }
+    console.log(add(10, 20));
+
+    //4. Destructuring 
+
+    const person = {
+        name:"Shivam",
+        age:25
+    }
+
+    let {name, age} = person;
+
+    console.log(name);
+
+    let arr = [1,2,3];
+
+    let [l,z] = arr;
+
+    console.log(z);
+
+    //5. Spread operator & Rest parameters  (...)
+
+    let arr2 = [1,2,3];
+
+    let arr3 = [4,5,6];
+
+    let arr4 = [11,...arr2, 12, ...arr3];
+
+    const person2 = {...person};
+
+    console.log(arr4);
+
+    function multiply(...para){
+        return para.reduce((num, acc)=>num+acc, 0);
+    }
+
+    console.log(multiply(1,2,3,4,5));
+
+    async function getProducts(){
+        try{
+
+        }
+        catch(error){
+            
+        }
+    }
+</script>

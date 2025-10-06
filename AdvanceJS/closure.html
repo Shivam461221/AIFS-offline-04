@@ -1,0 +1,25 @@
+<script>
+
+    //closure - when a function has access to a variable from its outer scope/function 
+    //even after the outer function has finished its execution it's called a closure
+    
+    let y = 20;
+
+
+    function outer(){
+        let outerVariable = 10;
+
+        return function(){
+            outerVariable++;
+            return outerVariable;
+        }
+    }
+
+    let inner = outer();
+
+    console.log(inner());
+
+    console.log(inner());
+
+
+</script>

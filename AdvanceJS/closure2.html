@@ -1,0 +1,22 @@
+<script>
+
+    function bankAccount(){
+        let balance = 100;
+
+        return {
+            deposit:function(amount){
+                balance += amount;
+                console.log(balance);
+            },
+            withdraw:function(amount){
+                balance -= amount;
+                console.log(balance);
+            }
+        }
+    }
+
+    let account = bankAccount();
+    account.deposit(200);
+
+    account.withdraw(100);
+</script>
