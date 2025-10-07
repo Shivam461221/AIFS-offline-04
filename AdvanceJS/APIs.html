@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="getLocation()">Location</button>
+
+    <br><br>
+
+    <button onclick="getNotification()">Notification</button>
+
+    <script>
+
+        function getLocation() {
+            navigator.geolocation.getCurrentPosition(position => {
+                console.log(position.coords.latitude);
+                console.log(position.coords.longitude);
+
+            });
+        }
+
+        function getNotification() {
+            Notification.requestPermission().then(Permission => 
+            {
+                if (Permission === 'granted') {
+                    new Notification("Hello from browser");
+                }
+            }
+            );
+        }
+    </script>
+</body>
+
+</html>

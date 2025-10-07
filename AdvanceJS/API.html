@@ -1,0 +1,19 @@
+<script>
+    //setInterval, setTimeout
+
+
+    setTimeout(()=>{
+        console.log('Hello');
+         clearInterval(intervalId);
+    }, 5000);
+
+    
+
+    let count = 0;
+    let intervalId =  setInterval(()=>{
+        count++;
+        console.log(count);
+    }, 1000);
+
+    //clearInterval(intervalId);
+</script>

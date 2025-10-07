@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .outer{
+            border: 2px solid black;
+            height: 600px;
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .outer div{
+            border: 1px solid red;
+            height: 50px;
+            width: 50px;
+        }
+
+        .nav{
+            min-height: 70px;
+            border: 1px solid black;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .nav div{
+            height: 70px;
+            width: 200px;
+            
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .nav div p{
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="items">
+            <h1>Cloudblitz</h1>
+        </div>
+        <div class="items">
+            <p>Home</p>
+        </div>
+        <div class="items">
+             <p>Home</p>
+        </div>
+        <div class="items">
+             <p>Home</p>
+        </div>
+        <div class="items">
+             <p>Home</p>
+        </div>
+        <div class="items">
+             <p>Home</p>
+        </div>
+    </div>
+    <div class="outer">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+    </div>
+
+    
+</body>
+</html>
