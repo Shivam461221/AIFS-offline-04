@@ -1,0 +1,51 @@
+<script>
+
+    //map, filter and reduce 
+
+    let arr = [1,2,3,4,5,6,7,8,9,10];
+
+    console.log(arr);
+    
+
+    let newArr = arr.map((element)=>element+2);
+
+    console.log(newArr);
+
+    let arr2 = arr.filter((element)=>element%2!==0);
+    
+    console.log(arr2);
+
+    let products = [
+        {id:1, title:"bootle", price:500},
+        {id:2, title:"mouse", price:700},
+        {id:3, title:"keyboard", price:100},
+        {id:4, title:"cable", price:200},
+        {id:5, title:"lunch", price:300},
+        {id:6, title:"remote", price:1000},
+        {id:7, title:"pen", price:500},
+        {id:8, title:"key", price:900},
+
+    ];
+
+    console.log(products);
+    
+
+    let over500 = products.filter((product)=>product.price>500)
+
+    console.log(over500);
+
+    let sum = products.reduce((acc, product)=>product.price+acc, 0);
+
+    console.log(sum);
+    
+    function sumTwo(num1, num2){
+        return num1+num2;
+    }
+
+    function getSum(...numbers){
+        return numbers.reduce((init, number)=>number+init, 0);
+    }
+
+    console.log(getSum(2,4,7,9,0,100));
+
+</script>
