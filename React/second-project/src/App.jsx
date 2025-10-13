@@ -12,16 +12,16 @@ function App() {
   //useEffect, useNavigate, useContext, useLocation
   
 
-  const sum=()=>{
-    setCount(count+1);
-    //x++;
-    //console.log(x);
-  }
+  // const sum=()=>{
+  //   setCount(count+1);
+  //   //x++;
+  //   //console.log(x);
+  // }
 
-  const substract=()=>{
-    setCount(count-1);
-    //x--;
-  }
+  // const substract=()=>{
+  //   setCount(count-1);
+  //   //x--;
+  // }
 
   return (
     <>
@@ -33,6 +33,8 @@ function App() {
       <button onClick={substract} >Substract</button> */}
 
       <Products/>
+
+      
     </>
   )
 }
