@@ -10,7 +10,7 @@ function App() {
 
   const getUsers = async () => {
     try {
-      let response = await fetch('https://dummyjson.com/users');
+      let response = await fetch('https://dummyjson.com/users', );
       let data = await response.json();
       setUsers(data.users);
       console.log(data.users);

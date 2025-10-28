@@ -9,7 +9,7 @@ export default function Home(){
         <h1>Home {count} </h1>
 
         <button onClick={increase}>Increase</button>
-
+        
         <button onClick={decrease}>Decrease</button>
     </>
 }
