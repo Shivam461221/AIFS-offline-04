@@ -1,16 +1,18 @@
 import axios from "axios"
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
 
 export default function Login(){
 const navigate = useNavigate();
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
+const {setToken, setUser, setIsLoggedIn} = useContext(UserContext);
 
-const [formData, setFormData] = useState({
-    email:"",
-    password:""
-});
+// const [formData, setFormData] = useState({
+//     email:"",
+//     password:""
+// });
 
     const login = async(e)=>{
         e.preventDefault();
@@ -18,7 +20,20 @@ const [formData, setFormData] = useState({
             let response = await axios.post('http://localhost:8000/api/auth/login', {email, password});
             console.log(response);
             if(response.data.token){
-                navigate("/dashboard")
+                setUser(response.data.user);
+                setToken(response.data.token);
+                setIsLoggedIn(true);
+                if(response.data.user.role==='admin'){
+                    navigate("/admin-dashboard")
+                }
+                else if(response.data.user.role==='doctor'){
+                    navigate("/doctor-dashboard")
+                }
+                else if(response.data.user.role==='receptionist'){
+                    navigate("/receptionist-dashboard")
+                }
+
+                
             }
 
         }

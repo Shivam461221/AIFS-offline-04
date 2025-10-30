@@ -1,6 +1,18 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
 
 export default function Header() {
+
+    const { isLoggedIn, setIsLoggedIn, user, setUser, setToken } = useContext(UserContext);
+    
+
+    const logout =()=>{
+        setUser({});
+        setToken('');
+        setIsLoggedIn(false);
+    }
+    
     return <>
         <header className="header_section">
             <div className="header_top">
@@ -43,45 +55,64 @@ export default function Header() {
                             <div className="d-flex mr-auto flex-column flex-lg-row align-items-center">
                                 <ul className="navbar-nav  ">
                                     <li className="nav-item active">
-                                        
+
                                         <Link className="nav-link" to={'/'} >Home <span className="sr-only">(current)</span></Link>
                                     </li>
                                     <li className="nav-item">
-                                        
-                                         <Link className="nav-link" to={'/about'} >About <span className="sr-only">(current)</span></Link>
+
+                                        <Link className="nav-link" to={'/about'} >About <span className="sr-only">(current)</span></Link>
                                     </li>
                                     <li className="nav-item">
-                                        
-                                         <Link className="nav-link" to={'/treatment'} >Treatment <span className="sr-only">(current)</span></Link>
+
+                                        <Link className="nav-link" to={'/treatment'} >Treatment <span className="sr-only">(current)</span></Link>
                                     </li>
                                     <li className="nav-item">
-                                        
-                                         <Link className="nav-link" to={'/team'} >Doctors <span className="sr-only">(current)</span></Link>
+
+                                        <Link className="nav-link" to={'/team'} >Doctors <span className="sr-only">(current)</span></Link>
                                     </li>
                                     <li className="nav-item">
-                                        
-                                         <Link className="nav-link" to={'/client'} >Testimonial <span className="sr-only">(current)</span></Link>
+
+                                        <Link className="nav-link" to={'/client'} >Testimonial <span className="sr-only">(current)</span></Link>
                                     </li>
                                     <li className="nav-item">
-                                        
-                                         <Link className="nav-link" to={'/contact'} >Contact Us <span className="sr-only">(current)</span></Link>
+
+                                        <Link className="nav-link" to={'/contact'} >Contact Us <span className="sr-only">(current)</span></Link>
+                                    </li>
+                                    <li className="nav-item">
+
+                                        <Link className="nav-link" to={'/admin-dashboard'} >admin <span className="sr-only">(current)</span></Link>
+                                    </li>
+                                    <li className="nav-item">
+
+                                        <Link className="nav-link" to={'/doctor-dashboard'} >doctor<span className="sr-only">(current)</span></Link>
+                                    </li>
+                                    <li className="nav-item">
+
+                                        <Link className="nav-link" to={'/receptionist-dashboard'} >reception<span className="sr-only">(current)</span></Link>
                                     </li>
                                 </ul>
                             </div>
                             <div className="quote_btn-container">
+
                                 
-                                <Link to={'/login'}>
-                                    <i className="fa fa-user" aria-hidden="true"></i>
-                                    <span>
-                                        Login
-                                    </span>
-                                </Link>
-                                {/* <a href="">
-                                    <i className="fa fa-user" aria-hidden="true"></i>
-                                    <span>
-                                        Sign Up
-                                    </span>
-                                </a> */}
+                                {
+                                    (isLoggedIn)
+                                        ?
+                                        <Link to={'/login'} onClick={logout} >
+                                            <i className="fa fa-user" aria-hidden="true"></i>
+                                            <span>
+                                                Logout
+                                            </span>
+                                        </Link>
+                                        :
+                                        <Link to={'/login'}>
+                                            <i className="fa fa-user" aria-hidden="true"></i>
+                                            <span>
+                                                Login
+                                            </span>
+                                        </Link>
+
+                                }
                                 <form className="form-inline">
                                     <button className="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                                         <i className="fa fa-search" aria-hidden="true"></i>

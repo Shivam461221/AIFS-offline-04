@@ -14,7 +14,10 @@ import Footer from './components/Footer'
 import Home from './components/Home'
 import { Route, Routes } from 'react-router-dom'
 import Login from './components/Login'
-import Dashboard from './Components/Dashboard'
+import Dashboard from './Components/AdminDashboard'
+import AdminDashboard from './Components/AdminDashboard'
+import DoctorDashboard from './Components/DoctorDashboard'
+import ReceptionistDashboard from './Components/ReceptionistDashboard'
 
 function App() {
   
@@ -24,6 +27,7 @@ function App() {
      <Header/>
       <Routes>
         <Route path='/' element={<Home/>} />
+        
         <Route path='/book' element={<Book/>} />
         <Route path='/about' element={<About/>} />
         <Route path='/treatment' element={<Treatment/>} />
@@ -31,7 +35,10 @@ function App() {
         <Route path='/client' element={<Client/>} />
         <Route path='/contact' element={ <Contact/>} />
         <Route path='/login' element={<Login/>} />
-        <Route path='/dashboard' element={<Dashboard/>} />
+        <Route path='/admin-dashboard' element={<AdminDashboard/>} />
+        <Route path='/doctor-dashboard' element={<DoctorDashboard/>} /> 
+        <Route path='/receptionist-dashboard' element={<ReceptionistDashboard/>} />
+
       </Routes>
       <Footer/>
     </>
