@@ -1,18 +1,20 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 
 export default function Header() {
 
     const { isLoggedIn, setIsLoggedIn, user, setUser, setToken } = useContext(UserContext);
-    
+    const navigate = useNavigate();
 
-    const logout =()=>{
+
+    const logout = () => {
         setUser({});
         setToken('');
         setIsLoggedIn(false);
+        navigate('/');
     }
-    
+
     return <>
         <header className="header_section">
             <div className="header_top">
@@ -53,57 +55,93 @@ export default function Header() {
 
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <div className="d-flex mr-auto flex-column flex-lg-row align-items-center">
-                                <ul className="navbar-nav  ">
-                                    <li className="nav-item active">
 
-                                        <Link className="nav-link" to={'/'} >Home <span className="sr-only">(current)</span></Link>
-                                    </li>
-                                    <li className="nav-item">
+                                {
+                                    (isLoggedIn && user.role === 'admin') ?
+                                        <ul className="navbar-nav  ">
+                                            <li className="nav-item active">
 
-                                        <Link className="nav-link" to={'/about'} >About <span className="sr-only">(current)</span></Link>
-                                    </li>
-                                    <li className="nav-item">
+                                                <Link className="nav-link" to={'/dashboard'} >Dashboard <span className="sr-only">(current)</span></Link>
+                                            </li>
+                                            <li className="nav-item active">
 
-                                        <Link className="nav-link" to={'/treatment'} >Treatment <span className="sr-only">(current)</span></Link>
-                                    </li>
-                                    <li className="nav-item">
+                                                <Link className="nav-link" to={'/add-doctor'} >Add Doctors <span className="sr-only">(current)</span></Link>
+                                            </li>
+                                            <li className="nav-item active">
 
-                                        <Link className="nav-link" to={'/team'} >Doctors <span className="sr-only">(current)</span></Link>
-                                    </li>
-                                    <li className="nav-item">
+                                                <Link className="nav-link" to={'/'} >Receptionist <span className="sr-only">(current)</span></Link>
+                                            </li>
+                                            <li className="nav-item active">
 
-                                        <Link className="nav-link" to={'/client'} >Testimonial <span className="sr-only">(current)</span></Link>
-                                    </li>
-                                    <li className="nav-item">
+                                                <Link className="nav-link" to={'/'} >Patient <span className="sr-only">(current)</span></Link>
+                                            </li>
 
-                                        <Link className="nav-link" to={'/contact'} >Contact Us <span className="sr-only">(current)</span></Link>
-                                    </li>
-                                    <li className="nav-item">
 
-                                        <Link className="nav-link" to={'/admin-dashboard'} >admin <span className="sr-only">(current)</span></Link>
-                                    </li>
-                                    <li className="nav-item">
+                                        </ul>
+                                        :
+                                        (isLoggedIn && user.role === 'doctor') ?
+                                            <ul className="navbar-nav  ">
+                                                <li className="nav-item active">
 
-                                        <Link className="nav-link" to={'/doctor-dashboard'} >doctor<span className="sr-only">(current)</span></Link>
-                                    </li>
-                                    <li className="nav-item">
+                                                    <Link className="nav-link" to={'/'} >Doctor <span className="sr-only">(current)</span></Link>
+                                                </li>
+                                            </ul>
+                                            :
+                                            (isLoggedIn && user.role === 'receptionist') ?
+                                                <ul className="navbar-nav  ">
+                                                    <li className="nav-item active">
 
-                                        <Link className="nav-link" to={'/receptionist-dashboard'} >reception<span className="sr-only">(current)</span></Link>
-                                    </li>
-                                </ul>
+                                                        <Link className="nav-link" to={'/'} >Receptionist <span className="sr-only">(current)</span></Link>
+                                                    </li>
+                                                </ul>
+                                                :
+                                                <ul className="navbar-nav  ">
+                                                    <li className="nav-item active">
+
+                                                        <Link className="nav-link" to={'/'} >Home <span className="sr-only">(current)</span></Link>
+                                                    </li>
+                                                    <li className="nav-item">
+
+                                                        <Link className="nav-link" to={'/about'} >About <span className="sr-only">(current)</span></Link>
+                                                    </li>
+                                                    <li className="nav-item">
+
+                                                        <Link className="nav-link" to={'/treatment'} >Treatment <span className="sr-only">(current)</span></Link>
+                                                    </li>
+                                                    <li className="nav-item">
+
+                                                        <Link className="nav-link" to={'/team'} >Doctors <span className="sr-only">(current)</span></Link>
+                                                    </li>
+                                                    <li className="nav-item">
+
+                                                        <Link className="nav-link" to={'/client'} >Testimonial <span className="sr-only">(current)</span></Link>
+                                                    </li>
+                                                    <li className="nav-item">
+
+                                                        <Link className="nav-link" to={'/contact'} >Contact Us <span className="sr-only">(current)</span></Link>
+                                                    </li>
+                                                    <li className="nav-item">
+
+                                                        <Link className="nav-link" to={'/dashboard'} >admin <span className="sr-only">(current)</span></Link>
+                                                    </li>
+                                                </ul>
+                                }
                             </div>
                             <div className="quote_btn-container">
 
-                                
+
                                 {
                                     (isLoggedIn)
                                         ?
-                                        <Link to={'/login'} onClick={logout} >
+                                        
+                                        <button onClick={logout} className="btn btn-secondary">
                                             <i className="fa fa-user" aria-hidden="true"></i>
                                             <span>
                                                 Logout
                                             </span>
-                                        </Link>
+                                        </button>
+
+
                                         :
                                         <Link to={'/login'}>
                                             <i className="fa fa-user" aria-hidden="true"></i>

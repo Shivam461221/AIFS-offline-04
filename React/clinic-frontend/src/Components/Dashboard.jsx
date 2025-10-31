@@ -1,12 +1,12 @@
 import { useContext } from "react"
 import { UserContext } from "../Context/UserContext"
 
-export default function AdminDashboard(){
+export default function Dashboard(){
 
     const {user} = useContext(UserContext);
 
     return <>
-        <h1>Admin Dashboard</h1>
+        <h1 className="text-center text-capitalize my-2">Welcome {user.role} {user.firstName}</h1>
         <section className="book_section layout_padding">
             <div className="container">
                 <div className="row">
