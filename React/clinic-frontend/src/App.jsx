@@ -16,6 +16,9 @@ import { Route, Routes } from 'react-router-dom'
 import Login from './components/Login'
 import Dashboard from './Components/Dashboard'
 import AddDoctor from './Components/AddDoctor'
+import ProtectedRoute from './Components/ProtectedRoute'
+import DoctorsList from './Components/DoctorsList'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -34,8 +37,10 @@ function App() {
         <Route path='/client' element={<Client/>} />
         <Route path='/contact' element={ <Contact/>} />
         <Route path='/login' element={<Login/>} />
-        <Route path='/dashboard' element={<Dashboard/>} />
+        <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
         <Route path='/add-doctor' element={<AddDoctor/>} />
+        <Route path='/doctors-list' element={<DoctorsList/>} />
+
 
       </Routes>
       <Footer/>

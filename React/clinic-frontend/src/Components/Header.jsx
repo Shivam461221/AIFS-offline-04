@@ -69,7 +69,7 @@ export default function Header() {
                                             </li>
                                             <li className="nav-item active">
 
-                                                <Link className="nav-link" to={'/'} >Receptionist <span className="sr-only">(current)</span></Link>
+                                                <Link className="nav-link" to={'/doctors-list'} >Doctors List <span className="sr-only">(current)</span></Link>
                                             </li>
                                             <li className="nav-item active">
 
