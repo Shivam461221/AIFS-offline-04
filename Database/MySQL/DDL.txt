@@ -1,0 +1,126 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| aifs               |
+| bank_db            |
+| information_schema |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> create database aifs_b4;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| aifs               |
+| aifs_b4            |
+| bank_db            |
+| information_schema |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+10 rows in set (0.00 sec)
+
+mysql> use aifs_b4;
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> create table students(id int primary key, name varchar(60), email varchar(50), age int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_aifs_b4 |
++-------------------+
+| students          |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from students;
+Empty set (0.00 sec)
+
+mysql> desc students;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(60) | YES  |     | NULL    |       |
+| email | varchar(50) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into students values (1, 'neha', 'neha@123', 25);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from students;
++----+------+----------+------+
+| id | name | email    | age  |
++----+------+----------+------+
+|  1 | neha | neha@123 |   25 |
++----+------+----------+------+
+1 row in set (0.00 sec)
+
+mysql> insert into students values (2, 'tushar', 'tushar@123', 25), (3,'Ayush', 'ayush@123', 24), (4, 'tarkit', 'tarkit@123', 24), (5, 'surbhi', 'surbhi@123', 23);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from students;
++----+--------+------------+------+
+| id | name   | email      | age  |
++----+--------+------------+------+
+|  1 | neha   | neha@123   |   25 |
+|  2 | tushar | tushar@123 |   25 |
+|  3 | Ayush  | ayush@123  |   24 |
+|  4 | tarkit | tarkit@123 |   24 |
+|  5 | surbhi | surbhi@123 |   23 |
++----+--------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select name, email from students;
++--------+------------+
+| name   | email      |
++--------+------------+
+| neha   | neha@123   |
+| tushar | tushar@123 |
+| Ayush  | ayush@123  |
+| tarkit | tarkit@123 |
+| surbhi | surbhi@123 |
++--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_aifs_b4 |
++-------------------+
+| students          |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> delete from students where id=1;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from students;
++----+--------+------------+------+
+| id | name   | email      | age  |
++----+--------+------------+------+
+|  2 | tushar | tushar@123 |   25 |
+|  3 | Ayush  | ayush@123  |   24 |
+|  4 | tarkit | tarkit@123 |   24 |
+|  5 | surbhi | surbhi@123 |   23 |
++----+--------+------------+------+
+4 rows in set (0.00 sec)
