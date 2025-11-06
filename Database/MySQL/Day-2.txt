@@ -1,0 +1,583 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| aifs               |
+| aifs_b4            |
+| bank_db            |
+| clinic_db          |
+| information_schema |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> use aifs_b4;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_aifs_b4 |
++-------------------+
+| students          |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from students;
++----+--------+------------+------+
+| id | name   | email      | age  |
++----+--------+------------+------+
+|  2 | tushar | tushar@123 |   25 |
+|  3 | Ayush  | ayush@123  |   24 |
+|  4 | tarkit | tarkit@123 |   24 |
+|  5 | surbhi | surbhi@123 |   23 |
++----+--------+------------+------+
+4 rows in set (0.00 sec)
+
+mysql> update students set name='Tushar' where id = 2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from students;
++----+--------+------------+------+
+| id | name   | email      | age  |
++----+--------+------------+------+
+|  2 | Tushar | tushar@123 |   25 |
+|  3 | Ayush  | ayush@123  |   24 |
+|  4 | tarkit | tarkit@123 |   24 |
+|  5 | surbhi | surbhi@123 |   23 |
++----+--------+------------+------+
+4 rows in set (0.00 sec)
+
+mysql> drop table students;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table courses (id int primary key auto_increment, name varchar(50));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc courses;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(50) | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into courses (name) values ('AIFS'), ('CDEC'), ('XDSAAI');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from courses;
++----+--------+
+| id | name   |
++----+--------+
+|  1 | AIFS   |
+|  2 | CDEC   |
+|  3 | XDSAAI |
++----+--------+
+3 rows in set (0.00 sec)
+
+mysql> create table students (int id primary key auto_increment, name varchar(50), email varchar(50) unique, course_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'int id primary key auto_increment, name varchar(50), email varchar(50) unique, c' at line 1
+mysql> create table students (int id primary key auto_increment, name varchar(50), email varchar(50) unique, course_id int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'int id primary key auto_increment, name varchar(50), email varchar(50) unique, c' at line 1
+mysql> create table students (int id primary key auto_increment, name varchar(50), email varchar(50) unique, course_id int, foreign key(course_id) references courses(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'int id primary key auto_increment, name varchar(50), email varchar(50) unique, c' at line 1
+mysql> create table students (id int primary key auto_increment, name varchar(50), email varchar(50) unique, course_id int, foreign key(course_id) references courses(id));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc students;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| name      | varchar(50) | YES  |     | NULL    |                |
+| email     | varchar(50) | YES  | UNI | NULL    |                |
+| course_id | int         | YES  | MUL | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into students (name, email, course_id) values('Tarkit','tarkit@gmail.com', 1 );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into students (name, email, course_id) values('Ayush','ayush@gmail.com', 2 ), ('Tushar' ,'tushar@gmail.com',3);
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from students;
++----+--------+------------------+-----------+
+| id | name   | email            | course_id |
++----+--------+------------------+-----------+
+|  1 | Tarkit | tarkit@gmail.com |         1 |
+|  2 | Ayush  | ayush@gmail.com  |         2 |
+|  3 | Tushar | tushar@gmail.com |         3 |
++----+--------+------------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students where course_id = 1;
++----+--------+------------------+-----------+
+| id | name   | email            | course_id |
++----+--------+------------------+-----------+
+|  1 | Tarkit | tarkit@gmail.com |         1 |
++----+--------+------------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from students order by name asc;
++----+--------+------------------+-----------+
+| id | name   | email            | course_id |
++----+--------+------------------+-----------+
+|  2 | Ayush  | ayush@gmail.com  |         2 |
+|  1 | Tarkit | tarkit@gmail.com |         1 |
+|  3 | Tushar | tushar@gmail.com |         3 |
++----+--------+------------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students order by name desc;
++----+--------+------------------+-----------+
+| id | name   | email            | course_id |
++----+--------+------------------+-----------+
+|  3 | Tushar | tushar@gmail.com |         3 |
+|  1 | Tarkit | tarkit@gmail.com |         1 |
+|  2 | Ayush  | ayush@gmail.com  |         2 |
++----+--------+------------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students order by course_id desc;
++----+--------+------------------+-----------+
+| id | name   | email            | course_id |
++----+--------+------------------+-----------+
+|  3 | Tushar | tushar@gmail.com |         3 |
+|  2 | Ayush  | ayush@gmail.com  |         2 |
+|  1 | Tarkit | tarkit@gmail.com |         1 |
++----+--------+------------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students order by course_id asc;
++----+--------+------------------+-----------+
+| id | name   | email            | course_id |
++----+--------+------------------+-----------+
+|  1 | Tarkit | tarkit@gmail.com |         1 |
+|  2 | Ayush  | ayush@gmail.com  |         2 |
+|  3 | Tushar | tushar@gmail.com |         3 |
++----+--------+------------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO students (name, email, course_id) VALUES
+    -> ('John Smith', 'john.smith@email.com', 1),
+    -> ('Emma Johnson', 'emma.johnson@email.com', 2),
+    -> ('Michael Brown', 'michael.brown@email.com', 3),
+    -> ('Sarah Davis', 'sarah.davis@email.com', 1),
+    -> ('David Wilson', 'david.wilson@email.com', 2),
+    -> ('Jennifer Miller', 'jennifer.miller@email.com', 3),
+    -> ('Christopher Taylor', 'christopher.taylor@email.com', 1),
+    -> ('Jessica Anderson', 'jessica.anderson@email.com', 2),
+    -> ('Matthew Thomas', 'matthew.thomas@email.com', 3),
+    -> ('Amanda Martinez', 'amanda.martinez@email.com', 1),
+    -> ('Daniel Garcia', 'daniel.garcia@email.com', 2),
+    -> ('Laura Rodriguez', 'laura.rodriguez@email.com', 3),
+    -> ('Kevin Lee', 'kevin.lee@email.com', 1),
+    -> ('Rachel White', 'rachel.white@email.com', 2),
+    -> ('Brian Harris', 'brian.harris@email.com', 3),
+    -> ('Nicole Clark', 'nicole.clark@email.com', 1),
+    -> ('Steven Lewis', 'steven.lewis@email.com', 2),
+    -> ('Michelle Walker', 'michelle.walker@email.com', 3),
+    -> ('Andrew Hall', 'andrew.hall@email.com', 1),
+    -> ('Emily Allen', 'emily.allen@email.com', 2);
+Query OK, 20 rows affected (0.01 sec)
+Records: 20  Duplicates: 0  Warnings: 0
+
+mysql> select * from students;
++----+--------------------+------------------------------+-----------+
+| id | name               | email                        | course_id |
++----+--------------------+------------------------------+-----------+
+|  1 | Tarkit             | tarkit@gmail.com             |         1 |
+|  2 | Ayush              | ayush@gmail.com              |         2 |
+|  3 | Tushar             | tushar@gmail.com             |         3 |
+|  4 | John Smith         | john.smith@email.com         |         1 |
+|  5 | Emma Johnson       | emma.johnson@email.com       |         2 |
+|  6 | Michael Brown      | michael.brown@email.com      |         3 |
+|  7 | Sarah Davis        | sarah.davis@email.com        |         1 |
+|  8 | David Wilson       | david.wilson@email.com       |         2 |
+|  9 | Jennifer Miller    | jennifer.miller@email.com    |         3 |
+| 10 | Christopher Taylor | christopher.taylor@email.com |         1 |
+| 11 | Jessica Anderson   | jessica.anderson@email.com   |         2 |
+| 12 | Matthew Thomas     | matthew.thomas@email.com     |         3 |
+| 13 | Amanda Martinez    | amanda.martinez@email.com    |         1 |
+| 14 | Daniel Garcia      | daniel.garcia@email.com      |         2 |
+| 15 | Laura Rodriguez    | laura.rodriguez@email.com    |         3 |
+| 16 | Kevin Lee          | kevin.lee@email.com          |         1 |
+| 17 | Rachel White       | rachel.white@email.com       |         2 |
+| 18 | Brian Harris       | brian.harris@email.com       |         3 |
+| 19 | Nicole Clark       | nicole.clark@email.com       |         1 |
+| 20 | Steven Lewis       | steven.lewis@email.com       |         2 |
+| 21 | Michelle Walker    | michelle.walker@email.com    |         3 |
+| 22 | Andrew Hall        | andrew.hall@email.com        |         1 |
+| 23 | Emily Allen        | emily.allen@email.com        |         2 |
++----+--------------------+------------------------------+-----------+
+23 rows in set (0.00 sec)
+
+mysql> select * from students where course_id = 3;
++----+-----------------+---------------------------+-----------+
+| id | name            | email                     | course_id |
++----+-----------------+---------------------------+-----------+
+|  3 | Tushar          | tushar@gmail.com          |         3 |
+|  6 | Michael Brown   | michael.brown@email.com   |         3 |
+|  9 | Jennifer Miller | jennifer.miller@email.com |         3 |
+| 12 | Matthew Thomas  | matthew.thomas@email.com  |         3 |
+| 15 | Laura Rodriguez | laura.rodriguez@email.com |         3 |
+| 18 | Brian Harris    | brian.harris@email.com    |         3 |
+| 21 | Michelle Walker | michelle.walker@email.com |         3 |
++----+-----------------+---------------------------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> select * from students where course_id < 3;
++----+--------------------+------------------------------+-----------+
+| id | name               | email                        | course_id |
++----+--------------------+------------------------------+-----------+
+|  1 | Tarkit             | tarkit@gmail.com             |         1 |
+|  2 | Ayush              | ayush@gmail.com              |         2 |
+|  4 | John Smith         | john.smith@email.com         |         1 |
+|  5 | Emma Johnson       | emma.johnson@email.com       |         2 |
+|  7 | Sarah Davis        | sarah.davis@email.com        |         1 |
+|  8 | David Wilson       | david.wilson@email.com       |         2 |
+| 10 | Christopher Taylor | christopher.taylor@email.com |         1 |
+| 11 | Jessica Anderson   | jessica.anderson@email.com   |         2 |
+| 13 | Amanda Martinez    | amanda.martinez@email.com    |         1 |
+| 14 | Daniel Garcia      | daniel.garcia@email.com      |         2 |
+| 16 | Kevin Lee          | kevin.lee@email.com          |         1 |
+| 17 | Rachel White       | rachel.white@email.com       |         2 |
+| 19 | Nicole Clark       | nicole.clark@email.com       |         1 |
+| 20 | Steven Lewis       | steven.lewis@email.com       |         2 |
+| 22 | Andrew Hall        | andrew.hall@email.com        |         1 |
+| 23 | Emily Allen        | emily.allen@email.com        |         2 |
++----+--------------------+------------------------------+-----------+
+16 rows in set (0.00 sec)
+
+mysql> select * from students where course_id > 3;
+Empty set (0.00 sec)
+
+mysql> select * from students where course_id > 1;
++----+------------------+----------------------------+-----------+
+| id | name             | email                      | course_id |
++----+------------------+----------------------------+-----------+
+|  2 | Ayush            | ayush@gmail.com            |         2 |
+|  3 | Tushar           | tushar@gmail.com           |         3 |
+|  5 | Emma Johnson     | emma.johnson@email.com     |         2 |
+|  6 | Michael Brown    | michael.brown@email.com    |         3 |
+|  8 | David Wilson     | david.wilson@email.com     |         2 |
+|  9 | Jennifer Miller  | jennifer.miller@email.com  |         3 |
+| 11 | Jessica Anderson | jessica.anderson@email.com |         2 |
+| 12 | Matthew Thomas   | matthew.thomas@email.com   |         3 |
+| 14 | Daniel Garcia    | daniel.garcia@email.com    |         2 |
+| 15 | Laura Rodriguez  | laura.rodriguez@email.com  |         3 |
+| 17 | Rachel White     | rachel.white@email.com     |         2 |
+| 18 | Brian Harris     | brian.harris@email.com     |         3 |
+| 20 | Steven Lewis     | steven.lewis@email.com     |         2 |
+| 21 | Michelle Walker  | michelle.walker@email.com  |         3 |
+| 23 | Emily Allen      | emily.allen@email.com      |         2 |
++----+------------------+----------------------------+-----------+
+15 rows in set (0.00 sec)
+
+mysql> select * from students where course_id != 1;
++----+------------------+----------------------------+-----------+
+| id | name             | email                      | course_id |
++----+------------------+----------------------------+-----------+
+|  2 | Ayush            | ayush@gmail.com            |         2 |
+|  3 | Tushar           | tushar@gmail.com           |         3 |
+|  5 | Emma Johnson     | emma.johnson@email.com     |         2 |
+|  6 | Michael Brown    | michael.brown@email.com    |         3 |
+|  8 | David Wilson     | david.wilson@email.com     |         2 |
+|  9 | Jennifer Miller  | jennifer.miller@email.com  |         3 |
+| 11 | Jessica Anderson | jessica.anderson@email.com |         2 |
+| 12 | Matthew Thomas   | matthew.thomas@email.com   |         3 |
+| 14 | Daniel Garcia    | daniel.garcia@email.com    |         2 |
+| 15 | Laura Rodriguez  | laura.rodriguez@email.com  |         3 |
+| 17 | Rachel White     | rachel.white@email.com     |         2 |
+| 18 | Brian Harris     | brian.harris@email.com     |         3 |
+| 20 | Steven Lewis     | steven.lewis@email.com     |         2 |
+| 21 | Michelle Walker  | michelle.walker@email.com  |         3 |
+| 23 | Emily Allen      | emily.allen@email.com      |         2 |
++----+------------------+----------------------------+-----------+
+15 rows in set (0.00 sec)
+
+mysql> select distinct course_id from students;
++-----------+
+| course_id |
++-----------+
+|         1 |
+|         2 |
+|         3 |
++-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students where name like 'a%';
++----+-----------------+---------------------------+-----------+
+| id | name            | email                     | course_id |
++----+-----------------+---------------------------+-----------+
+|  2 | Ayush           | ayush@gmail.com           |         2 |
+| 13 | Amanda Martinez | amanda.martinez@email.com |         1 |
+| 22 | Andrew Hall     | andrew.hall@email.com     |         1 |
++----+-----------------+---------------------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students where name like '%a';
++----+---------------+-------------------------+-----------+
+| id | name          | email                   | course_id |
++----+---------------+-------------------------+-----------+
+| 14 | Daniel Garcia | daniel.garcia@email.com |         2 |
++----+---------------+-------------------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where name like '%a%';
++----+--------------------+------------------------------+-----------+
+| id | name               | email                        | course_id |
++----+--------------------+------------------------------+-----------+
+|  1 | Tarkit             | tarkit@gmail.com             |         1 |
+|  2 | Ayush              | ayush@gmail.com              |         2 |
+|  3 | Tushar             | tushar@gmail.com             |         3 |
+|  5 | Emma Johnson       | emma.johnson@email.com       |         2 |
+|  6 | Michael Brown      | michael.brown@email.com      |         3 |
+|  7 | Sarah Davis        | sarah.davis@email.com        |         1 |
+|  8 | David Wilson       | david.wilson@email.com       |         2 |
+| 10 | Christopher Taylor | christopher.taylor@email.com |         1 |
+| 11 | Jessica Anderson   | jessica.anderson@email.com   |         2 |
+| 12 | Matthew Thomas     | matthew.thomas@email.com     |         3 |
+| 13 | Amanda Martinez    | amanda.martinez@email.com    |         1 |
+| 14 | Daniel Garcia      | daniel.garcia@email.com      |         2 |
+| 15 | Laura Rodriguez    | laura.rodriguez@email.com    |         3 |
+| 17 | Rachel White       | rachel.white@email.com       |         2 |
+| 18 | Brian Harris       | brian.harris@email.com       |         3 |
+| 19 | Nicole Clark       | nicole.clark@email.com       |         1 |
+| 21 | Michelle Walker    | michelle.walker@email.com    |         3 |
+| 22 | Andrew Hall        | andrew.hall@email.com        |         1 |
+| 23 | Emily Allen        | emily.allen@email.com        |         2 |
++----+--------------------+------------------------------+-----------+
+19 rows in set (0.00 sec)
+
+mysql> select * from students where name like '%emma%';
++----+--------------+------------------------+-----------+
+| id | name         | email                  | course_id |
++----+--------------+------------------------+-----------+
+|  5 | Emma Johnson | emma.johnson@email.com |         2 |
++----+--------------+------------------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where name like 'a%' and course_id=2;
++----+-------+-----------------+-----------+
+| id | name  | email           | course_id |
++----+-------+-----------------+-----------+
+|  2 | Ayush | ayush@gmail.com |         2 |
++----+-------+-----------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where name like 'a%' or course_id=2;
++----+------------------+----------------------------+-----------+
+| id | name             | email                      | course_id |
++----+------------------+----------------------------+-----------+
+|  2 | Ayush            | ayush@gmail.com            |         2 |
+|  5 | Emma Johnson     | emma.johnson@email.com     |         2 |
+|  8 | David Wilson     | david.wilson@email.com     |         2 |
+| 11 | Jessica Anderson | jessica.anderson@email.com |         2 |
+| 13 | Amanda Martinez  | amanda.martinez@email.com  |         1 |
+| 14 | Daniel Garcia    | daniel.garcia@email.com    |         2 |
+| 17 | Rachel White     | rachel.white@email.com     |         2 |
+| 20 | Steven Lewis     | steven.lewis@email.com     |         2 |
+| 22 | Andrew Hall      | andrew.hall@email.com      |         1 |
+| 23 | Emily Allen      | emily.allen@email.com      |         2 |
++----+------------------+----------------------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from students where course_id in (1, 2);
++----+--------------------+------------------------------+-----------+
+| id | name               | email                        | course_id |
++----+--------------------+------------------------------+-----------+
+|  1 | Tarkit             | tarkit@gmail.com             |         1 |
+|  2 | Ayush              | ayush@gmail.com              |         2 |
+|  4 | John Smith         | john.smith@email.com         |         1 |
+|  5 | Emma Johnson       | emma.johnson@email.com       |         2 |
+|  7 | Sarah Davis        | sarah.davis@email.com        |         1 |
+|  8 | David Wilson       | david.wilson@email.com       |         2 |
+| 10 | Christopher Taylor | christopher.taylor@email.com |         1 |
+| 11 | Jessica Anderson   | jessica.anderson@email.com   |         2 |
+| 13 | Amanda Martinez    | amanda.martinez@email.com    |         1 |
+| 14 | Daniel Garcia      | daniel.garcia@email.com      |         2 |
+| 16 | Kevin Lee          | kevin.lee@email.com          |         1 |
+| 17 | Rachel White       | rachel.white@email.com       |         2 |
+| 19 | Nicole Clark       | nicole.clark@email.com       |         1 |
+| 20 | Steven Lewis       | steven.lewis@email.com       |         2 |
+| 22 | Andrew Hall        | andrew.hall@email.com        |         1 |
+| 23 | Emily Allen        | emily.allen@email.com        |         2 |
++----+--------------------+------------------------------+-----------+
+16 rows in set (0.00 sec)
+
+mysql> select * from students where not course_id=2;
++----+--------------------+------------------------------+-----------+
+| id | name               | email                        | course_id |
++----+--------------------+------------------------------+-----------+
+|  1 | Tarkit             | tarkit@gmail.com             |         1 |
+|  3 | Tushar             | tushar@gmail.com             |         3 |
+|  4 | John Smith         | john.smith@email.com         |         1 |
+|  6 | Michael Brown      | michael.brown@email.com      |         3 |
+|  7 | Sarah Davis        | sarah.davis@email.com        |         1 |
+|  9 | Jennifer Miller    | jennifer.miller@email.com    |         3 |
+| 10 | Christopher Taylor | christopher.taylor@email.com |         1 |
+| 12 | Matthew Thomas     | matthew.thomas@email.com     |         3 |
+| 13 | Amanda Martinez    | amanda.martinez@email.com    |         1 |
+| 15 | Laura Rodriguez    | laura.rodriguez@email.com    |         3 |
+| 16 | Kevin Lee          | kevin.lee@email.com          |         1 |
+| 18 | Brian Harris       | brian.harris@email.com       |         3 |
+| 19 | Nicole Clark       | nicole.clark@email.com       |         1 |
+| 21 | Michelle Walker    | michelle.walker@email.com    |         3 |
+| 22 | Andrew Hall        | andrew.hall@email.com        |         1 |
++----+--------------------+------------------------------+-----------+
+15 rows in set (0.00 sec)
+
+mysql> desc students;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| name      | varchar(50) | YES  |     | NULL    |                |
+| email     | varchar(50) | YES  | UNI | NULL    |                |
+| course_id | int         | YES  | MUL | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> delete from students where id = 22;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> delete from students;
+Query OK, 22 rows affected (0.01 sec)
+
+mysql> select * from students;
+Empty set (0.00 sec)
+
+mysql> create table departments (id int primary key auto_increment);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> alter table departments add column (name varchar(50));
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc departments;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(50) | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from courses;
++----+--------+
+| id | name   |
++----+--------+
+|  1 | AIFS   |
+|  2 | CDEC   |
+|  3 | XDSAAI |
++----+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from studnets;
+ERROR 1146 (42S02): Table 'aifs_b4.studnets' doesn't exist
+mysql> select * from students;
+Empty set (0.00 sec)
+
+mysql> insert into departments (name) values ('IT'), ('Sales'), ('HR'),('Finance');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from departments;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | IT      |
+|  2 | Sales   |
+|  3 | HR      |
+|  4 | Finance |
++----+---------+
+4 rows in set (0.00 sec)
+
+mysql> create table employees (id int primary key auto_increment, name varchar(50), email varchar(50) unique, age int, salary double, department_id int, foreign key(department_id) referenses departments(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'referenses departments(id))' at line 1
+mysql> create table employees (id int primary key auto_increment, name varchar(50), email varchar(50) unique, age int, salary double, department_id int, foreign key(department_id) references departments(id));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc employees;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| id            | int         | NO   | PRI | NULL    | auto_increment |
+| name          | varchar(50) | YES  |     | NULL    |                |
+| email         | varchar(50) | YES  | UNI | NULL    |                |
+| age           | int         | YES  |     | NULL    |                |
+| salary        | double      | YES  |     | NULL    |                |
+| department_id | int         | YES  | MUL | NULL    |                |
++---------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT INTO employees (name, email, age, salary, department_id) VALUES
+    -> ('John Smith', 'john.smith@company.com', 28, 55000, 1),
+    -> ('Emma Johnson', 'emma.johnson@company.com', 32, 62000, 2),
+    -> ('Michael Brown', 'michael.brown@company.com', 45, 75000, 3),
+    -> ('Sarah Davis', 'sarah.davis@company.com', 26, 48000, 4),
+    -> ('David Wilson', 'david.wilson@company.com', 35, 68000, 1),
+    -> ('Jennifer Miller', 'jennifer.miller@company.com', 29, 52000, 2),
+    -> ('Christopher Taylor', 'christopher.taylor@company.com', 41, 72000, 3),
+    -> ('Jessica Anderson', 'jessica.anderson@company.com', 33, 58000, 4),
+    -> ('Matthew Thomas', 'matthew.thomas@company.com', 27, 50000, 1),
+    -> ('Amanda Martinez', 'amanda.martinez@company.com', 31, 61000, 2),
+    -> ('Daniel Garcia', 'daniel.garcia@company.com', 38, 69000, 3),
+    -> ('Laura Rodriguez', 'laura.rodriguez@company.com', 24, 45000, 4),
+    -> ('Kevin Lee', 'kevin.lee@company.com', 36, 67000, 1),
+    -> ('Rachel White', 'rachel.white@company.com', 30, 56000, 2),
+    -> ('Brian Harris', 'brian.harris@company.com', 42, 78000, 3),
+    -> ('Nicole Clark', 'nicole.clark@company.com', 28, 53000, 4),
+    -> ('Steven Lewis', 'steven.lewis@company.com', 34, 64000, 1),
+    -> ('Michelle Walker', 'michelle.walker@company.com', 29, 54000, 2),
+    -> ('Andrew Hall', 'andrew.hall@company.com', 39, 71000, 3),
+    -> ('Emily Allen', 'emily.allen@company.com', 25, 47000, 4);
+Query OK, 20 rows affected (0.01 sec)
+Records: 20  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees;
++----+--------------------+--------------------------------+------+--------+---------------+
+| id | name               | email                          | age  | salary | department_id |
++----+--------------------+--------------------------------+------+--------+---------------+
+|  1 | John Smith         | john.smith@company.com         |   28 |  55000 |             1 |
+|  2 | Emma Johnson       | emma.johnson@company.com       |   32 |  62000 |             2 |
+|  3 | Michael Brown      | michael.brown@company.com      |   45 |  75000 |             3 |
+|  4 | Sarah Davis        | sarah.davis@company.com        |   26 |  48000 |             4 |
+|  5 | David Wilson       | david.wilson@company.com       |   35 |  68000 |             1 |
+|  6 | Jennifer Miller    | jennifer.miller@company.com    |   29 |  52000 |             2 |
+|  7 | Christopher Taylor | christopher.taylor@company.com |   41 |  72000 |             3 |
+|  8 | Jessica Anderson   | jessica.anderson@company.com   |   33 |  58000 |             4 |
+|  9 | Matthew Thomas     | matthew.thomas@company.com     |   27 |  50000 |             1 |
+| 10 | Amanda Martinez    | amanda.martinez@company.com    |   31 |  61000 |             2 |
+| 11 | Daniel Garcia      | daniel.garcia@company.com      |   38 |  69000 |             3 |
+| 12 | Laura Rodriguez    | laura.rodriguez@company.com    |   24 |  45000 |             4 |
+| 13 | Kevin Lee          | kevin.lee@company.com          |   36 |  67000 |             1 |
+| 14 | Rachel White       | rachel.white@company.com       |   30 |  56000 |             2 |
+| 15 | Brian Harris       | brian.harris@company.com       |   42 |  78000 |             3 |
+| 16 | Nicole Clark       | nicole.clark@company.com       |   28 |  53000 |             4 |
+| 17 | Steven Lewis       | steven.lewis@company.com       |   34 |  64000 |             1 |
+| 18 | Michelle Walker    | michelle.walker@company.com    |   29 |  54000 |             2 |
+| 19 | Andrew Hall        | andrew.hall@company.com        |   39 |  71000 |             3 |
+| 20 | Emily Allen        | emily.allen@company.com        |   25 |  47000 |             4 |
++----+--------------------+--------------------------------+------+--------+---------------+
+20 rows in set (0.00 sec)
+
+mysql> select * from departments;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | IT      |
+|  2 | Sales   |
+|  3 | HR      |
+|  4 | Finance |
++----+---------+
+4 rows in set (0.00 sec)
