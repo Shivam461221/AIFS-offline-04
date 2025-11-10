@@ -1,0 +1,195 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| aifs               |
+| aifs_b4            |
+| bank_db            |
+| clinic_db          |
+| information_schema |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> use aifs_b4;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_aifs_b4 |
++-------------------+
+| courses           |
+| departments       |
+| employee          |
+| students          |
++-------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee;
++----+---------------+-------------------+--------+---------------+------+
+| id | employee_name | email             | salary | department_id | age  |
++----+---------------+-------------------+--------+---------------+------+
+|  2 | shivam        | shivam@gmail.com  |  25000 |             2 |   25 |
+|  3 | sanjay        | sanjay@gmail.com  |  30000 |             5 |   25 |
+|  5 | shekhar       | shekhar@gmail.com |  30000 |          NULL |   25 |
++----+---------------+-------------------+--------+---------------+------+
+3 rows in set (0.01 sec)
+
+mysql> desc employee;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| id            | int         | NO   | PRI | NULL    | auto_increment |
+| employee_name | varchar(50) | YES  |     | NULL    |                |
+| email         | varchar(50) | YES  | UNI | NULL    |                |
+| salary        | double      | YES  |     | NULL    |                |
+| department_id | int         | YES  | MUL | NULL    |                |
+| age           | double      | YES  |     | NULL    |                |
++---------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> update employee set name = 'Shivam' where id = 2;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> update employee set employee_name = 'Shivam' where id = 2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from departments;
++----+------------+
+| id | name       |
++----+------------+
+|  1 | HR         |
+|  2 | IT         |
+|  4 | Finance    |
+|  5 | Operations |
+|  6 | sales      |
++----+------------+
+5 rows in set (0.00 sec)
+
+mysql> select e.employee_name, e.email, e.salary, d.name as department from employee e inner join departments d on e.department_id=d.id;
++---------------+------------------+--------+------------+
+| employee_name | email            | salary | department |
++---------------+------------------+--------+------------+
+| Shivam        | shivam@gmail.com |  25000 | IT         |
+| sanjay        | sanjay@gmail.com |  30000 | Operations |
++---------------+------------------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee;
++----+---------------+-------------------+--------+---------------+------+
+| id | employee_name | email             | salary | department_id | age  |
++----+---------------+-------------------+--------+---------------+------+
+|  2 | Shivam        | shivam@gmail.com  |  25000 |             2 |   25 |
+|  3 | sanjay        | sanjay@gmail.com  |  30000 |             5 |   25 |
+|  5 | shekhar       | shekhar@gmail.com |  30000 |          NULL |   25 |
++----+---------------+-------------------+--------+---------------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students;
+Empty set (0.00 sec)
+
+mysql> desc students;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| name      | varchar(50) | YES  |     | NULL    |                |
+| email     | varchar(50) | YES  | UNI | NULL    |                |
+| course_id | int         | YES  | MUL | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into students (name, email, course_id) values ('Tushar', 'tushar@123', 1;);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> insert into students (name, email, course_id) values ('Tushar', 'tushar@123', 1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from courses;
++----+--------+
+| id | name   |
++----+--------+
+|  1 | AIFS   |
+|  2 | CDEC   |
+|  3 | XDSAAI |
++----+--------+
+3 rows in set (0.00 sec)
+
+mysql> insert into students (name, email, course_id) values ('Surbhi', 'surbhi@123', 2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into students (name, email, course_id) values ('Neha', 'neha@123', 3);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into students (name, email) values ('Tarkit', 'tarkit@123');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from students;
++----+--------+------------+-----------+
+| id | name   | email      | course_id |
++----+--------+------------+-----------+
+| 24 | Tushar | tushar@123 |         1 |
+| 25 | Surbhi | surbhi@123 |         2 |
+| 26 | Neha   | neha@123   |         3 |
+| 27 | Tarkit | tarkit@123 |      NULL |
++----+--------+------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from courses;
++----+--------+
+| id | name   |
++----+--------+
+|  1 | AIFS   |
+|  2 | CDEC   |
+|  3 | XDSAAI |
++----+--------+
+3 rows in set (0.00 sec)
+
+mysql> select s.name, c.name as course from students s inner join courses c on s.course_id = c.id;
++--------+--------+
+| name   | course |
++--------+--------+
+| Tushar | AIFS   |
+| Surbhi | CDEC   |
+| Neha   | XDSAAI |
++--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select s.name, c.name as course from students s left join courses c on s.course_id = c.id;
++--------+--------+
+| name   | course |
++--------+--------+
+| Tushar | AIFS   |
+| Surbhi | CDEC   |
+| Neha   | XDSAAI |
+| Tarkit | NULL   |
++--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select s.name, c.name as course from students s right join courses c on s.course_id = c.id;
++--------+--------+
+| name   | course |
++--------+--------+
+| Tushar | AIFS   |
+| Surbhi | CDEC   |
+| Neha   | XDSAAI |
++--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> insert into courses (name) values ('Data Science');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select s.name, c.name as course from students s right join courses c on s.course_id = c.id;
++--------+--------------+
+| name   | course       |
++--------+--------------+
+| Tushar | AIFS         |
+| Surbhi | CDEC         |
+| Neha   | XDSAAI       |
+| NULL   | Data Science |
++--------+--------------+
+4 rows in set (0.00 sec)
