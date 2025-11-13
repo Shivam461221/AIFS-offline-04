@@ -1,0 +1,820 @@
+mysql> use mydb;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_mydb |
++----------------+
+| departments    |
+| employee_self  |
+| employees      |
++----------------+
+3 rows in set (0.02 sec)
+
+mysql> select * from employees;
++----+--------------------+--------------------------------+---------------+--------+
+| id | name               | email                          | department_id | salary |
++----+--------------------+--------------------------------+---------------+--------+
+|  1 | John Smith         | john.smith@company.com         |             2 |  75000 |
+|  2 | Emma Johnson       | emma.johnson@company.com       |             3 |  65000 |
+|  3 | Michael Brown      | michael.brown@company.com      |             2 |  82000 |
+|  4 | Sarah Davis        | sarah.davis@company.com        |             1 |  58000 |
+|  5 | David Wilson       | david.wilson@company.com       |             5 |  72000 |
+|  6 | Jennifer Miller    | jennifer.miller@company.com    |             4 |  68000 |
+|  7 | Christopher Taylor | christopher.taylor@company.com |             2 |  90000 |
+|  8 | Jessica Anderson   | jessica.anderson@company.com   |             1 |  55000 |
+|  9 | Matthew Thomas     | matthew.thomas@company.com     |             5 |  78000 |
+| 10 | Amanda Martinez    | amanda.martinez@company.com    |             3 |  62000 |
+| 11 | Daniel Garcia      | daniel.garcia@company.com      |             4 |  85000 |
+| 12 | Laura Rodriguez    | laura.rodriguez@company.com    |             1 |  52000 |
+| 13 | Kevin Lee          | kevin.lee@company.com          |             2 |  77000 |
+| 14 | Rachel White       | rachel.white@company.com       |             3 |  59000 |
+| 15 | Brian Harris       | brian.harris@company.com       |             5 |  88000 |
+| 16 | Nicole Clark       | nicole.clark@company.com       |             4 |  63000 |
+| 17 | Steven Lewis       | steven.lewis@company.com       |             2 |  71000 |
+| 18 | Michelle Walker    | michelle.walker@company.com    |             1 |  56000 |
+| 19 | Andrew Hall        | andrew.hall@company.com        |             5 |  79000 |
+| 20 | Emily Allen        | emily.allen@company.com        |             3 |  54000 |
+| 21 | Sophie Turner      | sophie.turner@company.com      |             2 |  88000 |
+| 22 | Ryan Cooper        | ryan.cooper@company.com        |             3 |  72000 |
+| 23 | Grace Mitchell     | grace.mitchell@company.com     |             4 |  79000 |
+| 24 | Jason Reed         | jason.reed@company.com         |             1 |  57000 |
+| 25 | Lily Patterson     | lily.patterson@company.com     |             5 |  69000 |
+| 26 | Ethan Brooks       | ethan.brooks@company.com       |             2 |  92000 |
+| 27 | Zoe Bennett        | zoe.bennett@company.com        |             3 |  68000 |
+| 28 | Nathan Hayes       | nathan.hayes@company.com       |             4 |  84000 |
+| 29 | Chloe Foster       | chloe.foster@company.com       |             1 |  54000 |
+| 30 | Caleb Richardson   | caleb.richardson@company.com   |             5 |  76000 |
+| 31 | Hannah Simmons     | hannah.simmons@company.com     |             2 |  81000 |
+| 32 | Owen Coleman       | owen.coleman@company.com       |             3 |  75000 |
+| 33 | Avery Barnes       | avery.barnes@company.com       |             4 |  77000 |
+| 34 | Lucas Price        | lucas.price@company.com        |             1 |  59000 |
+| 35 | Ella Sanders       | ella.sanders@company.com       |             5 |  71000 |
+| 36 | Mason Wallace      | mason.wallace@company.com      |             2 |  86000 |
+| 37 | Scarlett Jenkins   | scarlett.jenkins@company.com   |             3 |  64000 |
+| 38 | Logan Perry        | logan.perry@company.com        |             4 |  80000 |
+| 39 | Aria Powell        | aria.powell@company.com        |             1 |  55000 |
+| 40 | Jack Long          | jack.long@company.com          |             5 |  73000 |
++----+--------------------+--------------------------------+---------------+--------+
+40 rows in set (0.00 sec)
+
+mysql> select department_id from employees group by department_id as total_employees;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'as total_employees' at line 1
+mysql> select department_id, count(*) as total_employee from employees group by department_id;
++---------------+----------------+
+| department_id | total_employee |
++---------------+----------------+
+|             1 |              8 |
+|             2 |              9 |
+|             3 |              8 |
+|             4 |              7 |
+|             5 |              8 |
++---------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> create table account(id int primary key auto_increment, name varchar(50), phone_number bigint, account_type varchar(50), balance double);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc account;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| id           | int         | NO   | PRI | NULL    | auto_increment |
+| name         | varchar(50) | YES  |     | NULL    |                |
+| phone_number | bigint      | YES  |     | NULL    |                |
+| account_type | varchar(50) | YES  |     | NULL    |                |
+| balance      | double      | YES  |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> insert into account (name, phone_number, account_type) values ('Shivam', 9754947123, 'Savings');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> truncate table account;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from account;
+Empty set (0.00 sec)
+
+mysql> INSERT INTO account (name, phone_number, account_type) VALUES
+    -> ('Shivam', 9754947123, 'Savings'),
+    -> ('Aarav Sharma', 9876543210, 'Current'),
+    -> ('Priya Patel', 9765432109, 'Savings'),
+    -> ('Rohan Kumar', 9654321098, 'Fixed Deposit'),
+    -> ('Neha Gupta', 9543210987, 'Savings'),
+    -> ('Vikram Singh', 9432109876, 'Current'),
+    -> ('Anjali Mehta', 9321098765, 'Savings'),
+    -> ('Arun Joshi', 9210987654, 'Recurring Deposit'),
+    -> ('Pooja Reddy', 9109876543, 'Savings'),
+    -> ('Sanjay Verma', 9098765432, 'Current'),
+    -> ('Kavita Malhotra', 8987654321, 'Savings'),
+    -> ('Rajesh Iyer', 8876543210, 'Fixed Deposit'),
+    -> ('Sneha Chatterjee', 8765432109, 'Savings'),
+    -> ('Manoj Desai', 8654321098, 'Current'),
+    -> ('Divya Kapoor', 8543210987, 'Savings'),
+    -> ('Amit Trivedi', 8432109876, 'Recurring Deposit'),
+    -> ('Sunita Nair', 8321098765, 'Savings'),
+    -> ('Deepak Choudhary', 8210987654, 'Current'),
+    -> ('Meera Srinivasan', 8109876543, 'Savings'),
+    -> ('Karan Bajaj', 8098765432, 'Fixed Deposit'),
+    -> ('Anita Khanna', 7987654321, 'Savings'),
+    -> ('Rahul Bose', 7876543210, 'Current'),
+    -> ('Swati Agarwal', 7765432109, 'Savings'),
+    -> ('Vishal Mehra', 7654321098, 'Recurring Deposit'),
+    -> ('Preeti Saxena', 7543210987, 'Savings'),
+    -> ('Nitin Rao', 7432109876, 'Current'),
+    -> ('Tanvi Menon', 7321098765, 'Savings'),
+    -> ('Harish Shetty', 7210987654, 'Fixed Deposit'),
+    -> ('Isha Banerjee', 7109876543, 'Savings'),
+    -> ('Alok Dubey', 7098765432, 'Current'),
+    -> ('Ritu Chawla', 6987654321, 'Savings'),
+    -> ('Suresh Goyal', 6876543210, 'Recurring Deposit'),
+    -> ('Poonam Mishra', 6765432109, 'Savings'),
+    -> ('Gaurav Anand', 6654321098, 'Current'),
+    -> ('Mona Sharma', 6543210987, 'Savings'),
+    -> ('Abhishek Tiwari', 6432109876, 'Fixed Deposit'),
+    -> ('Shweta Joshi', 6321098765, 'Savings'),
+    -> ('Ravi Kapoor', 6210987654, 'Current'),
+    -> ('Nisha Das', 6109876543, 'Savings'),
+    -> ('Anil Kumar', 6098765432, 'Recurring Deposit');
+Query OK, 40 rows affected (0.01 sec)
+Records: 40  Duplicates: 0  Warnings: 0
+
+mysql> select * from account;
++----+------------------+--------------+-------------------+---------+
+| id | name             | phone_number | account_type      | balance |
++----+------------------+--------------+-------------------+---------+
+|  1 | Shivam           |   9754947123 | Savings           |    NULL |
+|  2 | Aarav Sharma     |   9876543210 | Current           |    NULL |
+|  3 | Priya Patel      |   9765432109 | Savings           |    NULL |
+|  4 | Rohan Kumar      |   9654321098 | Fixed Deposit     |    NULL |
+|  5 | Neha Gupta       |   9543210987 | Savings           |    NULL |
+|  6 | Vikram Singh     |   9432109876 | Current           |    NULL |
+|  7 | Anjali Mehta     |   9321098765 | Savings           |    NULL |
+|  8 | Arun Joshi       |   9210987654 | Recurring Deposit |    NULL |
+|  9 | Pooja Reddy      |   9109876543 | Savings           |    NULL |
+| 10 | Sanjay Verma     |   9098765432 | Current           |    NULL |
+| 11 | Kavita Malhotra  |   8987654321 | Savings           |    NULL |
+| 12 | Rajesh Iyer      |   8876543210 | Fixed Deposit     |    NULL |
+| 13 | Sneha Chatterjee |   8765432109 | Savings           |    NULL |
+| 14 | Manoj Desai      |   8654321098 | Current           |    NULL |
+| 15 | Divya Kapoor     |   8543210987 | Savings           |    NULL |
+| 16 | Amit Trivedi     |   8432109876 | Recurring Deposit |    NULL |
+| 17 | Sunita Nair      |   8321098765 | Savings           |    NULL |
+| 18 | Deepak Choudhary |   8210987654 | Current           |    NULL |
+| 19 | Meera Srinivasan |   8109876543 | Savings           |    NULL |
+| 20 | Karan Bajaj      |   8098765432 | Fixed Deposit     |    NULL |
+| 21 | Anita Khanna     |   7987654321 | Savings           |    NULL |
+| 22 | Rahul Bose       |   7876543210 | Current           |    NULL |
+| 23 | Swati Agarwal    |   7765432109 | Savings           |    NULL |
+| 24 | Vishal Mehra     |   7654321098 | Recurring Deposit |    NULL |
+| 25 | Preeti Saxena    |   7543210987 | Savings           |    NULL |
+| 26 | Nitin Rao        |   7432109876 | Current           |    NULL |
+| 27 | Tanvi Menon      |   7321098765 | Savings           |    NULL |
+| 28 | Harish Shetty    |   7210987654 | Fixed Deposit     |    NULL |
+| 29 | Isha Banerjee    |   7109876543 | Savings           |    NULL |
+| 30 | Alok Dubey       |   7098765432 | Current           |    NULL |
+| 31 | Ritu Chawla      |   6987654321 | Savings           |    NULL |
+| 32 | Suresh Goyal     |   6876543210 | Recurring Deposit |    NULL |
+| 33 | Poonam Mishra    |   6765432109 | Savings           |    NULL |
+| 34 | Gaurav Anand     |   6654321098 | Current           |    NULL |
+| 35 | Mona Sharma      |   6543210987 | Savings           |    NULL |
+| 36 | Abhishek Tiwari  |   6432109876 | Fixed Deposit     |    NULL |
+| 37 | Shweta Joshi     |   6321098765 | Savings           |    NULL |
+| 38 | Ravi Kapoor      |   6210987654 | Current           |    NULL |
+| 39 | Nisha Das        |   6109876543 | Savings           |    NULL |
+| 40 | Anil Kumar       |   6098765432 | Recurring Deposit |    NULL |
++----+------------------+--------------+-------------------+---------+
+40 rows in set (0.00 sec)
+
+mysql> update account set balance = Floor(1000+rand()*50000);
+Query OK, 40 rows affected (0.01 sec)
+Rows matched: 40  Changed: 40  Warnings: 0
+
+mysql> select * from account;
++----+------------------+--------------+-------------------+---------+
+| id | name             | phone_number | account_type      | balance |
++----+------------------+--------------+-------------------+---------+
+|  1 | Shivam           |   9754947123 | Savings           |   24617 |
+|  2 | Aarav Sharma     |   9876543210 | Current           |   46328 |
+|  3 | Priya Patel      |   9765432109 | Savings           |    6793 |
+|  4 | Rohan Kumar      |   9654321098 | Fixed Deposit     |   43980 |
+|  5 | Neha Gupta       |   9543210987 | Savings           |   48520 |
+|  6 | Vikram Singh     |   9432109876 | Current           |    9663 |
+|  7 | Anjali Mehta     |   9321098765 | Savings           |    1756 |
+|  8 | Arun Joshi       |   9210987654 | Recurring Deposit |   28789 |
+|  9 | Pooja Reddy      |   9109876543 | Savings           |   37677 |
+| 10 | Sanjay Verma     |   9098765432 | Current           |    1020 |
+| 11 | Kavita Malhotra  |   8987654321 | Savings           |   41071 |
+| 12 | Rajesh Iyer      |   8876543210 | Fixed Deposit     |    1294 |
+| 13 | Sneha Chatterjee |   8765432109 | Savings           |   32258 |
+| 14 | Manoj Desai      |   8654321098 | Current           |    6407 |
+| 15 | Divya Kapoor     |   8543210987 | Savings           |   34261 |
+| 16 | Amit Trivedi     |   8432109876 | Recurring Deposit |    1084 |
+| 17 | Sunita Nair      |   8321098765 | Savings           |    1636 |
+| 18 | Deepak Choudhary |   8210987654 | Current           |    3932 |
+| 19 | Meera Srinivasan |   8109876543 | Savings           |   13752 |
+| 20 | Karan Bajaj      |   8098765432 | Fixed Deposit     |    5964 |
+| 21 | Anita Khanna     |   7987654321 | Savings           |   37565 |
+| 22 | Rahul Bose       |   7876543210 | Current           |   18933 |
+| 23 | Swati Agarwal    |   7765432109 | Savings           |   30972 |
+| 24 | Vishal Mehra     |   7654321098 | Recurring Deposit |   47059 |
+| 25 | Preeti Saxena    |   7543210987 | Savings           |   41379 |
+| 26 | Nitin Rao        |   7432109876 | Current           |   14719 |
+| 27 | Tanvi Menon      |   7321098765 | Savings           |   48460 |
+| 28 | Harish Shetty    |   7210987654 | Fixed Deposit     |   47143 |
+| 29 | Isha Banerjee    |   7109876543 | Savings           |   39337 |
+| 30 | Alok Dubey       |   7098765432 | Current           |    4256 |
+| 31 | Ritu Chawla      |   6987654321 | Savings           |    2269 |
+| 32 | Suresh Goyal     |   6876543210 | Recurring Deposit |   47575 |
+| 33 | Poonam Mishra    |   6765432109 | Savings           |   30072 |
+| 34 | Gaurav Anand     |   6654321098 | Current           |    6636 |
+| 35 | Mona Sharma      |   6543210987 | Savings           |   41962 |
+| 36 | Abhishek Tiwari  |   6432109876 | Fixed Deposit     |   38905 |
+| 37 | Shweta Joshi     |   6321098765 | Savings           |   17640 |
+| 38 | Ravi Kapoor      |   6210987654 | Current           |   20486 |
+| 39 | Nisha Das        |   6109876543 | Savings           |   48511 |
+| 40 | Anil Kumar       |   6098765432 | Recurring Deposit |   30095 |
++----+------------------+--------------+-------------------+---------+
+40 rows in set (0.00 sec)
+
+mysql> select account_type, count(*) as total_accounts from account group by account_type;
++-------------------+----------------+
+| account_type      | total_accounts |
++-------------------+----------------+
+| Savings           |             20 |
+| Current           |             10 |
+| Fixed Deposit     |              5 |
+| Recurring Deposit |              5 |
++-------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select account_type, count(*) as total_accounts from account group by account_type having avg(balance) > 5000;
++-------------------+----------------+
+| account_type      | total_accounts |
++-------------------+----------------+
+| Savings           |             20 |
+| Current           |             10 |
+| Fixed Deposit     |              5 |
+| Recurring Deposit |              5 |
++-------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select account_type, count(*) as total_accounts from account group by account_type having avg(balance) < 5000;
+Empty set (0.00 sec)
+
+mysql> select account_type, count(*) as total_accounts from account group by account_type having avg(balance) > 1000;
++-------------------+----------------+
+| account_type      | total_accounts |
++-------------------+----------------+
+| Savings           |             20 |
+| Current           |             10 |
+| Fixed Deposit     |              5 |
+| Recurring Deposit |              5 |
++-------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select account_type, count(*) as total_accounts from account group by account_type having avg(balance) < 10000;
+Empty set (0.00 sec)
+
+mysql> select account_type, count(*) as total_accounts from account group by account_type having avg(balance) > 10000;
++-------------------+----------------+
+| account_type      | total_accounts |
++-------------------+----------------+
+| Savings           |             20 |
+| Current           |             10 |
+| Fixed Deposit     |              5 |
+| Recurring Deposit |              5 |
++-------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select account_type, count(*) as total_accounts from account group by account_type;
++-------------------+----------------+
+| account_type      | total_accounts |
++-------------------+----------------+
+| Savings           |             20 |
+| Current           |             10 |
+| Fixed Deposit     |              5 |
+| Recurring Deposit |              5 |
++-------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select account_type, count(*) as total_accounts from account group by account_type order by total_accounts asc;
++-------------------+----------------+
+| account_type      | total_accounts |
++-------------------+----------------+
+| Fixed Deposit     |              5 |
+| Recurring Deposit |              5 |
+| Current           |             10 |
+| Savings           |             20 |
++-------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select account_type, count(*) as total_accounts from account group by account_type having count(*) > 5;
++--------------+----------------+
+| account_type | total_accounts |
++--------------+----------------+
+| Savings      |             20 |
+| Current      |             10 |
++--------------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT account_type, AVG(balance) as avg_balance
+    -> FROM account
+    -> GROUP BY account_type
+    -> HAVING AVG(balance) > 20000;
++-------------------+-------------+
+| account_type      | avg_balance |
++-------------------+-------------+
+| Savings           |     29025.4 |
+| Fixed Deposit     |     27457.2 |
+| Recurring Deposit |     30920.4 |
++-------------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> -- Find account types with total balance > 100,000
+mysql> SELECT account_type, SUM(balance) as total_balance
+    -> FROM account
+    -> GROUP BY account_type
+    -> HAVING SUM(balance) > 100000;
++-------------------+---------------+
+| account_type      | total_balance |
++-------------------+---------------+
+| Savings           |        580508 |
+| Current           |        132380 |
+| Fixed Deposit     |        137286 |
+| Recurring Deposit |        154602 |
++-------------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> create view saving_accounts as select * from account where account_type='Saving';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from saving_accounts;
+Empty set (0.00 sec)
+
+mysql> select * from account where account_type = 'Saving';
+Empty set (0.00 sec)
+
+mysql> select * from account;
++----+------------------+--------------+-------------------+---------+
+| id | name             | phone_number | account_type      | balance |
++----+------------------+--------------+-------------------+---------+
+|  1 | Shivam           |   9754947123 | Savings           |   24617 |
+|  2 | Aarav Sharma     |   9876543210 | Current           |   46328 |
+|  3 | Priya Patel      |   9765432109 | Savings           |    6793 |
+|  4 | Rohan Kumar      |   9654321098 | Fixed Deposit     |   43980 |
+|  5 | Neha Gupta       |   9543210987 | Savings           |   48520 |
+|  6 | Vikram Singh     |   9432109876 | Current           |    9663 |
+|  7 | Anjali Mehta     |   9321098765 | Savings           |    1756 |
+|  8 | Arun Joshi       |   9210987654 | Recurring Deposit |   28789 |
+|  9 | Pooja Reddy      |   9109876543 | Savings           |   37677 |
+| 10 | Sanjay Verma     |   9098765432 | Current           |    1020 |
+| 11 | Kavita Malhotra  |   8987654321 | Savings           |   41071 |
+| 12 | Rajesh Iyer      |   8876543210 | Fixed Deposit     |    1294 |
+| 13 | Sneha Chatterjee |   8765432109 | Savings           |   32258 |
+| 14 | Manoj Desai      |   8654321098 | Current           |    6407 |
+| 15 | Divya Kapoor     |   8543210987 | Savings           |   34261 |
+| 16 | Amit Trivedi     |   8432109876 | Recurring Deposit |    1084 |
+| 17 | Sunita Nair      |   8321098765 | Savings           |    1636 |
+| 18 | Deepak Choudhary |   8210987654 | Current           |    3932 |
+| 19 | Meera Srinivasan |   8109876543 | Savings           |   13752 |
+| 20 | Karan Bajaj      |   8098765432 | Fixed Deposit     |    5964 |
+| 21 | Anita Khanna     |   7987654321 | Savings           |   37565 |
+| 22 | Rahul Bose       |   7876543210 | Current           |   18933 |
+| 23 | Swati Agarwal    |   7765432109 | Savings           |   30972 |
+| 24 | Vishal Mehra     |   7654321098 | Recurring Deposit |   47059 |
+| 25 | Preeti Saxena    |   7543210987 | Savings           |   41379 |
+| 26 | Nitin Rao        |   7432109876 | Current           |   14719 |
+| 27 | Tanvi Menon      |   7321098765 | Savings           |   48460 |
+| 28 | Harish Shetty    |   7210987654 | Fixed Deposit     |   47143 |
+| 29 | Isha Banerjee    |   7109876543 | Savings           |   39337 |
+| 30 | Alok Dubey       |   7098765432 | Current           |    4256 |
+| 31 | Ritu Chawla      |   6987654321 | Savings           |    2269 |
+| 32 | Suresh Goyal     |   6876543210 | Recurring Deposit |   47575 |
+| 33 | Poonam Mishra    |   6765432109 | Savings           |   30072 |
+| 34 | Gaurav Anand     |   6654321098 | Current           |    6636 |
+| 35 | Mona Sharma      |   6543210987 | Savings           |   41962 |
+| 36 | Abhishek Tiwari  |   6432109876 | Fixed Deposit     |   38905 |
+| 37 | Shweta Joshi     |   6321098765 | Savings           |   17640 |
+| 38 | Ravi Kapoor      |   6210987654 | Current           |   20486 |
+| 39 | Nisha Das        |   6109876543 | Savings           |   48511 |
+| 40 | Anil Kumar       |   6098765432 | Recurring Deposit |   30095 |
++----+------------------+--------------+-------------------+---------+
+40 rows in set (0.00 sec)
+
+mysql> replace view saving_accounts as select * from account where account_type = 'Savings';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'saving_accounts as select * from account where account_type = 'Savings'' at line 1
+mysql> create or replace view saving_accounts as select * from account where account_type = 'Savings';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from saving_accounts;
++----+------------------+--------------+--------------+---------+
+| id | name             | phone_number | account_type | balance |
++----+------------------+--------------+--------------+---------+
+|  1 | Shivam           |   9754947123 | Savings      |   24617 |
+|  3 | Priya Patel      |   9765432109 | Savings      |    6793 |
+|  5 | Neha Gupta       |   9543210987 | Savings      |   48520 |
+|  7 | Anjali Mehta     |   9321098765 | Savings      |    1756 |
+|  9 | Pooja Reddy      |   9109876543 | Savings      |   37677 |
+| 11 | Kavita Malhotra  |   8987654321 | Savings      |   41071 |
+| 13 | Sneha Chatterjee |   8765432109 | Savings      |   32258 |
+| 15 | Divya Kapoor     |   8543210987 | Savings      |   34261 |
+| 17 | Sunita Nair      |   8321098765 | Savings      |    1636 |
+| 19 | Meera Srinivasan |   8109876543 | Savings      |   13752 |
+| 21 | Anita Khanna     |   7987654321 | Savings      |   37565 |
+| 23 | Swati Agarwal    |   7765432109 | Savings      |   30972 |
+| 25 | Preeti Saxena    |   7543210987 | Savings      |   41379 |
+| 27 | Tanvi Menon      |   7321098765 | Savings      |   48460 |
+| 29 | Isha Banerjee    |   7109876543 | Savings      |   39337 |
+| 31 | Ritu Chawla      |   6987654321 | Savings      |    2269 |
+| 33 | Poonam Mishra    |   6765432109 | Savings      |   30072 |
+| 35 | Mona Sharma      |   6543210987 | Savings      |   41962 |
+| 37 | Shweta Joshi     |   6321098765 | Savings      |   17640 |
+| 39 | Nisha Das        |   6109876543 | Savings      |   48511 |
++----+------------------+--------------+--------------+---------+
+20 rows in set (0.00 sec)
+
+mysql> show full tables where table_type = 'view';
+Empty set (0.00 sec)
+
+mysql> SHOW FULL TABLES WHERE TABLE_TYPE = 'VIEW';
++-----------------+------------+
+| Tables_in_mydb  | Table_type |
++-----------------+------------+
+| saving_accounts | VIEW       |
++-----------------+------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW FULL TABLES WHERE table_type = 'VIEW';
++-----------------+------------+
+| Tables_in_mydb  | Table_type |
++-----------------+------------+
+| saving_accounts | VIEW       |
++-----------------+------------+
+1 row in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| aifs               |
+| aifs_b4            |
+| bank_db            |
+| clinic_db          |
+| demo_db            |
+| information_schema |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| tinkus_cafe        |
+| world              |
++--------------------+
+13 rows in set (0.01 sec)
+
+mysql> use aifs_b4;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_aifs_b4 |
++-------------------+
+| courses           |
+| departments       |
+| employee          |
+| employee_self     |
+| students          |
++-------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee;
++----+--------------------+--------------------------------+--------+---------------+------+
+| id | employee_name      | email                          | salary | department_id | age  |
++----+--------------------+--------------------------------+--------+---------------+------+
+|  2 | Shivam             | shivam@gmail.com               |  25000 |             2 |   25 |
+|  3 | sanjay             | sanjay@gmail.com               |  30000 |             5 |   25 |
+|  5 | shekhar            | shekhar@gmail.com              |  30000 |          NULL |   25 |
+|  6 | John Smith         | john.smith@company.com         |  75000 |             2 |   28 |
+|  7 | Emma Johnson       | emma.johnson@company.com       |  65000 |             6 |   32 |
+|  8 | Michael Brown      | michael.brown@company.com      |  82000 |             2 |   45 |
+|  9 | Sarah Davis        | sarah.davis@company.com        |  58000 |             1 |   26 |
+| 10 | David Wilson       | david.wilson@company.com       |  72000 |             5 |   35 |
+| 11 | Jennifer Miller    | jennifer.miller@company.com    |  68000 |             4 |   29 |
+| 12 | Christopher Taylor | christopher.taylor@company.com |  90000 |             2 |   41 |
+| 13 | Jessica Anderson   | jessica.anderson@company.com   |  55000 |             1 |   33 |
+| 14 | Matthew Thomas     | matthew.thomas@company.com     |  78000 |             5 |   27 |
+| 15 | Amanda Martinez    | amanda.martinez@company.com    |  62000 |             6 |   31 |
+| 16 | Daniel Garcia      | daniel.garcia@company.com      |  85000 |             4 |   38 |
+| 17 | Laura Rodriguez    | laura.rodriguez@company.com    |  52000 |             1 |   24 |
+| 18 | Kevin Lee          | kevin.lee@company.com          |  77000 |             2 |   36 |
+| 19 | Rachel White       | rachel.white@company.com       |  59000 |             6 |   30 |
+| 20 | Brian Harris       | brian.harris@company.com       |  88000 |             5 |   42 |
+| 21 | Nicole Clark       | nicole.clark@company.com       |  63000 |             4 |   28 |
+| 22 | Steven Lewis       | steven.lewis@company.com       |  71000 |             2 |   34 |
+| 23 | Michelle Walker    | michelle.walker@company.com    |  56000 |             1 |   29 |
+| 24 | Andrew Hall        | andrew.hall@company.com        |  79000 |             5 |   39 |
+| 25 | Emily Allen        | emily.allen@company.com        |  54000 |             6 |   25 |
++----+--------------------+--------------------------------+--------+---------------+------+
+23 rows in set (0.00 sec)
+
+mysql> select max(salary) from employee;
++-------------+
+| max(salary) |
++-------------+
+|       90000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where salary = (select max(salary) from employee);
++----+--------------------+--------------------------------+--------+---------------+------+
+| id | employee_name      | email                          | salary | department_id | age  |
++----+--------------------+--------------------------------+--------+---------------+------+
+| 12 | Christopher Taylor | christopher.taylor@company.com |  90000 |             2 |   41 |
++----+--------------------+--------------------------------+--------+---------------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where salary = (select min(salary) from employee);
++----+---------------+------------------+--------+---------------+------+
+| id | employee_name | email            | salary | department_id | age  |
++----+---------------+------------------+--------+---------------+------+
+|  2 | Shivam        | shivam@gmail.com |  25000 |             2 |   25 |
++----+---------------+------------------+--------+---------------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where salary = (select max(salary) from employee where salary < (select max(salary) from employee));
++----+---------------+--------------------------+--------+---------------+------+
+| id | employee_name | email                    | salary | department_id | age  |
++----+---------------+--------------------------+--------+---------------+------+
+| 20 | Brian Harris  | brian.harris@company.com |  88000 |             5 |   42 |
++----+---------------+--------------------------+--------+---------------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee order by desc limit 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc limit 1' at line 1
+mysql> select * from employee order by salary desc limit 1;
++----+--------------------+--------------------------------+--------+---------------+------+
+| id | employee_name      | email                          | salary | department_id | age  |
++----+--------------------+--------------------------------+--------+---------------+------+
+| 12 | Christopher Taylor | christopher.taylor@company.com |  90000 |             2 |   41 |
++----+--------------------+--------------------------------+--------+---------------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee order by salary desc limit 1 offset 1;
++----+---------------+--------------------------+--------+---------------+------+
+| id | employee_name | email                    | salary | department_id | age  |
++----+---------------+--------------------------+--------+---------------+------+
+| 20 | Brian Harris  | brian.harris@company.com |  88000 |             5 |   42 |
++----+---------------+--------------------------+--------+---------------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee order by salary desc limit 5;
++----+--------------------+--------------------------------+--------+---------------+------+
+| id | employee_name      | email                          | salary | department_id | age  |
++----+--------------------+--------------------------------+--------+---------------+------+
+| 12 | Christopher Taylor | christopher.taylor@company.com |  90000 |             2 |   41 |
+| 20 | Brian Harris       | brian.harris@company.com       |  88000 |             5 |   42 |
+| 16 | Daniel Garcia      | daniel.garcia@company.com      |  85000 |             4 |   38 |
+|  8 | Michael Brown      | michael.brown@company.com      |  82000 |             2 |   45 |
+| 24 | Andrew Hall        | andrew.hall@company.com        |  79000 |             5 |   39 |
++----+--------------------+--------------------------------+--------+---------------+------+
+5 rows in set (0.00 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_aifs_b4 |
++-------------------+
+| courses           |
+| departments       |
+| employee          |
+| employee_self     |
+| students          |
++-------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from students;
++----+--------+------------+-----------+
+| id | name   | email      | course_id |
++----+--------+------------+-----------+
+| 24 | Tushar | tushar@123 |         1 |
+| 25 | Surbhi | surbhi@123 |         2 |
+| 26 | Neha   | neha@123   |         3 |
+| 27 | Tarkit | tarkit@123 |      NULL |
++----+--------+------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee;
++----+--------------------+--------------------------------+--------+---------------+------+
+| id | employee_name      | email                          | salary | department_id | age  |
++----+--------------------+--------------------------------+--------+---------------+------+
+|  2 | Shivam             | shivam@gmail.com               |  25000 |             2 |   25 |
+|  3 | sanjay             | sanjay@gmail.com               |  30000 |             5 |   25 |
+|  5 | shekhar            | shekhar@gmail.com              |  30000 |          NULL |   25 |
+|  6 | John Smith         | john.smith@company.com         |  75000 |             2 |   28 |
+|  7 | Emma Johnson       | emma.johnson@company.com       |  65000 |             6 |   32 |
+|  8 | Michael Brown      | michael.brown@company.com      |  82000 |             2 |   45 |
+|  9 | Sarah Davis        | sarah.davis@company.com        |  58000 |             1 |   26 |
+| 10 | David Wilson       | david.wilson@company.com       |  72000 |             5 |   35 |
+| 11 | Jennifer Miller    | jennifer.miller@company.com    |  68000 |             4 |   29 |
+| 12 | Christopher Taylor | christopher.taylor@company.com |  90000 |             2 |   41 |
+| 13 | Jessica Anderson   | jessica.anderson@company.com   |  55000 |             1 |   33 |
+| 14 | Matthew Thomas     | matthew.thomas@company.com     |  78000 |             5 |   27 |
+| 15 | Amanda Martinez    | amanda.martinez@company.com    |  62000 |             6 |   31 |
+| 16 | Daniel Garcia      | daniel.garcia@company.com      |  85000 |             4 |   38 |
+| 17 | Laura Rodriguez    | laura.rodriguez@company.com    |  52000 |             1 |   24 |
+| 18 | Kevin Lee          | kevin.lee@company.com          |  77000 |             2 |   36 |
+| 19 | Rachel White       | rachel.white@company.com       |  59000 |             6 |   30 |
+| 20 | Brian Harris       | brian.harris@company.com       |  88000 |             5 |   42 |
+| 21 | Nicole Clark       | nicole.clark@company.com       |  63000 |             4 |   28 |
+| 22 | Steven Lewis       | steven.lewis@company.com       |  71000 |             2 |   34 |
+| 23 | Michelle Walker    | michelle.walker@company.com    |  56000 |             1 |   29 |
+| 24 | Andrew Hall        | andrew.hall@company.com        |  79000 |             5 |   39 |
+| 25 | Emily Allen        | emily.allen@company.com        |  54000 |             6 |   25 |
++----+--------------------+--------------------------------+--------+---------------+------+
+23 rows in set (0.00 sec)
+
+mysql> select department_id, count(*) as total_employee from employee group by department_id;
++---------------+----------------+
+| department_id | total_employee |
++---------------+----------------+
+|          NULL |              1 |
+|             1 |              4 |
+|             2 |              6 |
+|             4 |              3 |
+|             5 |              5 |
+|             6 |              4 |
++---------------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> create table bank_account(id int primary key auto_increment, name varchar(50), account_type varchar(50), balance double);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc bank_account;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| id           | int         | NO   | PRI | NULL    | auto_increment |
+| name         | varchar(50) | YES  |     | NULL    |                |
+| account_type | varchar(50) | YES  |     | NULL    |                |
+| balance      | double      | YES  |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO bank_account (name, account_type) VALUES
+    -> ('Aarav', 'Saving'),
+    -> ('Vivaan', 'Current'),
+    -> ('Aditya', 'Fixed Deposit'),
+    -> ('Kabir', 'Saving'),
+    -> ('Ishaan', 'Current'),
+    -> ('Shaurya', 'Fixed Deposit'),
+    -> ('Arjun', 'Saving'),
+    -> ('Reyansh', 'Current'),
+    -> ('Krishna', 'Saving'),
+    -> ('Rudra', 'Fixed Deposit'),
+    -> ('Atharv', 'Current'),
+    -> ('Veer', 'Saving'),
+    -> ('Rohan', 'Current'),
+    -> ('Manav', 'Fixed Deposit'),
+    -> ('Samar', 'Saving'),
+    -> ('Varun', 'Current'),
+    -> ('Pranav', 'Fixed Deposit'),
+    -> ('Yash', 'Saving'),
+    -> ('Harsh', 'Current'),
+    -> ('Laksh', 'Saving'),
+    -> ('Divyam', 'Fixed Deposit'),
+    -> ('Ayaan', 'Current'),
+    -> ('Kunal', 'Saving'),
+    -> ('Abhay', 'Fixed Deposit'),
+    -> ('Tarun', 'Saving'),
+    -> ('Nikhil', 'Current'),
+    -> ('Armaan', 'Fixed Deposit'),
+    -> ('Ritik', 'Saving'),
+    -> ('Gaurav', 'Current'),
+    -> ('Nitin', 'Fixed Deposit'),
+    -> ('Siddharth', 'Saving'),
+    -> ('Vikram', 'Current'),
+    -> ('Deepak', 'Saving'),
+    -> ('Mohit', 'Fixed Deposit'),
+    -> ('Rajat', 'Saving'),
+    -> ('Hemant', 'Current'),
+    -> ('Suresh', 'Fixed Deposit'),
+    -> ('Piyush', 'Saving'),
+    -> ('Shivam', 'Current');
+Query OK, 39 rows affected (0.01 sec)
+Records: 39  Duplicates: 0  Warnings: 0
+
+mysql> select * from bank_account;
++----+-----------+---------------+---------+
+| id | name      | account_type  | balance |
++----+-----------+---------------+---------+
+|  1 | Aarav     | Saving        |    NULL |
+|  2 | Vivaan    | Current       |    NULL |
+|  3 | Aditya    | Fixed Deposit |    NULL |
+|  4 | Kabir     | Saving        |    NULL |
+|  5 | Ishaan    | Current       |    NULL |
+|  6 | Shaurya   | Fixed Deposit |    NULL |
+|  7 | Arjun     | Saving        |    NULL |
+|  8 | Reyansh   | Current       |    NULL |
+|  9 | Krishna   | Saving        |    NULL |
+| 10 | Rudra     | Fixed Deposit |    NULL |
+| 11 | Atharv    | Current       |    NULL |
+| 12 | Veer      | Saving        |    NULL |
+| 13 | Rohan     | Current       |    NULL |
+| 14 | Manav     | Fixed Deposit |    NULL |
+| 15 | Samar     | Saving        |    NULL |
+| 16 | Varun     | Current       |    NULL |
+| 17 | Pranav    | Fixed Deposit |    NULL |
+| 18 | Yash      | Saving        |    NULL |
+| 19 | Harsh     | Current       |    NULL |
+| 20 | Laksh     | Saving        |    NULL |
+| 21 | Divyam    | Fixed Deposit |    NULL |
+| 22 | Ayaan     | Current       |    NULL |
+| 23 | Kunal     | Saving        |    NULL |
+| 24 | Abhay     | Fixed Deposit |    NULL |
+| 25 | Tarun     | Saving        |    NULL |
+| 26 | Nikhil    | Current       |    NULL |
+| 27 | Armaan    | Fixed Deposit |    NULL |
+| 28 | Ritik     | Saving        |    NULL |
+| 29 | Gaurav    | Current       |    NULL |
+| 30 | Nitin     | Fixed Deposit |    NULL |
+| 31 | Siddharth | Saving        |    NULL |
+| 32 | Vikram    | Current       |    NULL |
+| 33 | Deepak    | Saving        |    NULL |
+| 34 | Mohit     | Fixed Deposit |    NULL |
+| 35 | Rajat     | Saving        |    NULL |
+| 36 | Hemant    | Current       |    NULL |
+| 37 | Suresh    | Fixed Deposit |    NULL |
+| 38 | Piyush    | Saving        |    NULL |
+| 39 | Shivam    | Current       |    NULL |
++----+-----------+---------------+---------+
+39 rows in set (0.00 sec)
+
+mysql> update bank_account set balance = floor(10000+rand()*50000);
+Query OK, 39 rows affected (0.01 sec)
+Rows matched: 39  Changed: 39  Warnings: 0
+
+mysql> select * from bank_account;
++----+-----------+---------------+---------+
+| id | name      | account_type  | balance |
++----+-----------+---------------+---------+
+|  1 | Aarav     | Saving        |   12942 |
+|  2 | Vivaan    | Current       |   37425 |
+|  3 | Aditya    | Fixed Deposit |   38302 |
+|  4 | Kabir     | Saving        |   19236 |
+|  5 | Ishaan    | Current       |   21274 |
+|  6 | Shaurya   | Fixed Deposit |   38662 |
+|  7 | Arjun     | Saving        |   19488 |
+|  8 | Reyansh   | Current       |   21454 |
+|  9 | Krishna   | Saving        |   38805 |
+| 10 | Rudra     | Fixed Deposit |   19666 |
+| 11 | Atharv    | Current       |   21914 |
+| 12 | Veer      | Saving        |   40571 |
+| 13 | Rohan     | Current       |   27116 |
+| 14 | Manav     | Fixed Deposit |   53865 |
+| 15 | Samar     | Saving        |   27978 |
+| 16 | Varun     | Current       |   18295 |
+| 17 | Pranav    | Fixed Deposit |   47544 |
+| 18 | Yash      | Saving        |   22836 |
+| 19 | Harsh     | Current       |   11546 |
+| 20 | Laksh     | Saving        |   29225 |
+| 21 | Divyam    | Fixed Deposit |   51484 |
+| 22 | Ayaan     | Current       |   59748 |
+| 23 | Kunal     | Saving        |   34289 |
+| 24 | Abhay     | Fixed Deposit |   32200 |
+| 25 | Tarun     | Saving        |   48133 |
+| 26 | Nikhil    | Current       |   34066 |
+| 27 | Armaan    | Fixed Deposit |   15932 |
+| 28 | Ritik     | Saving        |   17462 |
+| 29 | Gaurav    | Current       |   29516 |
+| 30 | Nitin     | Fixed Deposit |   35195 |
+| 31 | Siddharth | Saving        |   27426 |
+| 32 | Vikram    | Current       |   21544 |
+| 33 | Deepak    | Saving        |   15446 |
+| 34 | Mohit     | Fixed Deposit |   52595 |
+| 35 | Rajat     | Saving        |   56640 |
+| 36 | Hemant    | Current       |   15413 |
+| 37 | Suresh    | Fixed Deposit |   47147 |
+| 38 | Piyush    | Saving        |   29496 |
+| 39 | Shivam    | Current       |   46040 |
++----+-----------+---------------+---------+
+39 rows in set (0.00 sec)
+
+mysql> select account_type, count(*) as total_accounts from bank_account group by account_type;
++---------------+----------------+
+| account_type  | total_accounts |
++---------------+----------------+
+| Saving        |             15 |
+| Current       |             13 |
+| Fixed Deposit |             11 |
++---------------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> select account_type, count(*) as total_accounts from bank_account group by account_type having count > 11;
+ERROR 1054 (42S22): Unknown column 'count' in 'having clause'
+mysql> select account_type, count(*) as total_accounts from bank_account group by account_type having count(*) > 11;
++--------------+----------------+
+| account_type | total_accounts |
++--------------+----------------+
+| Saving       |             15 |
+| Current      |             13 |
++--------------+----------------+
+2 rows in set (0.00 sec)

@@ -1,0 +1,403 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| aifs               |
+| aifs_b4            |
+| bank_db            |
+| clinic_db          |
+| information_schema |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> use aifs_b4;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_aifs_b4 |
++-------------------+
+| courses           |
+| departments       |
+| employee          |
+| students          |
++-------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from departments;
++----+------------+
+| id | name       |
++----+------------+
+|  1 | HR         |
+|  2 | IT         |
+|  4 | Finance    |
+|  5 | Operations |
+|  6 | sales      |
++----+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee;
++----+--------------------+--------------------------------+--------+---------------+------+
+| id | employee_name      | email                          | salary | department_id | age  |
++----+--------------------+--------------------------------+--------+---------------+------+
+|  2 | Shivam             | shivam@gmail.com               |  25000 |             2 |   25 |
+|  3 | sanjay             | sanjay@gmail.com               |  30000 |             5 |   25 |
+|  5 | shekhar            | shekhar@gmail.com              |  30000 |          NULL |   25 |
+|  6 | John Smith         | john.smith@company.com         |  75000 |             2 |   28 |
+|  7 | Emma Johnson       | emma.johnson@company.com       |  65000 |             6 |   32 |
+|  8 | Michael Brown      | michael.brown@company.com      |  82000 |             2 |   45 |
+|  9 | Sarah Davis        | sarah.davis@company.com        |  58000 |             1 |   26 |
+| 10 | David Wilson       | david.wilson@company.com       |  72000 |             5 |   35 |
+| 11 | Jennifer Miller    | jennifer.miller@company.com    |  68000 |             4 |   29 |
+| 12 | Christopher Taylor | christopher.taylor@company.com |  90000 |             2 |   41 |
+| 13 | Jessica Anderson   | jessica.anderson@company.com   |  55000 |             1 |   33 |
+| 14 | Matthew Thomas     | matthew.thomas@company.com     |  78000 |             5 |   27 |
+| 15 | Amanda Martinez    | amanda.martinez@company.com    |  62000 |             6 |   31 |
+| 16 | Daniel Garcia      | daniel.garcia@company.com      |  85000 |             4 |   38 |
+| 17 | Laura Rodriguez    | laura.rodriguez@company.com    |  52000 |             1 |   24 |
+| 18 | Kevin Lee          | kevin.lee@company.com          |  77000 |             2 |   36 |
+| 19 | Rachel White       | rachel.white@company.com       |  59000 |             6 |   30 |
+| 20 | Brian Harris       | brian.harris@company.com       |  88000 |             5 |   42 |
+| 21 | Nicole Clark       | nicole.clark@company.com       |  63000 |             4 |   28 |
+| 22 | Steven Lewis       | steven.lewis@company.com       |  71000 |             2 |   34 |
+| 23 | Michelle Walker    | michelle.walker@company.com    |  56000 |             1 |   29 |
+| 24 | Andrew Hall        | andrew.hall@company.com        |  79000 |             5 |   39 |
+| 25 | Emily Allen        | emily.allen@company.com        |  54000 |             6 |   25 |
++----+--------------------+--------------------------------+--------+---------------+------+
+23 rows in set (0.00 sec)
+
+mysql> select e.employee_name, e.salary, d.name as departments from employee e inner join departments d on e.department_id = d.id;
++--------------------+--------+-------------+
+| employee_name      | salary | departments |
++--------------------+--------+-------------+
+| Sarah Davis        |  58000 | HR          |
+| Jessica Anderson   |  55000 | HR          |
+| Laura Rodriguez    |  52000 | HR          |
+| Michelle Walker    |  56000 | HR          |
+| Shivam             |  25000 | IT          |
+| John Smith         |  75000 | IT          |
+| Michael Brown      |  82000 | IT          |
+| Christopher Taylor |  90000 | IT          |
+| Kevin Lee          |  77000 | IT          |
+| Steven Lewis       |  71000 | IT          |
+| Jennifer Miller    |  68000 | Finance     |
+| Daniel Garcia      |  85000 | Finance     |
+| Nicole Clark       |  63000 | Finance     |
+| sanjay             |  30000 | Operations  |
+| David Wilson       |  72000 | Operations  |
+| Matthew Thomas     |  78000 | Operations  |
+| Brian Harris       |  88000 | Operations  |
+| Andrew Hall        |  79000 | Operations  |
+| Emma Johnson       |  65000 | sales       |
+| Amanda Martinez    |  62000 | sales       |
+| Rachel White       |  59000 | sales       |
+| Emily Allen        |  54000 | sales       |
++--------------------+--------+-------------+
+22 rows in set (0.00 sec)
+
+mysql> select e.employee_name, e.salary, d.name as departments from employee e left join departments d on e.department_id = d.id;
++--------------------+--------+-------------+
+| employee_name      | salary | departments |
++--------------------+--------+-------------+
+| Shivam             |  25000 | IT          |
+| sanjay             |  30000 | Operations  |
+| shekhar            |  30000 | NULL        |
+| John Smith         |  75000 | IT          |
+| Emma Johnson       |  65000 | sales       |
+| Michael Brown      |  82000 | IT          |
+| Sarah Davis        |  58000 | HR          |
+| David Wilson       |  72000 | Operations  |
+| Jennifer Miller    |  68000 | Finance     |
+| Christopher Taylor |  90000 | IT          |
+| Jessica Anderson   |  55000 | HR          |
+| Matthew Thomas     |  78000 | Operations  |
+| Amanda Martinez    |  62000 | sales       |
+| Daniel Garcia      |  85000 | Finance     |
+| Laura Rodriguez    |  52000 | HR          |
+| Kevin Lee          |  77000 | IT          |
+| Rachel White       |  59000 | sales       |
+| Brian Harris       |  88000 | Operations  |
+| Nicole Clark       |  63000 | Finance     |
+| Steven Lewis       |  71000 | IT          |
+| Michelle Walker    |  56000 | HR          |
+| Andrew Hall        |  79000 | Operations  |
+| Emily Allen        |  54000 | sales       |
++--------------------+--------+-------------+
+23 rows in set (0.00 sec)
+
+mysql> select e.employee_name, e.salary, d.name as departments from employee e right join departments d on e.department_id = d.id;
++--------------------+--------+-------------+
+| employee_name      | salary | departments |
++--------------------+--------+-------------+
+| Sarah Davis        |  58000 | HR          |
+| Jessica Anderson   |  55000 | HR          |
+| Laura Rodriguez    |  52000 | HR          |
+| Michelle Walker    |  56000 | HR          |
+| Shivam             |  25000 | IT          |
+| John Smith         |  75000 | IT          |
+| Michael Brown      |  82000 | IT          |
+| Christopher Taylor |  90000 | IT          |
+| Kevin Lee          |  77000 | IT          |
+| Steven Lewis       |  71000 | IT          |
+| Jennifer Miller    |  68000 | Finance     |
+| Daniel Garcia      |  85000 | Finance     |
+| Nicole Clark       |  63000 | Finance     |
+| sanjay             |  30000 | Operations  |
+| David Wilson       |  72000 | Operations  |
+| Matthew Thomas     |  78000 | Operations  |
+| Brian Harris       |  88000 | Operations  |
+| Andrew Hall        |  79000 | Operations  |
+| Emma Johnson       |  65000 | sales       |
+| Amanda Martinez    |  62000 | sales       |
+| Rachel White       |  59000 | sales       |
+| Emily Allen        |  54000 | sales       |
++--------------------+--------+-------------+
+22 rows in set (0.00 sec)
+
+mysql> insert into departments (name) values ('Technical Support');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select e.employee_name, e.salary, d.name as departments from employee e right join departments d on e.department_id = d.id;
++--------------------+--------+-------------------+
+| employee_name      | salary | departments       |
++--------------------+--------+-------------------+
+| Sarah Davis        |  58000 | HR                |
+| Jessica Anderson   |  55000 | HR                |
+| Laura Rodriguez    |  52000 | HR                |
+| Michelle Walker    |  56000 | HR                |
+| Shivam             |  25000 | IT                |
+| John Smith         |  75000 | IT                |
+| Michael Brown      |  82000 | IT                |
+| Christopher Taylor |  90000 | IT                |
+| Kevin Lee          |  77000 | IT                |
+| Steven Lewis       |  71000 | IT                |
+| Jennifer Miller    |  68000 | Finance           |
+| Daniel Garcia      |  85000 | Finance           |
+| Nicole Clark       |  63000 | Finance           |
+| sanjay             |  30000 | Operations        |
+| David Wilson       |  72000 | Operations        |
+| Matthew Thomas     |  78000 | Operations        |
+| Brian Harris       |  88000 | Operations        |
+| Andrew Hall        |  79000 | Operations        |
+| Emma Johnson       |  65000 | sales             |
+| Amanda Martinez    |  62000 | sales             |
+| Rachel White       |  59000 | sales             |
+| Emily Allen        |  54000 | sales             |
+| NULL               |   NULL | Technical Support |
++--------------------+--------+-------------------+
+23 rows in set (0.00 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_aifs_b4 |
++-------------------+
+| courses           |
+| departments       |
+| employee          |
+| students          |
++-------------------+
+4 rows in set (0.00 sec)
+
+mysql> create table employee_self (id int primary key auto_increment, name varchar(50), manager_id int);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc employee self;
+Empty set (0.00 sec)
+
+mysql> desc employee_self;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| id         | int         | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(50) | YES  |     | NULL    |                |
+| manager_id | int         | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into employee_self(name, manager_id) values ('shivam', NULL);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee_self(name, manager_id) values ('Tarkit', 1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee_self(name, manager_id) values ('Ayush', 1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee_self(name, manager_id) values ('Neha', 2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employee_self;
++----+--------+------------+
+| id | name   | manager_id |
++----+--------+------------+
+|  1 | shivam |       NULL |
+|  2 | Tarkit |          1 |
+|  3 | Ayush  |          1 |
+|  4 | Neha   |          2 |
++----+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select e.id, e.name, m.name as manager from employee_self e inner join employee_self m on e.id = m.manager_id;
++----+--------+---------+
+| id | name   | manager |
++----+--------+---------+
+|  1 | shivam | Tarkit  |
+|  1 | shivam | Ayush   |
+|  2 | Tarkit | Neha    |
++----+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select e.id, e.name, m.name as manager from employee_self e inner join employee_self m on e.manager_id = m.id;
++----+--------+---------+
+| id | name   | manager |
++----+--------+---------+
+|  2 | Tarkit | shivam  |
+|  3 | Ayush  | shivam  |
+|  4 | Neha   | Tarkit  |
++----+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee;
++----+--------------------+--------------------------------+--------+---------------+------+
+| id | employee_name      | email                          | salary | department_id | age  |
++----+--------------------+--------------------------------+--------+---------------+------+
+|  2 | Shivam             | shivam@gmail.com               |  25000 |             2 |   25 |
+|  3 | sanjay             | sanjay@gmail.com               |  30000 |             5 |   25 |
+|  5 | shekhar            | shekhar@gmail.com              |  30000 |          NULL |   25 |
+|  6 | John Smith         | john.smith@company.com         |  75000 |             2 |   28 |
+|  7 | Emma Johnson       | emma.johnson@company.com       |  65000 |             6 |   32 |
+|  8 | Michael Brown      | michael.brown@company.com      |  82000 |             2 |   45 |
+|  9 | Sarah Davis        | sarah.davis@company.com        |  58000 |             1 |   26 |
+| 10 | David Wilson       | david.wilson@company.com       |  72000 |             5 |   35 |
+| 11 | Jennifer Miller    | jennifer.miller@company.com    |  68000 |             4 |   29 |
+| 12 | Christopher Taylor | christopher.taylor@company.com |  90000 |             2 |   41 |
+| 13 | Jessica Anderson   | jessica.anderson@company.com   |  55000 |             1 |   33 |
+| 14 | Matthew Thomas     | matthew.thomas@company.com     |  78000 |             5 |   27 |
+| 15 | Amanda Martinez    | amanda.martinez@company.com    |  62000 |             6 |   31 |
+| 16 | Daniel Garcia      | daniel.garcia@company.com      |  85000 |             4 |   38 |
+| 17 | Laura Rodriguez    | laura.rodriguez@company.com    |  52000 |             1 |   24 |
+| 18 | Kevin Lee          | kevin.lee@company.com          |  77000 |             2 |   36 |
+| 19 | Rachel White       | rachel.white@company.com       |  59000 |             6 |   30 |
+| 20 | Brian Harris       | brian.harris@company.com       |  88000 |             5 |   42 |
+| 21 | Nicole Clark       | nicole.clark@company.com       |  63000 |             4 |   28 |
+| 22 | Steven Lewis       | steven.lewis@company.com       |  71000 |             2 |   34 |
+| 23 | Michelle Walker    | michelle.walker@company.com    |  56000 |             1 |   29 |
+| 24 | Andrew Hall        | andrew.hall@company.com        |  79000 |             5 |   39 |
+| 25 | Emily Allen        | emily.allen@company.com        |  54000 |             6 |   25 |
++----+--------------------+--------------------------------+--------+---------------+------+
+23 rows in set (0.00 sec)
+
+mysql> select count(*) from employee;
++----------+
+| count(*) |
++----------+
+|       23 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) as total_employee from employee;
++----------------+
+| total_employee |
++----------------+
+|             23 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(age) from employee;
++--------------------+
+| avg(age)           |
++--------------------+
+| 31.608695652173914 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from employee;
++-------------------+
+| avg(salary)       |
++-------------------+
+| 64086.95652173913 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(salary) from employee;
++-------------+
+| sum(salary) |
++-------------+
+|     1474000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(age) from employee;
++----------+
+| sum(age) |
++----------+
+|      727 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary) from employee;
++-------------+
+| max(salary) |
++-------------+
+|       90000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select min(salary) from employee;
++-------------+
+| min(salary) |
++-------------+
+|       25000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select employee_name, salary from employee where salary = (select max(salary) from employee);
++--------------------+--------+
+| employee_name      | salary |
++--------------------+--------+
+| Christopher Taylor |  90000 |
++--------------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select employee_name, salary from employee where salary = (select min(salary) from employee);
++---------------+--------+
+| employee_name | salary |
++---------------+--------+
+| Shivam        |  25000 |
++---------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee;
++----+--------------------+--------------------------------+--------+---------------+------+
+| id | employee_name      | email                          | salary | department_id | age  |
++----+--------------------+--------------------------------+--------+---------------+------+
+|  2 | Shivam             | shivam@gmail.com               |  25000 |             2 |   25 |
+|  3 | sanjay             | sanjay@gmail.com               |  30000 |             5 |   25 |
+|  5 | shekhar            | shekhar@gmail.com              |  30000 |          NULL |   25 |
+|  6 | John Smith         | john.smith@company.com         |  75000 |             2 |   28 |
+|  7 | Emma Johnson       | emma.johnson@company.com       |  65000 |             6 |   32 |
+|  8 | Michael Brown      | michael.brown@company.com      |  82000 |             2 |   45 |
+|  9 | Sarah Davis        | sarah.davis@company.com        |  58000 |             1 |   26 |
+| 10 | David Wilson       | david.wilson@company.com       |  72000 |             5 |   35 |
+| 11 | Jennifer Miller    | jennifer.miller@company.com    |  68000 |             4 |   29 |
+| 12 | Christopher Taylor | christopher.taylor@company.com |  90000 |             2 |   41 |
+| 13 | Jessica Anderson   | jessica.anderson@company.com   |  55000 |             1 |   33 |
+| 14 | Matthew Thomas     | matthew.thomas@company.com     |  78000 |             5 |   27 |
+| 15 | Amanda Martinez    | amanda.martinez@company.com    |  62000 |             6 |   31 |
+| 16 | Daniel Garcia      | daniel.garcia@company.com      |  85000 |             4 |   38 |
+| 17 | Laura Rodriguez    | laura.rodriguez@company.com    |  52000 |             1 |   24 |
+| 18 | Kevin Lee          | kevin.lee@company.com          |  77000 |             2 |   36 |
+| 19 | Rachel White       | rachel.white@company.com       |  59000 |             6 |   30 |
+| 20 | Brian Harris       | brian.harris@company.com       |  88000 |             5 |   42 |
+| 21 | Nicole Clark       | nicole.clark@company.com       |  63000 |             4 |   28 |
+| 22 | Steven Lewis       | steven.lewis@company.com       |  71000 |             2 |   34 |
+| 23 | Michelle Walker    | michelle.walker@company.com    |  56000 |             1 |   29 |
+| 24 | Andrew Hall        | andrew.hall@company.com        |  79000 |             5 |   39 |
+| 25 | Emily Allen        | emily.allen@company.com        |  54000 |             6 |   25 |
++----+--------------------+--------------------------------+--------+---------------+------+
+23 rows in set (0.00 sec)
