@@ -1,0 +1,279 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| aifs               |
+| aifs_b4            |
+| bank_db            |
+| clinic_db          |
+| demo_db            |
+| information_schema |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| tinkus_cafe        |
+| world              |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql> use aifs_b4;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_aifs_b4 |
++-------------------+
+| bank_account      |
+| courses           |
+| current_accounts  |
+| departments       |
+| employee          |
+| employee_self     |
+| saving_accounts   |
+| students          |
++-------------------+
+8 rows in set (0.00 sec)
+
+mysql> delimiter $
+mysql> create procedure getITEmployees begin select * from employee where department = 'IT'; end $
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'begin select * from employee where department = 'IT'; end' at line 1
+mysql> create procedure getITEmployees() begin select * from employee where department = 'IT'; end $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> call getITEmployees;
+ERROR 1054 (42S22): Unknown column 'department' in 'where clause'
+mysql> select * from employee;
++----+--------------------+--------------------------------+--------+---------------+------+
+| id | employee_name      | email                          | salary | department_id | age  |
++----+--------------------+--------------------------------+--------+---------------+------+
+|  2 | Shivam             | shivam@gmail.com               |  25000 |             2 |   25 |
+|  3 | sanjay             | sanjay@gmail.com               |  30000 |             5 |   25 |
+|  5 | shekhar            | shekhar@gmail.com              |  30000 |          NULL |   25 |
+|  6 | John Smith         | john.smith@company.com         |  75000 |             2 |   28 |
+|  7 | Emma Johnson       | emma.johnson@company.com       |  65000 |             6 |   32 |
+|  8 | Michael Brown      | michael.brown@company.com      |  82000 |             2 |   45 |
+|  9 | Sarah Davis        | sarah.davis@company.com        |  58000 |             1 |   26 |
+| 10 | David Wilson       | david.wilson@company.com       |  72000 |             5 |   35 |
+| 11 | Jennifer Miller    | jennifer.miller@company.com    |  68000 |             4 |   29 |
+| 12 | Christopher Taylor | christopher.taylor@company.com |  90000 |             2 |   41 |
+| 13 | Jessica Anderson   | jessica.anderson@company.com   |  55000 |             1 |   33 |
+| 14 | Matthew Thomas     | matthew.thomas@company.com     |  78000 |             5 |   27 |
+| 15 | Amanda Martinez    | amanda.martinez@company.com    |  62000 |             6 |   31 |
+| 16 | Daniel Garcia      | daniel.garcia@company.com      |  85000 |             4 |   38 |
+| 17 | Laura Rodriguez    | laura.rodriguez@company.com    |  52000 |             1 |   24 |
+| 18 | Kevin Lee          | kevin.lee@company.com          |  77000 |             2 |   36 |
+| 19 | Rachel White       | rachel.white@company.com       |  59000 |             6 |   30 |
+| 20 | Brian Harris       | brian.harris@company.com       |  88000 |             5 |   42 |
+| 21 | Nicole Clark       | nicole.clark@company.com       |  63000 |             4 |   28 |
+| 22 | Steven Lewis       | steven.lewis@company.com       |  71000 |             2 |   34 |
+| 23 | Michelle Walker    | michelle.walker@company.com    |  56000 |             1 |   29 |
+| 24 | Andrew Hall        | andrew.hall@company.com        |  79000 |             5 |   39 |
+| 25 | Emily Allen        | emily.allen@company.com        |  54000 |             6 |   25 |
++----+--------------------+--------------------------------+--------+---------------+------+
+23 rows in set (0.00 sec)
+
+mysql> select * from departments;
++----+-------------------+
+| id | name              |
++----+-------------------+
+|  1 | HR                |
+|  2 | IT                |
+|  4 | Finance           |
+|  5 | Operations        |
+|  6 | sales             |
+|  7 | Technical Support |
++----+-------------------+
+6 rows in set (0.00 sec)
+
+mysql> drop procedure if exist callITEmployees;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'exist callITEmployees' at line 1
+mysql> drop procedure if exist callITEmployees();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'exist callITEmployees()' at line 1
+mysql> drop procedure callITEmployees();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '()' at line 1
+mysql> drop procedure callITEmployees;
+ERROR 1305 (42000): PROCEDURE aifs_b4.callITEmployees does not exist
+mysql> drop procedure getITEmployees;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter $
+mysql> create procedure getItEmployees() begin select * from employee where department_id = 2; end $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter $
+mysql> delimiter ;
+mysql> call getItEmployees();
++----+--------------------+--------------------------------+--------+---------------+------+
+| id | employee_name      | email                          | salary | department_id | age  |
++----+--------------------+--------------------------------+--------+---------------+------+
+|  2 | Shivam             | shivam@gmail.com               |  25000 |             2 |   25 |
+|  6 | John Smith         | john.smith@company.com         |  75000 |             2 |   28 |
+|  8 | Michael Brown      | michael.brown@company.com      |  82000 |             2 |   45 |
+| 12 | Christopher Taylor | christopher.taylor@company.com |  90000 |             2 |   41 |
+| 18 | Kevin Lee          | kevin.lee@company.com          |  77000 |             2 |   36 |
+| 22 | Steven Lewis       | steven.lewis@company.com       |  71000 |             2 |   34 |
++----+--------------------+--------------------------------+--------+---------------+------+
+6 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> delimiter #
+mysql> create procedure getEmployeeWithId(IN d_id int) begin select * from employee where department_id = d_id; end #
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> call getEmployeeWithId(3);
+Empty set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call getEmployeeWithId(2);
++----+--------------------+--------------------------------+--------+---------------+------+
+| id | employee_name      | email                          | salary | department_id | age  |
++----+--------------------+--------------------------------+--------+---------------+------+
+|  2 | Shivam             | shivam@gmail.com               |  25000 |             2 |   25 |
+|  6 | John Smith         | john.smith@company.com         |  75000 |             2 |   28 |
+|  8 | Michael Brown      | michael.brown@company.com      |  82000 |             2 |   45 |
+| 12 | Christopher Taylor | christopher.taylor@company.com |  90000 |             2 |   41 |
+| 18 | Kevin Lee          | kevin.lee@company.com          |  77000 |             2 |   36 |
+| 22 | Steven Lewis       | steven.lewis@company.com       |  71000 |             2 |   34 |
++----+--------------------+--------------------------------+--------+---------------+------+
+6 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> call getEmployeeWithId(1);
++----+------------------+------------------------------+--------+---------------+------+
+| id | employee_name    | email                        | salary | department_id | age  |
++----+------------------+------------------------------+--------+---------------+------+
+|  9 | Sarah Davis      | sarah.davis@company.com      |  58000 |             1 |   26 |
+| 13 | Jessica Anderson | jessica.anderson@company.com |  55000 |             1 |   33 |
+| 17 | Laura Rodriguez  | laura.rodriguez@company.com  |  52000 |             1 |   24 |
+| 23 | Michelle Walker  | michelle.walker@company.com  |  56000 |             1 |   29 |
++----+------------------+------------------------------+--------+---------------+------+
+4 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> call getEmployeeWithId(4);
++----+-----------------+-----------------------------+--------+---------------+------+
+| id | employee_name   | email                       | salary | department_id | age  |
++----+-----------------+-----------------------------+--------+---------------+------+
+| 11 | Jennifer Miller | jennifer.miller@company.com |  68000 |             4 |   29 |
+| 16 | Daniel Garcia   | daniel.garcia@company.com   |  85000 |             4 |   38 |
+| 21 | Nicole Clark    | nicole.clark@company.com    |  63000 |             4 |   28 |
++----+-----------------+-----------------------------+--------+---------------+------+
+3 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter $
+mysql> create procedure getAvgSalary(OUT avg_salary double) begin select avg(salary) from employee; end$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> call getAvgSalary(@avgSal);
++-------------------+
+| avg(salary)       |
++-------------------+
+| 64086.95652173913 |
++-------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> drop getAvgSalary;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'getAvgSalary' at line 1
+mysql> drop procedure getAvgSalary;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter $
+mysql> create procedure getAvgSalary(OUT avg_salary double) begin select avg(salary) into avg_salary from employee; end$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> call getAvgSalary(@avg);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select @avg as avg_salary;
++-------------------+
+| avg_salary        |
++-------------------+
+| 64086.95652173913 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> create function getAnnualSalary(montly_salary double) returns double determinstic begin return monthly_salary * 12; end $
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'begin return monthly_salary * 12' at line 1
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'end $' at line 1
+mysql> delimiter $
+mysql> create function getAnnualSalary(montly_salary double) returns double determinstic begin return monthly_salary * 12; end $
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'begin return monthly_salary * 12; end' at line 1
+mysql> create function getAnnualSalary(monthly_salary double) returns double determinstic begin return monthly_salary * 12; end $
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'begin return monthly_salary * 12; end' at line 1
+mysql> create function getAnnualSalary(monthly_salary double) returns double deterministic begin return monthly_salary * 12; end $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> select * from employee;
++----+--------------------+--------------------------------+--------+---------------+------+
+| id | employee_name      | email                          | salary | department_id | age  |
++----+--------------------+--------------------------------+--------+---------------+------+
+|  2 | Shivam             | shivam@gmail.com               |  25000 |             2 |   25 |
+|  3 | sanjay             | sanjay@gmail.com               |  30000 |             5 |   25 |
+|  5 | shekhar            | shekhar@gmail.com              |  30000 |          NULL |   25 |
+|  6 | John Smith         | john.smith@company.com         |  75000 |             2 |   28 |
+|  7 | Emma Johnson       | emma.johnson@company.com       |  65000 |             6 |   32 |
+|  8 | Michael Brown      | michael.brown@company.com      |  82000 |             2 |   45 |
+|  9 | Sarah Davis        | sarah.davis@company.com        |  58000 |             1 |   26 |
+| 10 | David Wilson       | david.wilson@company.com       |  72000 |             5 |   35 |
+| 11 | Jennifer Miller    | jennifer.miller@company.com    |  68000 |             4 |   29 |
+| 12 | Christopher Taylor | christopher.taylor@company.com |  90000 |             2 |   41 |
+| 13 | Jessica Anderson   | jessica.anderson@company.com   |  55000 |             1 |   33 |
+| 14 | Matthew Thomas     | matthew.thomas@company.com     |  78000 |             5 |   27 |
+| 15 | Amanda Martinez    | amanda.martinez@company.com    |  62000 |             6 |   31 |
+| 16 | Daniel Garcia      | daniel.garcia@company.com      |  85000 |             4 |   38 |
+| 17 | Laura Rodriguez    | laura.rodriguez@company.com    |  52000 |             1 |   24 |
+| 18 | Kevin Lee          | kevin.lee@company.com          |  77000 |             2 |   36 |
+| 19 | Rachel White       | rachel.white@company.com       |  59000 |             6 |   30 |
+| 20 | Brian Harris       | brian.harris@company.com       |  88000 |             5 |   42 |
+| 21 | Nicole Clark       | nicole.clark@company.com       |  63000 |             4 |   28 |
+| 22 | Steven Lewis       | steven.lewis@company.com       |  71000 |             2 |   34 |
+| 23 | Michelle Walker    | michelle.walker@company.com    |  56000 |             1 |   29 |
+| 24 | Andrew Hall        | andrew.hall@company.com        |  79000 |             5 |   39 |
+| 25 | Emily Allen        | emily.allen@company.com        |  54000 |             6 |   25 |
++----+--------------------+--------------------------------+--------+---------------+------+
+23 rows in set (0.00 sec)
+
+mysql> select employee_name, salary as monthly_salary, getAnnualSalary(salary) as annual_salary from employee;
++--------------------+----------------+---------------+
+| employee_name      | monthly_salary | annual_salary |
++--------------------+----------------+---------------+
+| Shivam             |          25000 |        300000 |
+| sanjay             |          30000 |        360000 |
+| shekhar            |          30000 |        360000 |
+| John Smith         |          75000 |        900000 |
+| Emma Johnson       |          65000 |        780000 |
+| Michael Brown      |          82000 |        984000 |
+| Sarah Davis        |          58000 |        696000 |
+| David Wilson       |          72000 |        864000 |
+| Jennifer Miller    |          68000 |        816000 |
+| Christopher Taylor |          90000 |       1080000 |
+| Jessica Anderson   |          55000 |        660000 |
+| Matthew Thomas     |          78000 |        936000 |
+| Amanda Martinez    |          62000 |        744000 |
+| Daniel Garcia      |          85000 |       1020000 |
+| Laura Rodriguez    |          52000 |        624000 |
+| Kevin Lee          |          77000 |        924000 |
+| Rachel White       |          59000 |        708000 |
+| Brian Harris       |          88000 |       1056000 |
+| Nicole Clark       |          63000 |        756000 |
+| Steven Lewis       |          71000 |        852000 |
+| Michelle Walker    |          56000 |        672000 |
+| Andrew Hall        |          79000 |        948000 |
+| Emily Allen        |          54000 |        648000 |
++--------------------+----------------+---------------+
+23 rows in set (0.00 sec)
