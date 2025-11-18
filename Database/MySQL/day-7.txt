@@ -1,0 +1,772 @@
+mysql> use aifs_b4;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_aifs_b4 |
++-------------------+
+| bank_account      |
+| courses           |
+| current_accounts  |
+| departments       |
+| employee          |
+| employee_self     |
+| saving_accounts   |
+| students          |
++-------------------+
+8 rows in set (0.04 sec)
+
+mysql> select * from employee;
++----+--------------------+--------------------------------+--------+---------------+------+
+| id | employee_name      | email                          | salary | department_id | age  |
++----+--------------------+--------------------------------+--------+---------------+------+
+|  2 | Shivam             | shivam@gmail.com               |  25000 |             2 |   25 |
+|  3 | sanjay             | sanjay@gmail.com               |  30000 |             5 |   25 |
+|  5 | shekhar            | shekhar@gmail.com              |  30000 |          NULL |   25 |
+|  6 | John Smith         | john.smith@company.com         |  75000 |             2 |   28 |
+|  7 | Emma Johnson       | emma.johnson@company.com       |  65000 |             6 |   32 |
+|  8 | Michael Brown      | michael.brown@company.com      |  82000 |             2 |   45 |
+|  9 | Sarah Davis        | sarah.davis@company.com        |  58000 |             1 |   26 |
+| 10 | David Wilson       | david.wilson@company.com       |  72000 |             5 |   35 |
+| 11 | Jennifer Miller    | jennifer.miller@company.com    |  68000 |             4 |   29 |
+| 12 | Christopher Taylor | christopher.taylor@company.com |  90000 |             2 |   41 |
+| 13 | Jessica Anderson   | jessica.anderson@company.com   |  55000 |             1 |   33 |
+| 14 | Matthew Thomas     | matthew.thomas@company.com     |  78000 |             5 |   27 |
+| 15 | Amanda Martinez    | amanda.martinez@company.com    |  62000 |             6 |   31 |
+| 16 | Daniel Garcia      | daniel.garcia@company.com      |  85000 |             4 |   38 |
+| 17 | Laura Rodriguez    | laura.rodriguez@company.com    |  52000 |             1 |   24 |
+| 18 | Kevin Lee          | kevin.lee@company.com          |  77000 |             2 |   36 |
+| 19 | Rachel White       | rachel.white@company.com       |  59000 |             6 |   30 |
+| 20 | Brian Harris       | brian.harris@company.com       |  88000 |             5 |   42 |
+| 21 | Nicole Clark       | nicole.clark@company.com       |  63000 |             4 |   28 |
+| 22 | Steven Lewis       | steven.lewis@company.com       |  71000 |             2 |   34 |
+| 23 | Michelle Walker    | michelle.walker@company.com    |  56000 |             1 |   29 |
+| 24 | Andrew Hall        | andrew.hall@company.com        |  79000 |             5 |   39 |
+| 25 | Emily Allen        | emily.allen@company.com        |  54000 |             6 |   25 |
++----+--------------------+--------------------------------+--------+---------------+------+
+23 rows in set (0.01 sec)
+
+mysql> select * from bank_account;
++----+-----------+---------------+---------+
+| id | name      | account_type  | balance |
++----+-----------+---------------+---------+
+|  1 | Aarav     | Saving        |   12942 |
+|  2 | Vivaan    | Current       |   37425 |
+|  3 | Aditya    | Fixed Deposit |   38302 |
+|  4 | Kabir     | Saving        |   19236 |
+|  5 | Ishaan    | Current       |   21274 |
+|  6 | Shaurya   | Fixed Deposit |   38662 |
+|  7 | Arjun     | Saving        |   20000 |
+|  8 | Reyansh   | Current       |   21454 |
+|  9 | Krishna   | Saving        |   38805 |
+| 10 | Rudra     | Fixed Deposit |   19666 |
+| 11 | Atharv    | Current       |   21914 |
+| 12 | Veer      | Saving        |   40571 |
+| 13 | Rohan     | Current       |   27116 |
+| 14 | Manav     | Fixed Deposit |   53865 |
+| 15 | Samar     | Saving        |   27978 |
+| 16 | Varun     | Current       |   18295 |
+| 17 | Pranav    | Fixed Deposit |   47544 |
+| 18 | Yash      | Saving        |   22836 |
+| 19 | Harsh     | Current       |   11546 |
+| 20 | Laksh     | Saving        |   29225 |
+| 21 | Divyam    | Fixed Deposit |   51484 |
+| 22 | Ayaan     | Current       |   59748 |
+| 23 | Kunal     | Saving        |   34289 |
+| 24 | Abhay     | Fixed Deposit |   32200 |
+| 25 | Tarun     | Saving        |   48133 |
+| 26 | Nikhil    | Current       |   34066 |
+| 27 | Armaan    | Fixed Deposit |   15932 |
+| 28 | Ritik     | Saving        |   17462 |
+| 29 | Gaurav    | Current       |   29516 |
+| 30 | Nitin     | Fixed Deposit |   35195 |
+| 31 | Siddharth | Saving        |   27426 |
+| 32 | Vikram    | Current       |   21544 |
+| 33 | Deepak    | Saving        |   15446 |
+| 34 | Mohit     | Fixed Deposit |   52595 |
+| 35 | Rajat     | Saving        |   56640 |
+| 36 | Hemant    | Current       |   15413 |
+| 37 | Suresh    | Fixed Deposit |   47147 |
+| 38 | Piyush    | Saving        |   29496 |
+| 39 | Shivam    | Current       |   46040 |
++----+-----------+---------------+---------+
+39 rows in set (0.00 sec)
+
+mysql> select distinct account_type from bank_account where (select avg(balance) from bank_account b where b.account_type = bank_account.account_type) > 100000;
+Empty set (0.01 sec)
+
+mysql> select distinct account_type from bank_account where (select avg(balance) from bank_account b where b.account_type = bank_account.account_type) > 10000;
++---------------+
+| account_type  |
++---------------+
+| Saving        |
+| Current       |
+| Fixed Deposit |
++---------------+
+3 rows in set (0.00 sec)
+
+mysql> select distinct account_type from bank_account where (select avg(balance) from bank_account b where b.account_type = bank_account.account_type) > 50000;
+Empty set (0.00 sec)
+
+mysql> select distinct account_type from bank_account where (select avg(balance) from bank_account b where b.account_type = bank_account.account_type) > 30000;
++---------------+
+| account_type  |
++---------------+
+| Fixed Deposit |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(balance) from bank_account where account_type = 'Saving';
++--------------------+
+| avg(balance)       |
++--------------------+
+| 29365.666666666668 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(balance) from bank_account where account_type = 'Current';
++--------------------+
+| avg(balance)       |
++--------------------+
+| 28103.923076923078 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(balance) from bank_account where account_type = 'Fixed Deposit';
++--------------------+
+| avg(balance)       |
++--------------------+
+| 39326.545454545456 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select distinct account_type from bank_account where (select avg(balance) from bank_account b where b.account_type = bank_account.account_type) > 35000;
++---------------+
+| account_type  |
++---------------+
+| Fixed Deposit |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select distinct account_type from bank_account where (select avg(balance) from bank_account b where b.account_type = bank_account.account_type) > 28000;
++---------------+
+| account_type  |
++---------------+
+| Saving        |
+| Current       |
+| Fixed Deposit |
++---------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from bank_account;
++----+-----------+---------------+---------+
+| id | name      | account_type  | balance |
++----+-----------+---------------+---------+
+|  1 | Aarav     | Saving        |   12942 |
+|  2 | Vivaan    | Current       |   37425 |
+|  3 | Aditya    | Fixed Deposit |   38302 |
+|  4 | Kabir     | Saving        |   19236 |
+|  5 | Ishaan    | Current       |   21274 |
+|  6 | Shaurya   | Fixed Deposit |   38662 |
+|  7 | Arjun     | Saving        |   20000 |
+|  8 | Reyansh   | Current       |   21454 |
+|  9 | Krishna   | Saving        |   38805 |
+| 10 | Rudra     | Fixed Deposit |   19666 |
+| 11 | Atharv    | Current       |   21914 |
+| 12 | Veer      | Saving        |   40571 |
+| 13 | Rohan     | Current       |   27116 |
+| 14 | Manav     | Fixed Deposit |   53865 |
+| 15 | Samar     | Saving        |   27978 |
+| 16 | Varun     | Current       |   18295 |
+| 17 | Pranav    | Fixed Deposit |   47544 |
+| 18 | Yash      | Saving        |   22836 |
+| 19 | Harsh     | Current       |   11546 |
+| 20 | Laksh     | Saving        |   29225 |
+| 21 | Divyam    | Fixed Deposit |   51484 |
+| 22 | Ayaan     | Current       |   59748 |
+| 23 | Kunal     | Saving        |   34289 |
+| 24 | Abhay     | Fixed Deposit |   32200 |
+| 25 | Tarun     | Saving        |   48133 |
+| 26 | Nikhil    | Current       |   34066 |
+| 27 | Armaan    | Fixed Deposit |   15932 |
+| 28 | Ritik     | Saving        |   17462 |
+| 29 | Gaurav    | Current       |   29516 |
+| 30 | Nitin     | Fixed Deposit |   35195 |
+| 31 | Siddharth | Saving        |   27426 |
+| 32 | Vikram    | Current       |   21544 |
+| 33 | Deepak    | Saving        |   15446 |
+| 34 | Mohit     | Fixed Deposit |   52595 |
+| 35 | Rajat     | Saving        |   56640 |
+| 36 | Hemant    | Current       |   15413 |
+| 37 | Suresh    | Fixed Deposit |   47147 |
+| 38 | Piyush    | Saving        |   29496 |
+| 39 | Shivam    | Current       |   46040 |
++----+-----------+---------------+---------+
+39 rows in set (0.00 sec)
+
+mysql> select name, account_type, case when balance > 50000 then 'Rich' when balance between 35000 and 50000 then 'Middle class else 'poor' end as Category from bank_account;
+    '> ^C
+mysql> select name, account_type, case when balance > 50000 then 'Rich' when balance between 35000 and 50000 then 'Middle class else 'poor' end as Category from bank_account;
+    '> ^C
+mysql> select name, account_type, case when balance > 50000 then 'Rich' when balance between 35000 and 50000 then 'Middle class' else 'poor' end as Category from bank_account;
++-----------+---------------+--------------+
+| name      | account_type  | Category     |
++-----------+---------------+--------------+
+| Aarav     | Saving        | poor         |
+| Vivaan    | Current       | Middle class |
+| Aditya    | Fixed Deposit | Middle class |
+| Kabir     | Saving        | poor         |
+| Ishaan    | Current       | poor         |
+| Shaurya   | Fixed Deposit | Middle class |
+| Arjun     | Saving        | poor         |
+| Reyansh   | Current       | poor         |
+| Krishna   | Saving        | Middle class |
+| Rudra     | Fixed Deposit | poor         |
+| Atharv    | Current       | poor         |
+| Veer      | Saving        | Middle class |
+| Rohan     | Current       | poor         |
+| Manav     | Fixed Deposit | Rich         |
+| Samar     | Saving        | poor         |
+| Varun     | Current       | poor         |
+| Pranav    | Fixed Deposit | Middle class |
+| Yash      | Saving        | poor         |
+| Harsh     | Current       | poor         |
+| Laksh     | Saving        | poor         |
+| Divyam    | Fixed Deposit | Rich         |
+| Ayaan     | Current       | Rich         |
+| Kunal     | Saving        | poor         |
+| Abhay     | Fixed Deposit | poor         |
+| Tarun     | Saving        | Middle class |
+| Nikhil    | Current       | poor         |
+| Armaan    | Fixed Deposit | poor         |
+| Ritik     | Saving        | poor         |
+| Gaurav    | Current       | poor         |
+| Nitin     | Fixed Deposit | Middle class |
+| Siddharth | Saving        | poor         |
+| Vikram    | Current       | poor         |
+| Deepak    | Saving        | poor         |
+| Mohit     | Fixed Deposit | Rich         |
+| Rajat     | Saving        | Rich         |
+| Hemant    | Current       | poor         |
+| Suresh    | Fixed Deposit | Middle class |
+| Piyush    | Saving        | poor         |
+| Shivam    | Current       | Middle class |
++-----------+---------------+--------------+
+39 rows in set (0.00 sec)
+
+mysql> select * from bank_account;
++----+-----------+---------------+---------+
+| id | name      | account_type  | balance |
++----+-----------+---------------+---------+
+|  1 | Aarav     | Saving        |   12942 |
+|  2 | Vivaan    | Current       |   37425 |
+|  3 | Aditya    | Fixed Deposit |   38302 |
+|  4 | Kabir     | Saving        |   19236 |
+|  5 | Ishaan    | Current       |   21274 |
+|  6 | Shaurya   | Fixed Deposit |   38662 |
+|  7 | Arjun     | Saving        |   20000 |
+|  8 | Reyansh   | Current       |   21454 |
+|  9 | Krishna   | Saving        |   38805 |
+| 10 | Rudra     | Fixed Deposit |   19666 |
+| 11 | Atharv    | Current       |   21914 |
+| 12 | Veer      | Saving        |   40571 |
+| 13 | Rohan     | Current       |   27116 |
+| 14 | Manav     | Fixed Deposit |   53865 |
+| 15 | Samar     | Saving        |   27978 |
+| 16 | Varun     | Current       |   18295 |
+| 17 | Pranav    | Fixed Deposit |   47544 |
+| 18 | Yash      | Saving        |   22836 |
+| 19 | Harsh     | Current       |   11546 |
+| 20 | Laksh     | Saving        |   29225 |
+| 21 | Divyam    | Fixed Deposit |   51484 |
+| 22 | Ayaan     | Current       |   59748 |
+| 23 | Kunal     | Saving        |   34289 |
+| 24 | Abhay     | Fixed Deposit |   32200 |
+| 25 | Tarun     | Saving        |   48133 |
+| 26 | Nikhil    | Current       |   34066 |
+| 27 | Armaan    | Fixed Deposit |   15932 |
+| 28 | Ritik     | Saving        |   17462 |
+| 29 | Gaurav    | Current       |   29516 |
+| 30 | Nitin     | Fixed Deposit |   35195 |
+| 31 | Siddharth | Saving        |   27426 |
+| 32 | Vikram    | Current       |   21544 |
+| 33 | Deepak    | Saving        |   15446 |
+| 34 | Mohit     | Fixed Deposit |   52595 |
+| 35 | Rajat     | Saving        |   56640 |
+| 36 | Hemant    | Current       |   15413 |
+| 37 | Suresh    | Fixed Deposit |   47147 |
+| 38 | Piyush    | Saving        |   29496 |
+| 39 | Shivam    | Current       |   46040 |
++----+-----------+---------------+---------+
+39 rows in set (0.00 sec)
+
+mysql> delimiter $
+mysql> create trigger before_account_insert before insert on bank_account for each row begin if new.balance < 10000 then set new.balance = 10000; end if; end $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> insert into bankl_account (name, account_type, balance) values ('Khushi', 'Saving', 5000);
+ERROR 1146 (42S02): Table 'aifs_b4.bankl_account' doesn't exist
+mysql> insert into bank_account (name, account_type, balance) values ('Khushi', 'Saving', 5000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from bank_account;
++----+-----------+---------------+---------+
+| id | name      | account_type  | balance |
++----+-----------+---------------+---------+
+|  1 | Aarav     | Saving        |   12942 |
+|  2 | Vivaan    | Current       |   37425 |
+|  3 | Aditya    | Fixed Deposit |   38302 |
+|  4 | Kabir     | Saving        |   19236 |
+|  5 | Ishaan    | Current       |   21274 |
+|  6 | Shaurya   | Fixed Deposit |   38662 |
+|  7 | Arjun     | Saving        |   20000 |
+|  8 | Reyansh   | Current       |   21454 |
+|  9 | Krishna   | Saving        |   38805 |
+| 10 | Rudra     | Fixed Deposit |   19666 |
+| 11 | Atharv    | Current       |   21914 |
+| 12 | Veer      | Saving        |   40571 |
+| 13 | Rohan     | Current       |   27116 |
+| 14 | Manav     | Fixed Deposit |   53865 |
+| 15 | Samar     | Saving        |   27978 |
+| 16 | Varun     | Current       |   18295 |
+| 17 | Pranav    | Fixed Deposit |   47544 |
+| 18 | Yash      | Saving        |   22836 |
+| 19 | Harsh     | Current       |   11546 |
+| 20 | Laksh     | Saving        |   29225 |
+| 21 | Divyam    | Fixed Deposit |   51484 |
+| 22 | Ayaan     | Current       |   59748 |
+| 23 | Kunal     | Saving        |   34289 |
+| 24 | Abhay     | Fixed Deposit |   32200 |
+| 25 | Tarun     | Saving        |   48133 |
+| 26 | Nikhil    | Current       |   34066 |
+| 27 | Armaan    | Fixed Deposit |   15932 |
+| 28 | Ritik     | Saving        |   17462 |
+| 29 | Gaurav    | Current       |   29516 |
+| 30 | Nitin     | Fixed Deposit |   35195 |
+| 31 | Siddharth | Saving        |   27426 |
+| 32 | Vikram    | Current       |   21544 |
+| 33 | Deepak    | Saving        |   15446 |
+| 34 | Mohit     | Fixed Deposit |   52595 |
+| 35 | Rajat     | Saving        |   56640 |
+| 36 | Hemant    | Current       |   15413 |
+| 37 | Suresh    | Fixed Deposit |   47147 |
+| 38 | Piyush    | Saving        |   29496 |
+| 39 | Shivam    | Current       |   46040 |
+| 40 | Khushi    | Saving        |   10000 |
++----+-----------+---------------+---------+
+40 rows in set (0.00 sec)
+
+mysql> insert into bank_account (name, account_type, balance) values ('Sagar', 'Saving', 15000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from bank_account;
++----+-----------+---------------+---------+
+| id | name      | account_type  | balance |
++----+-----------+---------------+---------+
+|  1 | Aarav     | Saving        |   12942 |
+|  2 | Vivaan    | Current       |   37425 |
+|  3 | Aditya    | Fixed Deposit |   38302 |
+|  4 | Kabir     | Saving        |   19236 |
+|  5 | Ishaan    | Current       |   21274 |
+|  6 | Shaurya   | Fixed Deposit |   38662 |
+|  7 | Arjun     | Saving        |   20000 |
+|  8 | Reyansh   | Current       |   21454 |
+|  9 | Krishna   | Saving        |   38805 |
+| 10 | Rudra     | Fixed Deposit |   19666 |
+| 11 | Atharv    | Current       |   21914 |
+| 12 | Veer      | Saving        |   40571 |
+| 13 | Rohan     | Current       |   27116 |
+| 14 | Manav     | Fixed Deposit |   53865 |
+| 15 | Samar     | Saving        |   27978 |
+| 16 | Varun     | Current       |   18295 |
+| 17 | Pranav    | Fixed Deposit |   47544 |
+| 18 | Yash      | Saving        |   22836 |
+| 19 | Harsh     | Current       |   11546 |
+| 20 | Laksh     | Saving        |   29225 |
+| 21 | Divyam    | Fixed Deposit |   51484 |
+| 22 | Ayaan     | Current       |   59748 |
+| 23 | Kunal     | Saving        |   34289 |
+| 24 | Abhay     | Fixed Deposit |   32200 |
+| 25 | Tarun     | Saving        |   48133 |
+| 26 | Nikhil    | Current       |   34066 |
+| 27 | Armaan    | Fixed Deposit |   15932 |
+| 28 | Ritik     | Saving        |   17462 |
+| 29 | Gaurav    | Current       |   29516 |
+| 30 | Nitin     | Fixed Deposit |   35195 |
+| 31 | Siddharth | Saving        |   27426 |
+| 32 | Vikram    | Current       |   21544 |
+| 33 | Deepak    | Saving        |   15446 |
+| 34 | Mohit     | Fixed Deposit |   52595 |
+| 35 | Rajat     | Saving        |   56640 |
+| 36 | Hemant    | Current       |   15413 |
+| 37 | Suresh    | Fixed Deposit |   47147 |
+| 38 | Piyush    | Saving        |   29496 |
+| 39 | Shivam    | Current       |   46040 |
+| 40 | Khushi    | Saving        |   10000 |
+| 41 | Sagar     | Saving        |   15000 |
++----+-----------+---------------+---------+
+41 rows in set (0.00 sec)
+
+mysql> create table account_log (id int primary key auto_increment, action varchar(50), time_log);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> create table account_log (id int primary key auto_increment, action varchar(50), time_log datetime);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc account_log
+    -> ;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| action   | varchar(50) | YES  |     | NULL    |                |
+| time_log | datetime    | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from account_log;
+Empty set (0.00 sec)
+
+mysql> create trigger after_account_insert after insert on bank_account for each row begin i;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> delimiter $
+mysql> create trigger after_account_insert after insert on bank_account for each row begin insert into account_log(action, time_log) values ('INSERT', now()); end $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> insert into bank_account (name, account_type, balance) values ('Sanjay', 'Current', 35000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from account_log;
++----+--------+---------------------+
+| id | action | time_log            |
++----+--------+---------------------+
+|  1 | INSERT | 2025-11-18 19:14:21 |
++----+--------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> alter table account_log add column account_id int;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> drop trigger after_account_trigger;
+ERROR 1360 (HY000): Trigger does not exist
+mysql> drop trigger after_account_insert;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter $
+mysql> create trigger after_account_insert after insert on bank_account for each row begin insert into account_log(action, time_log, account_id) values ('INSERT', now(), new.id); end $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> insert into bank_account (name, account_type, balance) values ('Samiksha', 'Fixed Deposit', 40000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from account_log;
++----+--------+---------------------+------------+
+| id | action | time_log            | account_id |
++----+--------+---------------------+------------+
+|  1 | INSERT | 2025-11-18 19:14:21 |       NULL |
+|  2 | INSERT | 2025-11-18 19:17:31 |         43 |
++----+--------+---------------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> delimiter $
+mysql> create trigger before_account_update before update on bank_account for each row begin if new.balance < 10000 then set new.balance = 10000; end if; end$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> select * from bank_account;
++----+-----------+---------------+---------+
+| id | name      | account_type  | balance |
++----+-----------+---------------+---------+
+|  1 | Aarav     | Saving        |   12942 |
+|  2 | Vivaan    | Current       |   37425 |
+|  3 | Aditya    | Fixed Deposit |   38302 |
+|  4 | Kabir     | Saving        |   19236 |
+|  5 | Ishaan    | Current       |   21274 |
+|  6 | Shaurya   | Fixed Deposit |   38662 |
+|  7 | Arjun     | Saving        |   20000 |
+|  8 | Reyansh   | Current       |   21454 |
+|  9 | Krishna   | Saving        |   38805 |
+| 10 | Rudra     | Fixed Deposit |   19666 |
+| 11 | Atharv    | Current       |   21914 |
+| 12 | Veer      | Saving        |   40571 |
+| 13 | Rohan     | Current       |   27116 |
+| 14 | Manav     | Fixed Deposit |   53865 |
+| 15 | Samar     | Saving        |   27978 |
+| 16 | Varun     | Current       |   18295 |
+| 17 | Pranav    | Fixed Deposit |   47544 |
+| 18 | Yash      | Saving        |   22836 |
+| 19 | Harsh     | Current       |   11546 |
+| 20 | Laksh     | Saving        |   29225 |
+| 21 | Divyam    | Fixed Deposit |   51484 |
+| 22 | Ayaan     | Current       |   59748 |
+| 23 | Kunal     | Saving        |   34289 |
+| 24 | Abhay     | Fixed Deposit |   32200 |
+| 25 | Tarun     | Saving        |   48133 |
+| 26 | Nikhil    | Current       |   34066 |
+| 27 | Armaan    | Fixed Deposit |   15932 |
+| 28 | Ritik     | Saving        |   17462 |
+| 29 | Gaurav    | Current       |   29516 |
+| 30 | Nitin     | Fixed Deposit |   35195 |
+| 31 | Siddharth | Saving        |   27426 |
+| 32 | Vikram    | Current       |   21544 |
+| 33 | Deepak    | Saving        |   15446 |
+| 34 | Mohit     | Fixed Deposit |   52595 |
+| 35 | Rajat     | Saving        |   56640 |
+| 36 | Hemant    | Current       |   15413 |
+| 37 | Suresh    | Fixed Deposit |   47147 |
+| 38 | Piyush    | Saving        |   29496 |
+| 39 | Shivam    | Current       |   46040 |
+| 40 | Khushi    | Saving        |   10000 |
+| 41 | Sagar     | Saving        |   15000 |
+| 42 | Sanjay    | Current       |   35000 |
+| 43 | Samiksha  | Fixed Deposit |   40000 |
++----+-----------+---------------+---------+
+43 rows in set (0.00 sec)
+
+mysql> update bank_account set balance = 8000 where id = 41;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from bank_account;
++----+-----------+---------------+---------+
+| id | name      | account_type  | balance |
++----+-----------+---------------+---------+
+|  1 | Aarav     | Saving        |   12942 |
+|  2 | Vivaan    | Current       |   37425 |
+|  3 | Aditya    | Fixed Deposit |   38302 |
+|  4 | Kabir     | Saving        |   19236 |
+|  5 | Ishaan    | Current       |   21274 |
+|  6 | Shaurya   | Fixed Deposit |   38662 |
+|  7 | Arjun     | Saving        |   20000 |
+|  8 | Reyansh   | Current       |   21454 |
+|  9 | Krishna   | Saving        |   38805 |
+| 10 | Rudra     | Fixed Deposit |   19666 |
+| 11 | Atharv    | Current       |   21914 |
+| 12 | Veer      | Saving        |   40571 |
+| 13 | Rohan     | Current       |   27116 |
+| 14 | Manav     | Fixed Deposit |   53865 |
+| 15 | Samar     | Saving        |   27978 |
+| 16 | Varun     | Current       |   18295 |
+| 17 | Pranav    | Fixed Deposit |   47544 |
+| 18 | Yash      | Saving        |   22836 |
+| 19 | Harsh     | Current       |   11546 |
+| 20 | Laksh     | Saving        |   29225 |
+| 21 | Divyam    | Fixed Deposit |   51484 |
+| 22 | Ayaan     | Current       |   59748 |
+| 23 | Kunal     | Saving        |   34289 |
+| 24 | Abhay     | Fixed Deposit |   32200 |
+| 25 | Tarun     | Saving        |   48133 |
+| 26 | Nikhil    | Current       |   34066 |
+| 27 | Armaan    | Fixed Deposit |   15932 |
+| 28 | Ritik     | Saving        |   17462 |
+| 29 | Gaurav    | Current       |   29516 |
+| 30 | Nitin     | Fixed Deposit |   35195 |
+| 31 | Siddharth | Saving        |   27426 |
+| 32 | Vikram    | Current       |   21544 |
+| 33 | Deepak    | Saving        |   15446 |
+| 34 | Mohit     | Fixed Deposit |   52595 |
+| 35 | Rajat     | Saving        |   56640 |
+| 36 | Hemant    | Current       |   15413 |
+| 37 | Suresh    | Fixed Deposit |   47147 |
+| 38 | Piyush    | Saving        |   29496 |
+| 39 | Shivam    | Current       |   46040 |
+| 40 | Khushi    | Saving        |   10000 |
+| 41 | Sagar     | Saving        |   10000 |
+| 42 | Sanjay    | Current       |   35000 |
+| 43 | Samiksha  | Fixed Deposit |   40000 |
++----+-----------+---------------+---------+
+43 rows in set (0.00 sec)
+
+mysql> create trigger after_account_update after update on bank_account for each row begin insert into account_log (action, time_log, account_id) values ('Update', now(), new.id); end$
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'end$' at line 1
+mysql> delimiter $
+mysql> create trigger after_account_update after update on bank_account for each row begin insert into account_log (action, time_log, account_id) values ('Update', now(), new.id); end $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> update bank_account set balance = 18000 where id = 41;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from account_log;
++----+--------+---------------------+------------+
+| id | action | time_log            | account_id |
++----+--------+---------------------+------------+
+|  1 | INSERT | 2025-11-18 19:14:21 |       NULL |
+|  2 | INSERT | 2025-11-18 19:17:31 |         43 |
+|  3 | Update | 2025-11-18 19:27:07 |         41 |
++----+--------+---------------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> delimiter $
+mysql> create trigger before_account_delete before delete on bank_account for each row begin insert into account_log(action, time_log, account_id) values ('Before Delete', now(), old.id); end $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter :
+mysql> delimiter ;
+mysql> delete from bank_account where id = 43;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from account_log;
++----+---------------+---------------------+------------+
+| id | action        | time_log            | account_id |
++----+---------------+---------------------+------------+
+|  1 | INSERT        | 2025-11-18 19:14:21 |       NULL |
+|  2 | INSERT        | 2025-11-18 19:17:31 |         43 |
+|  3 | Update        | 2025-11-18 19:27:07 |         41 |
+|  4 | Before Delete | 2025-11-18 19:30:53 |         43 |
++----+---------------+---------------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> delimiter $
+mysql> create trigger after_account_delete after delete on bank_account for each row begin insert into account_log(action, time_log, account_id) values (''After delete', now(), old.id); end $
+    '> create trigger after_account_delete after delete on bank_account for each row begin insert into account_log(action, time_log, account_id) values ('After delete', now(), old.id); end $
+    '> ;
+    '> 4
+    '> ^C
+mysql> create trigger after_account_delete after delete on bank_account for each row begin insert into account_log(action, time_log, account_id) values ('After delete', now(), old.id); end $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> delete from bank_account where id = 42;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from account_lof;
+ERROR 1146 (42S02): Table 'aifs_b4.account_lof' doesn't exist
+mysql> select * from account_log;
++----+---------------+---------------------+------------+
+| id | action        | time_log            | account_id |
++----+---------------+---------------------+------------+
+|  1 | INSERT        | 2025-11-18 19:14:21 |       NULL |
+|  2 | INSERT        | 2025-11-18 19:17:31 |         43 |
+|  3 | Update        | 2025-11-18 19:27:07 |         41 |
+|  4 | Before Delete | 2025-11-18 19:30:53 |         43 |
+|  5 | Before Delete | 2025-11-18 19:33:49 |         42 |
+|  6 | After delete  | 2025-11-18 19:33:49 |         42 |
++----+---------------+---------------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from bank_account;
++----+-----------+---------------+---------+
+| id | name      | account_type  | balance |
++----+-----------+---------------+---------+
+|  1 | Aarav     | Saving        |   12942 |
+|  2 | Vivaan    | Current       |   37425 |
+|  3 | Aditya    | Fixed Deposit |   38302 |
+|  4 | Kabir     | Saving        |   19236 |
+|  5 | Ishaan    | Current       |   21274 |
+|  6 | Shaurya   | Fixed Deposit |   38662 |
+|  7 | Arjun     | Saving        |   20000 |
+|  8 | Reyansh   | Current       |   21454 |
+|  9 | Krishna   | Saving        |   38805 |
+| 10 | Rudra     | Fixed Deposit |   19666 |
+| 11 | Atharv    | Current       |   21914 |
+| 12 | Veer      | Saving        |   40571 |
+| 13 | Rohan     | Current       |   27116 |
+| 14 | Manav     | Fixed Deposit |   53865 |
+| 15 | Samar     | Saving        |   27978 |
+| 16 | Varun     | Current       |   18295 |
+| 17 | Pranav    | Fixed Deposit |   47544 |
+| 18 | Yash      | Saving        |   22836 |
+| 19 | Harsh     | Current       |   11546 |
+| 20 | Laksh     | Saving        |   29225 |
+| 21 | Divyam    | Fixed Deposit |   51484 |
+| 22 | Ayaan     | Current       |   59748 |
+| 23 | Kunal     | Saving        |   34289 |
+| 24 | Abhay     | Fixed Deposit |   32200 |
+| 25 | Tarun     | Saving        |   48133 |
+| 26 | Nikhil    | Current       |   34066 |
+| 27 | Armaan    | Fixed Deposit |   15932 |
+| 28 | Ritik     | Saving        |   17462 |
+| 29 | Gaurav    | Current       |   29516 |
+| 30 | Nitin     | Fixed Deposit |   35195 |
+| 31 | Siddharth | Saving        |   27426 |
+| 32 | Vikram    | Current       |   21544 |
+| 33 | Deepak    | Saving        |   15446 |
+| 34 | Mohit     | Fixed Deposit |   52595 |
+| 35 | Rajat     | Saving        |   56640 |
+| 36 | Hemant    | Current       |   15413 |
+| 37 | Suresh    | Fixed Deposit |   47147 |
+| 38 | Piyush    | Saving        |   29496 |
+| 39 | Shivam    | Current       |   46040 |
+| 40 | Khushi    | Saving        |   10000 |
+| 41 | Sagar     | Saving        |   18000 |
++----+-----------+---------------+---------+
+41 rows in set (0.00 sec)
+
+mysql> create trigger before_account_insert_name before insert on bank_account for each row begin set new.name = upper(name) ; end $
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'end $' at line 1
+mysql> delimiter $
+mysql> create trigger before_account_insert_name before insert on bank_account for each row begin set new.name = upper(name) ; end $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> insert into bank_account (name, account_type, balance ) values ('akku', 'Savings', 12000);
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> insert into bank_account (name, account_type, balance ) values ('akku', 'Savings', 12000);
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> drop trigger before_account_insert_name;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter $
+mysql> create trigger before_account_insert_name before insert on bank_account for each row begin set new.name = upper(new.name) ; end $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> insert into bank_account (name, account_type, balance ) values ('akku', 'Savings', 12000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from bank_account;
++----+-----------+---------------+---------+
+| id | name      | account_type  | balance |
++----+-----------+---------------+---------+
+|  1 | Aarav     | Saving        |   12942 |
+|  2 | Vivaan    | Current       |   37425 |
+|  3 | Aditya    | Fixed Deposit |   38302 |
+|  4 | Kabir     | Saving        |   19236 |
+|  5 | Ishaan    | Current       |   21274 |
+|  6 | Shaurya   | Fixed Deposit |   38662 |
+|  7 | Arjun     | Saving        |   20000 |
+|  8 | Reyansh   | Current       |   21454 |
+|  9 | Krishna   | Saving        |   38805 |
+| 10 | Rudra     | Fixed Deposit |   19666 |
+| 11 | Atharv    | Current       |   21914 |
+| 12 | Veer      | Saving        |   40571 |
+| 13 | Rohan     | Current       |   27116 |
+| 14 | Manav     | Fixed Deposit |   53865 |
+| 15 | Samar     | Saving        |   27978 |
+| 16 | Varun     | Current       |   18295 |
+| 17 | Pranav    | Fixed Deposit |   47544 |
+| 18 | Yash      | Saving        |   22836 |
+| 19 | Harsh     | Current       |   11546 |
+| 20 | Laksh     | Saving        |   29225 |
+| 21 | Divyam    | Fixed Deposit |   51484 |
+| 22 | Ayaan     | Current       |   59748 |
+| 23 | Kunal     | Saving        |   34289 |
+| 24 | Abhay     | Fixed Deposit |   32200 |
+| 25 | Tarun     | Saving        |   48133 |
+| 26 | Nikhil    | Current       |   34066 |
+| 27 | Armaan    | Fixed Deposit |   15932 |
+| 28 | Ritik     | Saving        |   17462 |
+| 29 | Gaurav    | Current       |   29516 |
+| 30 | Nitin     | Fixed Deposit |   35195 |
+| 31 | Siddharth | Saving        |   27426 |
+| 32 | Vikram    | Current       |   21544 |
+| 33 | Deepak    | Saving        |   15446 |
+| 34 | Mohit     | Fixed Deposit |   52595 |
+| 35 | Rajat     | Saving        |   56640 |
+| 36 | Hemant    | Current       |   15413 |
+| 37 | Suresh    | Fixed Deposit |   47147 |
+| 38 | Piyush    | Saving        |   29496 |
+| 39 | Shivam    | Current       |   46040 |
+| 40 | Khushi    | Saving        |   10000 |
+| 41 | Sagar     | Saving        |   18000 |
+| 44 | AKKU      | Savings       |   12000 |
++----+-----------+---------------+---------+
+42 rows in set (0.00 sec)
