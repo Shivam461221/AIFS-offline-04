@@ -1,0 +1,322 @@
+test> show dbs
+admin        40.00 KiB
+aifs         96.00 KiB
+clinic-app  360.00 KiB
+companyDB   336.00 KiB
+config       72.00 KiB
+local        88.00 KiB
+mydb        112.00 KiB
+test> use aifs
+switched to db aifs
+aifs> show collections
+courses
+users
+aifs> db.users.find()
+[
+  {
+    _id: ObjectId('691dab230d8e5ead8c73518a'),
+    name: 'Nilima',
+    gender: 'female',
+    isMarried: false,
+    courseName: 'AIFS',
+    fees: '100000'
+  },
+  {
+    _id: ObjectId('691dab300d8e5ead8c73518b'),
+    name: 'Kalpana',
+    age: 23,
+    gender: 'female',
+    isMarried: false,
+    courseName: 'CDEC',
+    fees: '80000'
+  },
+  {
+    _id: ObjectId('691dab380d8e5ead8c73518c'),
+    name: 'Amrapali',
+    age: 22,
+    gender: 'female',
+    isMarried: false,
+    courseName: 'AIFS',
+    fees: '100000'
+  },
+  {
+    _id: ObjectId('691dad320d8e5ead8c73518e'),
+    name: 'Shekhar Gupta',
+    gender: 'male',
+    email: 'shekhar@123',
+    courseName: 'XDSAAI',
+    age: 28,
+    fees: '80000'
+  },
+  {
+    _id: ObjectId('691eff9030d17be6ca73518c'),
+    name: 'Om',
+    age: 21,
+    gender: 'male',
+    email: 'om@123',
+    skills: [ 'Java', 'SQL', 'JS' ]
+  }
+]
+aifs> db.users.insertOne({name:'Shivam', age:25, email:'shivam@gamil.com'})
+{
+  acknowledged: true,
+  insertedId: ObjectId('691f16941e5a692f81735189')
+}
+aifs> db.users.find()
+[
+  {
+    _id: ObjectId('691dab230d8e5ead8c73518a'),
+    name: 'Nilima',
+    gender: 'female',
+    isMarried: false,
+    courseName: 'AIFS',
+    fees: '100000'
+  },
+  {
+    _id: ObjectId('691dab300d8e5ead8c73518b'),
+    name: 'Kalpana',
+    age: 23,
+    gender: 'female',
+    isMarried: false,
+    courseName: 'CDEC',
+    fees: '80000'
+  },
+  {
+    _id: ObjectId('691dab380d8e5ead8c73518c'),
+    name: 'Amrapali',
+    age: 22,
+    gender: 'female',
+    isMarried: false,
+    courseName: 'AIFS',
+    fees: '100000'
+  },
+  {
+    _id: ObjectId('691dad320d8e5ead8c73518e'),
+    name: 'Shekhar Gupta',
+    gender: 'male',
+    email: 'shekhar@123',
+    courseName: 'XDSAAI',
+    age: 28,
+    fees: '80000'
+  },
+  {
+    _id: ObjectId('691eff9030d17be6ca73518c'),
+    name: 'Om',
+    age: 21,
+    gender: 'male',
+    email: 'om@123',
+    skills: [ 'Java', 'SQL', 'JS' ]
+  },
+  {
+    _id: ObjectId('691f16941e5a692f81735189'),
+    name: 'Shivam',
+    age: 25,
+    email: 'shivam@gamil.com'
+  }
+]
+aifs> db.users.find({name:'shivam'})
+
+aifs> db.users.find({name:'Shivam'})
+[
+  {
+    _id: ObjectId('691f16941e5a692f81735189'),
+    name: 'Shivam',
+    age: 25,
+    email: 'shivam@gamil.com'
+  }
+]
+aifs> db.users.find({_id: ObjectId('691f16941e5a692f81735189')})
+[
+  {
+    _id: ObjectId('691f16941e5a692f81735189'),
+    name: 'Shivam',
+    age: 25,
+    email: 'shivam@gamil.com'
+  }
+]
+aifs> db.users.updateOne({name:'Shivam'}, {$set:{email:'shivam@123', isImployed: true}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aifs> db.users.find()
+[
+  {
+    _id: ObjectId('691dab230d8e5ead8c73518a'),
+    name: 'Nilima',
+    gender: 'female',
+    isMarried: false,
+    courseName: 'AIFS',
+    fees: '100000'
+  },
+  {
+    _id: ObjectId('691dab300d8e5ead8c73518b'),
+    name: 'Kalpana',
+    age: 23,
+    gender: 'female',
+    isMarried: false,
+    courseName: 'CDEC',
+    fees: '80000'
+  },
+  {
+    _id: ObjectId('691dab380d8e5ead8c73518c'),
+    name: 'Amrapali',
+    age: 22,
+    gender: 'female',
+    isMarried: false,
+    courseName: 'AIFS',
+    fees: '100000'
+  },
+  {
+    _id: ObjectId('691dad320d8e5ead8c73518e'),
+    name: 'Shekhar Gupta',
+    gender: 'male',
+    email: 'shekhar@123',
+    courseName: 'XDSAAI',
+    age: 28,
+    fees: '80000'
+  },
+  {
+    _id: ObjectId('691eff9030d17be6ca73518c'),
+    name: 'Om',
+    age: 21,
+    gender: 'male',
+    email: 'om@123',
+    skills: [ 'Java', 'SQL', 'JS' ]
+  },
+  {
+    _id: ObjectId('691f16941e5a692f81735189'),
+    name: 'Shivam',
+    age: 25,
+    email: 'shivam@123',
+    isImployed: true
+  }
+]
+aifs> db.users.updateOne({courseName:'AIFS'}, {$set:{fees:'150000'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aifs> db.users.find()
+[
+  {
+    _id: ObjectId('691dab230d8e5ead8c73518a'),
+    name: 'Nilima',
+    gender: 'female',
+    isMarried: false,
+    courseName: 'AIFS',
+    fees: '150000'
+  },
+  {
+    _id: ObjectId('691dab300d8e5ead8c73518b'),
+    name: 'Kalpana',
+    age: 23,
+    gender: 'female',
+    isMarried: false,
+    courseName: 'CDEC',
+    fees: '80000'
+  },
+  {
+    _id: ObjectId('691dab380d8e5ead8c73518c'),
+    name: 'Amrapali',
+    age: 22,
+    gender: 'female',
+    isMarried: false,
+    courseName: 'AIFS',
+    fees: '100000'
+  },
+  {
+    _id: ObjectId('691dad320d8e5ead8c73518e'),
+    name: 'Shekhar Gupta',
+    gender: 'male',
+    email: 'shekhar@123',
+    courseName: 'XDSAAI',
+    age: 28,
+    fees: '80000'
+  },
+  {
+    _id: ObjectId('691eff9030d17be6ca73518c'),
+    name: 'Om',
+    age: 21,
+    gender: 'male',
+    email: 'om@123',
+    skills: [ 'Java', 'SQL', 'JS' ]
+  },
+  {
+    _id: ObjectId('691f16941e5a692f81735189'),
+    name: 'Shivam',
+    age: 25,
+    email: 'shivam@123',
+    isImployed: true
+  }
+]
+aifs> db.users.updateMany({courseName:'AIFS'}, {$set:{fees:'150000'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aifs> db.users.find()
+[
+  {
+    _id: ObjectId('691dab230d8e5ead8c73518a'),
+    name: 'Nilima',
+    gender: 'female',
+    isMarried: false,
+    courseName: 'AIFS',
+    fees: '150000'
+  },
+  {
+    _id: ObjectId('691dab300d8e5ead8c73518b'),
+    name: 'Kalpana',
+    age: 23,
+    gender: 'female',
+    isMarried: false,
+    courseName: 'CDEC',
+    fees: '80000'
+  },
+  {
+    _id: ObjectId('691dab380d8e5ead8c73518c'),
+    name: 'Amrapali',
+    age: 22,
+    gender: 'female',
+    isMarried: false,
+    courseName: 'AIFS',
+    fees: '150000'
+  },
+  {
+    _id: ObjectId('691dad320d8e5ead8c73518e'),
+    name: 'Shekhar Gupta',
+    gender: 'male',
+    email: 'shekhar@123',
+    courseName: 'XDSAAI',
+    age: 28,
+    fees: '80000'
+  },
+  {
+    _id: ObjectId('691eff9030d17be6ca73518c'),
+    name: 'Om',
+    age: 21,
+    gender: 'male',
+    email: 'om@123',
+    skills: [ 'Java', 'SQL', 'JS' ]
+  },
+  {
+    _id: ObjectId('691f16941e5a692f81735189'),
+    name: 'Shivam',
+    age: 25,
+    email: 'shivam@123',
+    isImployed: true
+  }
+]
+aifs> db.users.deleteOne({name:'Shivam'})
+{ acknowledged: true, deletedCount: 1 }
+aifs>
