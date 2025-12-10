@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 async function createUser(req, res) {
     try {
@@ -40,7 +41,9 @@ async function login(req, res){
             return res.status(400).json({message:'Invalid credential'})
         }
 
-        res.status(200).json({message:'Login successful'})
+        const token = jwt.sign({userId:existingUser._id, role:'admin'}, process.env.SECRET, {expiresIn:'1H'})
+
+        res.status(200).json({message:'Login successful', token}, )
 
     }
     catch(err){
