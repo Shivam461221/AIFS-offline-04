@@ -29,7 +29,6 @@ public class LinkedDemo {
 		
 		System.out.println(list);
 		
-		
 		//List<Integer> list2 = new ArrayList<>();
 		
 		Iterator<Integer> it = list.iterator();
