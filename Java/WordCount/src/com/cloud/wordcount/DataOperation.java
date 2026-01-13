@@ -7,9 +7,8 @@ import java.util.Arrays;
 public class DataOperation {
 
 	public static String removeSymbols(String inputData, String symbolsFile) throws IOException {
-
 		char[] ch = inputData.toCharArray();
-
+		
 		ArrayList<Character> list = new ArrayList<>();
 
 		for (int i = 0; i < ch.length; i++) {

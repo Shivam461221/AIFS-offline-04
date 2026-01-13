@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class FileOperations {
 	
 	public static String getInputFile(String filePath) throws IOException{
+		
 		File file = new File(filePath);
 		
 		Scanner sc = new Scanner(file);
@@ -18,7 +19,7 @@ public class FileOperations {
 			data = data.concat(sc.next().concat(" "));
 		}
 		
-		return data;
+		return data.toLowerCase();
 	}
 	
 	public static ArrayList<Character> readSymbols(String filePath) throws IOException{
