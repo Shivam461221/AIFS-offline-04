@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -33,6 +36,25 @@ public class UserOperation {
 		}
 		
 		return map;
+	}
+	
+	public static List<Map.Entry<String, Integer>> wordCountDescending(String inputFile) throws IOException {
+
+		String[] str = inputFile.split(" ");
+
+		ArrayList<String> list = new ArrayList<>(Arrays.asList(str));
+		
+		TreeMap<String, Integer> map = new TreeMap<>();
+		
+		for(String string: list) {
+			map.put(string, Collections.frequency(list, string));
+		}
+		
+		List<Map.Entry<String , Integer>> mapList = new ArrayList<>(map.entrySet());
+		
+		mapList.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+		
+		return mapList;
 	}
 	
 	public static TreeMap<Character, Integer> charCount(String inputFile) throws IOException{

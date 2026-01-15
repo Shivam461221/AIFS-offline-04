@@ -2,6 +2,8 @@ package com.cloud.wordcount;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -39,15 +41,33 @@ public class WordCount {
 		System.out.println(uniqueWords.size());
 		
 		
-		System.out.println("-----------------Unique words with Frequency-----------------------");
-		TreeMap<String , Integer> map = UserOperation.wordCount(dataWithoutStopwords);
+//		System.out.println("-----------------Unique words with Frequency-----------------------");
+//		TreeMap<String , Integer> map = UserOperation.wordCount(dataWithoutStopwords);
+//		
+//		map.forEach((key, value)-> System.out.println(key+" : "+value));
 		
-		map.forEach((key, value)-> System.out.println(key+" : "+value));
+//		System.out.println("-----------------Alphabets Frequency-----------------------");
+//		TreeMap<Character , Integer> charlist = UserOperation.charCount(dataWithoutStopwords);
+//		
+//		charlist.forEach((key, value)-> System.out.println(key+" : "+value));
 		
-		System.out.println("-----------------Alphabets Frequency-----------------------");
-		TreeMap<Character , Integer> charlist = UserOperation.charCount(dataWithoutStopwords);
+		System.out.println("-----------------Unique words with Frequency in Descending-----------------------");
+		List<Map.Entry<String, Integer>> list = UserOperation.wordCountDescending(dataWithoutStopwords);
 		
-		charlist.forEach((key, value)-> System.out.println(key+" : "+value));
+		for(Map.Entry<String, Integer> entry: list) {
+			System.out.println(entry.getKey()+" : "+entry.getValue());
+		}
+		
+		
+		System.out.println("-------------------Top 10 words------------------");
+		int count = 0;
+		for(Map.Entry<String, Integer> entry: list) {
+			if(count==10) {
+				break;
+			}
+			System.out.println(entry.getKey()+" : "+entry.getValue());
+			count++;
+		}
 		
 //		ArrayList<Character> symbols = FileOperations.readSymbols(symbolsFile);
 //		
