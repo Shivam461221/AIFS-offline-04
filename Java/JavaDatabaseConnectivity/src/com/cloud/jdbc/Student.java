@@ -113,57 +113,91 @@ public class Student {
 //				System.out.println(rs.getInt("id") + ", " + rs.getString("name") + ", " + rs.getString("email") + ", "
 //						+ rs.getInt("age") + ", " + rs.getString("course"));
 //			}
-			
+
 			// Print Table Header
-		    System.out.printf("%-5s %-20s %-30s %-5s %-15s%n",
-		            "ID", "Name", "Email", "Age", "Course");
+			System.out.printf("%-5s %-20s %-30s %-5s %-15s%n", "ID", "Name", "Email", "Age", "Course");
 
-		    System.out.println("--------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------");
 
-		    // Print Table Rows
-		    while (rs.next()) {
-		        System.out.printf("%-5d %-20s %-30s %-5d %-15s%n",
-		                rs.getInt("id"),
-		                rs.getString("name"),
-		                rs.getString("email"),
-		                rs.getInt("age"),
-		                rs.getString("course"));
-		    }
+			// Print Table Rows
+			while (rs.next()) {
+				System.out.printf("%-5d %-20s %-30s %-5d %-15s%n", rs.getInt("id"), rs.getString("name"),
+						rs.getString("email"), rs.getInt("age"), rs.getString("course"));
+			}
 		}
 	}
 
 	private static void updateStudent() throws SQLException {
 		scanner.nextLine();
 		String sql_query = "UPDATE students set course = ? WHERE id = ?";
-		
+
 		System.out.println("Enter course to update");
 		String course = scanner.nextLine();
-		
+
 		System.out.println("Enter student ID");
 		int id = scanner.nextInt();
-		
-		try (PreparedStatement pstmt = connection.prepareStatement(sql_query);){
-			pstmt.setString(1, course);	
+
+		try (PreparedStatement pstmt = connection.prepareStatement(sql_query);) {
+			pstmt.setString(1, course);
 			pstmt.setInt(2, id);
-			
+
 			int result = pstmt.executeUpdate();
-			
-			if(result>0) {
+
+			if (result > 0) {
 				System.out.println("Student details updated");
-			}
-			else {
+			} else {
 				System.out.println("Student details not updated");
 			}
 		}
-		
-		
+
 	}
 
 	private static void deleteStudent() throws SQLException {
-		System.out.println("Delete");
+		//System.out.println("Delete");
+
+		System.out.println("Enter Student ID: ");
+		int id = scanner.nextInt();
+
+		String sql = "DELETE FROM students where id = ?";
+
+		try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+			pstmt.setInt(1, id);
+
+			int result = pstmt.executeUpdate();
+
+			if (result > 0) {
+				System.out.println("Student with id: " + id + " Deleted");
+			} else {
+				System.out.println("Student  not deleted");
+			}
+		}
 	}
 
 	private static void searchStudent() throws SQLException {
-		System.out.println("Search");
+		scanner.nextLine();
+		System.out.println("Enter student name: ");
+		
+		
+		String name = scanner.nextLine();
+		
+		String sql = "SELECT * FROM students where name LIKE ? ";
+		
+		try(PreparedStatement pstmt = connection.prepareStatement(sql)){
+			
+			
+			pstmt.setString(1,"%"+name+"%");
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				System.out.printf("%-5d %-20s %-30s %-5d %-15s%n", rs.getInt("id"), rs.getString("name"),
+						rs.getString("email"), rs.getInt("age"), rs.getString("course"));
+			}
+			
+			rs.close();
+		}
+		
+		
 	}
 }
